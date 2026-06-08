@@ -1,0 +1,92 @@
+<!-- login.component.html -->
+@if (isLoginPage) {
+  <div>
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+      <!-- Email Input -->
+      <div>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <!-- Error message for email -->
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <div class="error">
+            @if (loginForm.get('email')?.hasError('required')) {
+              <small>Email is required.</small>
+            }
+            @if (loginForm.get('email')?.hasError('email')) {
+              <small>Please enter a valid email address.</small>
+            }
+          </div>
+        }
+      </div>
+      <!-- Password Input -->
+      <div>
+        <input type="password" placeholder="Password" formControlName="password" />
+        <!-- Error message for password -->
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="error">
+            @if (loginForm.get('password')?.hasError('required')) {
+              <small>Password is required.</small>
+            }
+            @if (loginForm.get('password')?.hasError('minlength')) {
+              <small>Password must be at least 4 characters long.</small>
+            }
+          </div>
+        }
+      </div>
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+}
+
+<!-- Register Form -->
+@if (!isLoginPage && !showVerification) {
+  <div>
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+      <!-- Email Input -->
+      <div>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <!-- Error message for email -->
+        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+          <div class="error">
+            @if (registerForm.get('email')?.hasError('required')) {
+              <small>Email is required.</small>
+            }
+            @if (registerForm.get('email')?.hasError('email')) {
+              <small>Please enter a valid email address.</small>
+            }
+          </div>
+        }
+      </div>
+      <!-- Password Input -->
+      <div>
+        <input type="password" placeholder="Password" formControlName="password" />
+        <!-- Error message for password -->
+        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          <div class="error">
+            @if (registerForm.get('password')?.hasError('required')) {
+              <small>Password is required.</small>
+            }
+            @if (registerForm.get('password')?.hasError('minlength')) {
+              <small>Password must be at least 4 characters long.</small>
+            }
+          </div>
+        }
+      </div>
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+      </div>
+    </form>
+  </div>
+}
+
+<!-- Verify Form -->
+@if (showVerification) {
+  <div>
+    <h1>{{verifyPageContent || "Verification Email Sent! Check your inbox/spam"}}</h1>
+  </div>
+}
