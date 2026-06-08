@@ -1,11 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports: [TranslateModule]
 })
 export class DashboardComponent {
 

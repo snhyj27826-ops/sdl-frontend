@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Angular Material Prebuilt Theme */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Global variables based on DESIGN.md */
+:root {
+  --color-primary: #a41b27;
+  --color-primary-container: #c6363c;
+  --color-secondary: #0c4076;
+  --color-secondary-container: #355f97;
+  --color-surface: #f8f9fa;
+  --color-outline: #8d706e;
+  --color-text-main: #191c1d;
+  --color-text-muted: #525454;
+  --color-white: #ffffff;
+
+  --font-family: 'Hanken Grotesk', sans-serif;
+
+  --shadow-card: 0 4px 12px rgba(12, 64, 118, 0.05);
+  --shadow-dropdown: 0 12px 24px rgba(12, 64, 118, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+/* Helper classes */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.text-center { text-align: center; }
+.w-full { width: 100%; }
+.max-w-7xl { max-width: 1280px; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Navigation */
+.nav-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link-active {
+  color: var(--color-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 4px;
+}
+
+/* Material Overrides to match DESIGN.md */
+.mat-mdc-card {
+  background: var(--color-white) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-card) !important;
+  border: 1px solid rgba(141, 112, 110, 0.1) !important;
+}
+
+.mat-mdc-button.mat-primary {
+  --mdc-filled-button-container-color: var(--color-primary-container);
+  --mdc-filled-button-label-text-color: var(--color-white);
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  height: 48px !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}

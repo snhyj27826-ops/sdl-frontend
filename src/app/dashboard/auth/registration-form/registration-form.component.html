@@ -1,0 +1,69 @@
+<div class="auth-header">
+  <h1 class="auth-title">{{ 'CREATE_ACCOUNT' | translate }}</h1>
+  <p class="auth-subtitle">{{ 'JOIN_COMMUNITY' | translate }}</p>
+</div>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+  <div class="form-field-group">
+    <label class="form-label" for="firstName">{{ 'FIRST_NAME' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>person</mat-icon>
+      <input matInput id="firstName" placeholder="{{ 'FIRST_NAME_PLACEHOLDER' | translate }}" formControlName="firstName">
+    </mat-form-field>
+  </div>
+
+  <div class="form-field-group">
+    <label class="form-label" for="lastName">{{ 'LAST_NAME' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>person</mat-icon>
+      <input matInput id="lastName" placeholder="{{ 'LAST_NAME_PLACEHOLDER' | translate }}" formControlName="lastName">
+    </mat-form-field>
+  </div>
+
+  <div class="form-field-group">
+    <label class="form-label" for="nationality">{{ 'NATIONALITY' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>public</mat-icon>
+      <input matInput id="nationality" placeholder="{{ 'NATIONALITY_PLACEHOLDER' | translate }}" formControlName="nationality">
+    </mat-form-field>
+  </div>
+
+  <div class="form-field-group">
+    <label class="form-label" for="reg-email">{{ 'EMAIL_ADDRESS' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>mail</mat-icon>
+      <input matInput id="reg-email" placeholder="name@company.com" formControlName="email" type="email">
+    </mat-form-field>
+  </div>
+
+  <div class="form-field-group">
+    <label class="form-label" for="reg-password">{{ 'PASSWORD' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>lock</mat-icon>
+      <input matInput id="reg-password" placeholder="••••••••" formControlName="password" [type]="passwordVisible ? 'text' : 'password'">
+      <button mat-icon-button matSuffix (click)="onTogglePassword()" type="button">
+        <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="registerForm.invalid">
+    {{ 'REGISTER_NOW' | translate }}
+  </button>
+</form>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-text">{{ 'CONTINUE_WITH' | translate }}</span>
+  <div class="divider-line"></div>
+</div>
+
+<button class="google-btn" type="button">
+  <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+  Google
+</button>
+
+<p class="auth-footer">
+  {{ 'ALREADY_HAVE_ACCOUNT' | translate }}
+  <a class="auth-link" href="javascript:void(0)" (click)="onNavigateToLogin()">{{ 'SIGN_IN' | translate }}</a>
+</p>

@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -18,7 +19,11 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/app/components/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

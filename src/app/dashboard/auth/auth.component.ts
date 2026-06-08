@@ -3,13 +3,35 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      ReactiveFormsModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatButtonModule,
+      MatIconModule,
+      MatCheckboxModule,
+      TranslateModule,
+      RegistrationFormComponent
+    ]
 })
 export class AuthComponent {
 
@@ -18,7 +40,7 @@ export class AuthComponent {
   showVerification: Boolean = false;
   token: string | null = null;
   verifyPageContent: any;
-
+  passwordVisible: boolean = false; // Add this
 
   // Login form
   loginForm: FormGroup = new FormGroup({
@@ -32,8 +54,11 @@ export class AuthComponent {
     ]),
   });
 
-  // Register form (without confirm password)
+  // Register form (with expanded fields)
   registerForm: FormGroup = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    nationality: new FormControl('', [Validators.required]),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -88,8 +113,6 @@ export class AuthComponent {
   // Submit register form
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
-      const { email, password } = this.registerForm.value;
-      console.log('Register attempted with email:', email, 'and password:', password);
       this.http.register(this.registerForm.value).subscribe((res: any) => {
         this.showVerification = true
       }, (error: any) => {
@@ -121,5 +144,9 @@ export class AuthComponent {
         }, 3500);
       });
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 }

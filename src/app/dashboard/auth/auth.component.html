@@ -1,92 +1,123 @@
-<!-- login.component.html -->
-@if (isLoginPage) {
-  <div>
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-      <!-- Email Input -->
-      <div>
-        <input type="email" placeholder="Email" formControlName="email" />
-        <!-- Error message for email -->
-        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
-          <div class="error">
-            @if (loginForm.get('email')?.hasError('required')) {
-              <small>Email is required.</small>
-            }
-            @if (loginForm.get('email')?.hasError('email')) {
-              <small>Please enter a valid email address.</small>
-            }
-          </div>
-        }
-      </div>
-      <!-- Password Input -->
-      <div>
-        <input type="password" placeholder="Password" formControlName="password" />
-        <!-- Error message for password -->
-        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-          <div class="error">
-            @if (loginForm.get('password')?.hasError('required')) {
-              <small>Password is required.</small>
-            }
-            @if (loginForm.get('password')?.hasError('minlength')) {
-              <small>Password must be at least 4 characters long.</small>
-            }
-          </div>
-        }
-      </div>
-      <!-- Submit Button -->
-      <div>
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
-      </div>
-    </form>
-  </div>
-}
+<header class="main-header">
+  <nav class="nav-container">
+    <div class="logo" (click)="utils.navigateTo('dashboard')">
+      Српска Демократска Лига
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="javascript:void(0)">{{ 'SUPPORT' | translate }}</a>
+      <a class="nav-link" [class.nav-link-active]="!isLoginPage" (click)="utils.navigateTo('register')">{{ 'SIGN_UP' | translate }}</a>
+      <a class="nav-link" [class.nav-link-active]="isLoginPage" (click)="utils.navigateTo('login')">{{ 'SIGN_IN' | translate }}</a>
+    </div>
+    <button class="header-btn" (click)="isLoginPage ? utils.navigateTo('login') : utils.navigateTo('register')">
+      {{ (isLoginPage ? 'SIGN_IN' : 'SIGN_UP') | translate }}
+    </button>
+  </nav>
+</header>
 
-<!-- Register Form -->
-@if (!isLoginPage && !showVerification) {
-  <div>
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
-      <!-- Email Input -->
-      <div>
-        <input type="email" placeholder="Email" formControlName="email" />
-        <!-- Error message for email -->
-        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
-          <div class="error">
-            @if (registerForm.get('email')?.hasError('required')) {
-              <small>Email is required.</small>
-            }
-            @if (registerForm.get('email')?.hasError('email')) {
-              <small>Please enter a valid email address.</small>
-            }
-          </div>
-        }
-      </div>
-      <!-- Password Input -->
-      <div>
-        <input type="password" placeholder="Password" formControlName="password" />
-        <!-- Error message for password -->
-        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
-          <div class="error">
-            @if (registerForm.get('password')?.hasError('required')) {
-              <small>Password is required.</small>
-            }
-            @if (registerForm.get('password')?.hasError('minlength')) {
-              <small>Password must be at least 4 characters long.</small>
-            }
-          </div>
-        }
-      </div>
-      <!-- Submit Button -->
-      <div>
-        <button type="submit" [disabled]="registerForm.invalid">Register</button>
-      </div>
-    </form>
+<main class="auth-container">
+  <div class="background-gradients">
+    <div class="gradient-orb-1"></div>
+    <div class="gradient-orb-2"></div>
   </div>
-}
 
-<!-- Verify Form -->
-@if (showVerification) {
-  <div>
-    <h1>{{verifyPageContent || "Verification Email Sent! Check your inbox/spam"}}</h1>
+  <div class="auth-card-wrapper">
+    <!-- Login Form -->
+    @if (isLoginPage && !showVerification) {
+      <mat-card class="auth-card">
+        <div class="auth-header">
+          <h1 class="auth-title">{{ 'WELCOME_BACK' | translate }}</h1>
+          <p class="auth-subtitle">{{ 'SIGN_IN_TO_ACCOUNT' | translate }}</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="auth-form">
+          <div class="form-field-group">
+            <label class="form-label" for="email">{{ 'EMAIL_ADDRESS' | translate }}</label>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>mail</mat-icon>
+              <input matInput id="email" placeholder="name@company.com" formControlName="email" type="email">
+            </mat-form-field>
+          </div>
+
+          <div class="form-field-group">
+            <div class="form-extras">
+              <label class="form-label" for="password">{{ 'PASSWORD' | translate }}</label>
+              <a class="forgot-link" href="javascript:void(0)">{{ 'FORGOT_PASSWORD' | translate }}</a>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>lock</mat-icon>
+              <input matInput id="password" placeholder="••••••••" formControlName="password" [type]="passwordVisible ? 'text' : 'password'">
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div class="remember-me">
+            <mat-checkbox color="primary">{{ 'REMEMBER_FOR_30_DAYS' | translate }}</mat-checkbox>
+          </div>
+
+          <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="loginForm.invalid">
+            {{ 'SIGN_IN' | translate }}
+          </button>
+        </form>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">{{ 'CONTINUE_WITH' | translate }}</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <button class="google-btn" type="button">
+          <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+          Google
+        </button>
+
+        <p class="auth-footer">
+          {{ 'DONT_HAVE_ACCOUNT' | translate }}
+          <a class="auth-link" href="javascript:void(0)" (click)="utils.navigateTo('register')">{{ 'REGISTER_NOW' | translate }}</a>
+        </p>
+      </mat-card>
+    }
+
+    <!-- Register Form -->
+    @if (!isLoginPage && !showVerification) {
+      <mat-card class="auth-card">
+        <app-registration-form
+          [registerForm]="registerForm"
+          [passwordVisible]="passwordVisible"
+          (submit)="onRegisterSubmit()"
+          (togglePassword)="togglePasswordVisibility()"
+          (navigateToLogin)="utils.navigateTo('login')">
+        </app-registration-form>
+      </mat-card>
+    }
+
+    <!-- Verification Section -->
+    @if (showVerification) {
+      <mat-card class="auth-card text-center">
+        <h1 class="auth-title">{{ (verifyPageContent ? verifyPageContent : 'VERIFICATION_SENT') | translate }}</h1>
+        <p class="auth-subtitle" style="margin-bottom: 24px;">{{ 'CHECK_INBOX_INSTRUCTIONS' | translate }}</p>
+        <button mat-flat-button color="primary" (click)="utils.navigateTo('login')">{{ 'BACK_TO_LOGIN' | translate }}</button>
+      </mat-card>
+    }
   </div>
-}
+</main>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div class="flag-icon">
+        <div class="flag-red"></div>
+        <div class="flag-blue"></div>
+        <div class="flag-white"></div>
+      </div>
+      <span style="font-weight: 700;">СДЛ</span>
+    </div>
+    <p class="footer-copyright">© 2026 SDL. {{ 'ALL_RIGHTS_RESERVED' | translate }}</p>
+    <div class="footer-links">
+      <a class="footer-link" href="javascript:void(0)">{{ 'PRIVACY_POLICY' | translate }}</a>
+      <a class="footer-link" href="javascript:void(0)">{{ 'TERMS_OF_SERVICE' | translate }}</a>
+      <a class="footer-link" href="javascript:void(0)">{{ 'CONTACT' | translate }}</a>
+    </div>
+  </div>
+</footer>
