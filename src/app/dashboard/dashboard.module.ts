@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth/auth.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from '@src/app/shared/components/not-found/not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from '@src/app/home/home.component';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';

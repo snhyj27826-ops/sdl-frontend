@@ -37,5 +37,7 @@
   "NATIONALITY": "Nationality",
   "FIRST_NAME_PLACEHOLDER": "Enter your first name",
   "LAST_NAME_PLACEHOLDER": "Enter your last name",
-  "NATIONALITY_PLACEHOLDER": "e.g. Serbian"
+  "NATIONALITY_PLACEHOLDER": "e.g. Serbian",
+  "NEWS": "News",
+  "ABOUT": "About"
 }

@@ -37,5 +37,7 @@
   "NATIONALITY": "Националност",
   "FIRST_NAME_PLACEHOLDER": "Внесете го вашето име",
   "LAST_NAME_PLACEHOLDER": "Внесете го вашето презиме",
-  "NATIONALITY_PLACEHOLDER": "на пр. Македонска"
+  "NATIONALITY_PLACEHOLDER": "на пр. Македонска",
+  "NEWS": "Вести",
+  "ABOUT": "За нас"
 }

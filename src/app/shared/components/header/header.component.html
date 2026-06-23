@@ -1,0 +1,38 @@
+<header class="main-header">
+  <div class="header-top">
+    <div class="language-switcher">
+      <button mat-icon-button (click)="switchLanguage('sr')" [matTooltip]="'SERBIAN' | translate">
+        <img src="assets/flags/sr.svg" alt="Serbian">
+      </button>
+
+      <button mat-icon-button (click)="switchLanguage('mk')" [matTooltip]="'MACEDONIAN' | translate">
+        <img src="assets/flags/mk.svg" alt="Macedonian">
+      </button>
+
+      <button mat-icon-button (click)="switchLanguage('en')" [matTooltip]="'ENGLISH' | translate">
+        <img src="assets/flags/en.svg" alt="English">
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-container">
+    <div class="logo" (click)="handleLogoClick()">
+      {{ logoText }}
+    </div>
+
+    <div class="nav-links">
+      @for (item of menuItems; track item) {
+        <a
+          class="nav-link"
+          [class.nav-link-active]="item.isActive"
+          (click)="item.action()">
+          {{ item.label | translate }}
+        </a>
+      }
+    </div>
+
+    <button class="header-btn" (click)="handlePrimaryButtonClick()">
+      {{ primaryButtonLabel | translate }}
+    </button>
+  </nav>
+</header>

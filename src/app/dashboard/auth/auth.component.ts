@@ -12,8 +12,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { HeaderComponent, HeaderMenuItem } from 'src/app/shared/components/header/header.component';
+import {FooterComponent} from "@src/app/shared/components/footer/footer.component";
 
 @Component({
     selector: 'app-auth',
@@ -21,30 +22,32 @@ import { RegistrationFormComponent } from './registration-form/registration-form
     styleUrls: ['./auth.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
-    imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      MatCardModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatButtonModule,
-      MatIconModule,
-      MatCheckboxModule,
-      TranslateModule,
-      HeaderComponent,
-      RegistrationFormComponent
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCheckboxModule,
+    TranslateModule,
+    RegistrationFormComponent,
+    HeaderComponent,
+    FooterComponent
+  ]
 })
 export class AuthComponent {
   // Variables
-  isLoginPage: Boolean = false;
-  showVerification: Boolean = false;
-  token: string | null = null;
-  verifyPageContent: any;
-  passwordVisible: boolean = false; // Add this
+  public isLoginPage: boolean = false;
+  public showVerification: boolean = false;
+  public token: string | null = null;
+  public verifyPageContent: any;
+  public passwordVisible: boolean = false;
+  public headerMenuItems: HeaderMenuItem[] = [];
 
   // Login form
-  loginForm: FormGroup = new FormGroup({
+  public loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -56,7 +59,7 @@ export class AuthComponent {
   });
 
   // Register form (with expanded fields)
-  registerForm: FormGroup = new FormGroup({
+  public registerForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
@@ -70,12 +73,34 @@ export class AuthComponent {
     ]),
   });
 
-  constructor(private route: ActivatedRoute, private http: HttpService, public utils: UtilsService) { }
+  constructor(private route: ActivatedRoute, private http: HttpService, public utils: UtilsService) {
+    this.initializeHeaderMenu();
+  }
+
+  private initializeHeaderMenu(): void {
+    this.headerMenuItems = [
+      {
+        label: 'SUPPORT',
+        action: () => { /* Support action */ }
+      },
+      {
+        label: 'SIGN_UP',
+        action: () => this.utils.navigateTo('register'),
+        isActive: !this.isLoginPage
+      },
+      {
+        label: 'SIGN_IN',
+        action: () => this.utils.navigateTo('login'),
+        isActive: this.isLoginPage
+      }
+    ];
+  }
 
   ngOnInit() {
     // Check if the current route is '/login' or '/register'
     this.route.url.subscribe(urlSegment => {
       this.isLoginPage = urlSegment[0]?.path === 'login';
+      this.updateHeaderMenuItems();
     });
 
     // Capture the token from the route parameter 'token'
@@ -90,6 +115,25 @@ export class AuthComponent {
         return this.utils.navigateTo('dashboard');
       }
     });
+  }
+
+  private updateHeaderMenuItems(): void {
+    this.headerMenuItems = [
+      {
+        label: 'SUPPORT',
+        action: () => { /* Support action */ }
+      },
+      {
+        label: 'SIGN_UP',
+        action: () => this.utils.navigateTo('register'),
+        isActive: !this.isLoginPage
+      },
+      {
+        label: 'SIGN_IN',
+        action: () => this.utils.navigateTo('login'),
+        isActive: this.isLoginPage
+      }
+    ];
   }
 
   // Submit login form
@@ -154,5 +198,13 @@ export class AuthComponent {
 
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
+  }
+
+  handleAuthButtonClick(): void {
+    if (this.isLoginPage) {
+      this.utils.navigateTo('register');
+    } else {
+      this.utils.navigateTo('login');
+    }
   }
 }

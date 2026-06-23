@@ -37,5 +37,7 @@
   "NATIONALITY": "Националност",
   "FIRST_NAME_PLACEHOLDER": "Унесите ваше име",
   "LAST_NAME_PLACEHOLDER": "Унесите ваше презиме",
-  "NATIONALITY_PLACEHOLDER": "нпр. Српска"
+  "NATIONALITY_PLACEHOLDER": "нпр. Српска",
+  "NEWS": "Вести",
+  "ABOUT": "О нама"
 }
