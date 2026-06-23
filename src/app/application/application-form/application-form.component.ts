@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatIcon} from "@angular/material/icon";
-import {MatFormField} from "@angular/material/input";
+import {MatFormField, MatInput} from "@angular/material/input";
 import {MatCard} from "@angular/material/card";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {HeaderComponent, HeaderMenuItem} from "@src/app/shared/components/header/header.component";
+import {ActivatedRoute} from "@angular/router";
+import {UtilsService} from "@src/app/services/utils.service";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-application-form',
@@ -17,15 +21,20 @@ import {MatCheckbox} from "@angular/material/checkbox";
     MatCard,
     MatOption,
     MatSelect,
-    MatCheckbox
+    MatCheckbox,
+    MatInput,
+    HeaderComponent,
+    MatButton
   ],
   styleUrls: ['./application-form.component.css']
 })
 export class ApplicationFormComponent implements OnInit {
-  applicationForm: FormGroup;
-  isSubmitted = false;
+  public isLoginPage = false;
+  public headerMenuItems: HeaderMenuItem[] = [];
+  public applicationForm: FormGroup;
+  public isSubmitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private utils: UtilsService) {
     this.applicationForm = this.fb.group({
       fullName: ['', Validators.required],
       address: ['', Validators.required],
@@ -34,11 +43,16 @@ export class ApplicationFormComponent implements OnInit {
       reason: ['', Validators.required],
       consent: [false, Validators.requiredTrue]
     });
+    this.initializeHeaderMenu();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.url.subscribe(urlSegment => {
+      this.isLoginPage = urlSegment[0]?.path === 'login';
+    });
+  }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.applicationForm.valid) {
       this.isSubmitted = true;
       console.log('Form Submitted', this.applicationForm.value);
@@ -46,6 +60,31 @@ export class ApplicationFormComponent implements OnInit {
       setTimeout(() => {
         // Reset or navigate
       }, 2000);
+    }
+  }
+
+  private initializeHeaderMenu(): void {
+    this.headerMenuItems = [
+      {
+        label: 'SUPPORT',
+        action: () => { /* Support action */ }
+      },
+      {
+        label: 'SIGN_UP',
+        action: () => this.utils.navigateTo('register')
+      },
+      {
+        label: 'SIGN_IN',
+        action: () => this.utils.navigateTo('login')
+      }
+    ];
+  }
+
+  public handleAuthButtonClick(): void {
+    if (this.isLoginPage) {
+      this.utils.navigateTo('register');
+    } else {
+      this.utils.navigateTo('login');
     }
   }
 }

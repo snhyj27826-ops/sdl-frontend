@@ -1,21 +1,10 @@
 <div class="application-container">
   <!-- TopNavBar -->
-  <header class="main-header">
-    <div class="header-content">
-      <div class="logo">
-        SerbianConnect
-      </div>
-      <nav class="nav-links">
-        <a class="nav-link" href="#">Login</a>
-        <a class="nav-link" href="#">Register</a>
-        <a class="nav-link" href="#">Support</a>
-        <button class="header-btn">Sign In</button>
-      </nav>
-      <button class="mobile-menu-btn">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-  </header>
+  <app-header
+    [menuItems]="headerMenuItems"
+    [primaryButtonLabel]="'SIGN_IN'"
+    (primaryButtonClick)="handleAuthButtonClick()">
+  </app-header>
 
   <main class="main-content">
     <!-- Hero Decorative Section -->
@@ -106,10 +95,11 @@
           <!-- Submit -->
           <div class="submit-container">
             <button mat-flat-button color="primary" type="submit" [disabled]="!applicationForm.valid || isSubmitted" class="submit-button">
-              <span *ngIf="!isSubmitted">Поднеси пријаву</span>
-              <span *ngIf="isSubmitted">Обрада...</span>
-              <mat-icon *ngIf="!isSubmitted">send</mat-icon>
-              <mat-icon *ngIf="isSubmitted" class="spinner">sync</mat-icon>
+              <span>{{ isSubmitted ? 'Обрада...' : 'Поднеси пријаву' }}</span>
+
+              <mat-icon [class.spinner]="isSubmitted">
+                {{ isSubmitted ? 'sync' : 'send' }}
+              </mat-icon>
             </button>
           </div>
         </form>

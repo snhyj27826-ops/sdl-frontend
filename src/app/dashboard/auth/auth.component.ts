@@ -196,11 +196,11 @@ export class AuthComponent {
     }
   }
 
-  togglePasswordVisibility(): void {
+  public togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  handleAuthButtonClick(): void {
+  public handleAuthButtonClick(): void {
     if (this.isLoginPage) {
       this.utils.navigateTo('register');
     } else {
