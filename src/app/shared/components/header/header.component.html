@@ -21,11 +21,12 @@
     </div>
 
     <div class="nav-links">
-      @for (item of menuItems; track item) {
+      @for (item of menuItems; track item.route) {
         <a
           class="nav-link"
-          [class.nav-link-active]="item.isActive"
-          (click)="item.action()">
+          [routerLink]="item.route"
+          routerLinkActive="nav-link-active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/' }">
           {{ item.label | translate }}
         </a>
       }

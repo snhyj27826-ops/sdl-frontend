@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-import { HeaderComponent, HeaderMenuItem } from 'src/app/shared/components/header/header.component';
+import { HeaderMenuItem } from 'src/app/shared/components/header/header.component';
 import {FooterComponent} from "@src/app/shared/components/footer/footer.component";
 
 @Component({
@@ -33,18 +33,15 @@ import {FooterComponent} from "@src/app/shared/components/footer/footer.componen
     MatCheckboxModule,
     TranslateModule,
     RegistrationFormComponent,
-    HeaderComponent,
     FooterComponent
   ]
 })
-export class AuthComponent {
-  // Variables
+export class AuthComponent implements OnInit {
   public isLoginPage: boolean = false;
   public showVerification: boolean = false;
   public token: string | null = null;
   public verifyPageContent: any;
   public passwordVisible: boolean = false;
-  public headerMenuItems: HeaderMenuItem[] = [];
 
   // Login form
   public loginForm: FormGroup = new FormGroup({
@@ -74,33 +71,12 @@ export class AuthComponent {
   });
 
   constructor(private route: ActivatedRoute, private http: HttpService, public utils: UtilsService) {
-    this.initializeHeaderMenu();
   }
 
-  private initializeHeaderMenu(): void {
-    this.headerMenuItems = [
-      {
-        label: 'SUPPORT',
-        action: () => { /* Support action */ }
-      },
-      {
-        label: 'SIGN_UP',
-        action: () => this.utils.navigateTo('register'),
-        isActive: !this.isLoginPage
-      },
-      {
-        label: 'SIGN_IN',
-        action: () => this.utils.navigateTo('login'),
-        isActive: this.isLoginPage
-      }
-    ];
-  }
-
-  ngOnInit() {
+  public ngOnInit() {
     // Check if the current route is '/login' or '/register'
     this.route.url.subscribe(urlSegment => {
       this.isLoginPage = urlSegment[0]?.path === 'login';
-      this.updateHeaderMenuItems();
     });
 
     // Capture the token from the route parameter 'token'
@@ -117,32 +93,13 @@ export class AuthComponent {
     });
   }
 
-  private updateHeaderMenuItems(): void {
-    this.headerMenuItems = [
-      {
-        label: 'SUPPORT',
-        action: () => { /* Support action */ }
-      },
-      {
-        label: 'SIGN_UP',
-        action: () => this.utils.navigateTo('register'),
-        isActive: !this.isLoginPage
-      },
-      {
-        label: 'SIGN_IN',
-        action: () => this.utils.navigateTo('login'),
-        isActive: this.isLoginPage
-      }
-    ];
-  }
-
   // Submit login form
-  onLoginSubmit(): void {
+  public onLoginSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.http.login(this.loginForm.value).subscribe((res: any) => {
         this.utils.saveToken(res.accessToken);
-        this.utils.navigateTo('dashboard');
+        this.utils.navigateTo('board');
       }, (error: any) => {
         if (error.status === 401) {
           alert('Unauthorized!');
@@ -161,7 +118,7 @@ export class AuthComponent {
       this.http.register(this.registerForm.value).subscribe((res: any) => {
         if (res.accessToken) {
           this.utils.saveToken(res.accessToken);
-          this.utils.navigateTo('dashboard');
+          this.utils.navigateTo('board');
         } else {
           this.showVerification = true;
         }
@@ -198,13 +155,5 @@ export class AuthComponent {
 
   public togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
-  }
-
-  public handleAuthButtonClick(): void {
-    if (this.isLoginPage) {
-      this.utils.navigateTo('register');
-    } else {
-      this.utils.navigateTo('login');
-    }
   }
 }

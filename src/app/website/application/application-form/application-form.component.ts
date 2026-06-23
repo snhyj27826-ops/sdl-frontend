@@ -6,7 +6,7 @@ import {MatCard} from "@angular/material/card";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
 import {MatCheckbox} from "@angular/material/checkbox";
-import {HeaderComponent, HeaderMenuItem} from "@src/app/shared/components/header/header.component";
+import {HeaderMenuItem} from "@src/app/shared/components/header/header.component";
 import {ActivatedRoute} from "@angular/router";
 import {UtilsService} from "@src/app/services/utils.service";
 import {MatButton} from "@angular/material/button";
@@ -23,14 +23,12 @@ import {MatButton} from "@angular/material/button";
     MatSelect,
     MatCheckbox,
     MatInput,
-    HeaderComponent,
     MatButton
   ],
   styleUrls: ['./application-form.component.scss']
 })
 export class ApplicationFormComponent implements OnInit {
   public isLoginPage = false;
-  public headerMenuItems: HeaderMenuItem[] = [];
   public applicationForm: FormGroup;
   public isSubmitted = false;
 
@@ -43,7 +41,6 @@ export class ApplicationFormComponent implements OnInit {
       reason: ['', Validators.required],
       consent: [false, Validators.requiredTrue]
     });
-    this.initializeHeaderMenu();
   }
 
   ngOnInit(): void {
@@ -60,31 +57,6 @@ export class ApplicationFormComponent implements OnInit {
       setTimeout(() => {
         // Reset or navigate
       }, 2000);
-    }
-  }
-
-  private initializeHeaderMenu(): void {
-    this.headerMenuItems = [
-      {
-        label: 'SUPPORT',
-        action: () => { /* Support action */ }
-      },
-      {
-        label: 'SIGN_UP',
-        action: () => this.utils.navigateTo('register')
-      },
-      {
-        label: 'SIGN_IN',
-        action: () => this.utils.navigateTo('login')
-      }
-    ];
-  }
-
-  public handleAuthButtonClick(): void {
-    if (this.isLoginPage) {
-      this.utils.navigateTo('register');
-    } else {
-      this.utils.navigateTo('login');
     }
   }
 }

@@ -14,7 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ApplicationModule } from './application/application.module';
+import { ApplicationModule } from '@src/app/website/application/application.module';
 
 @NgModule({ declarations: [
         AppComponent

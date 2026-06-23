@@ -4,11 +4,12 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils.service';
 import {MatIconButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 export interface HeaderMenuItem {
   label: string;
+  route: string;
   action: () => void;
-  isActive?: boolean;
 }
 
 @Component({
@@ -17,7 +18,7 @@ export interface HeaderMenuItem {
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip]
+  imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip, RouterLink, RouterLinkActive]
 })
 export class HeaderComponent {
   @Input() menuItems: HeaderMenuItem[] = [];
