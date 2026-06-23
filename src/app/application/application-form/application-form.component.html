@@ -1,0 +1,154 @@
+<div class="application-container">
+  <!-- TopNavBar -->
+  <header class="main-header">
+    <div class="header-content">
+      <div class="logo">
+        SerbianConnect
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="#">Register</a>
+        <a class="nav-link" href="#">Support</a>
+        <button class="header-btn">Sign In</button>
+      </nav>
+      <button class="mobile-menu-btn">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero Decorative Section -->
+    <div class="hero-section">
+      <div class="hero-bg">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTAwPKNuaSwKYF3sEZCkHALLgjmnFSk_RYViGCvGKhytFS9PfAeOxIQDWWyMtGylFQpGYap3V_OIYBZgljE1S_t7ZRul91nQ3YOaV3QPqpDHsVM1TobofmLPxz2S1W_wAu_SAB8XFV6XkD0uTJzIysg3sUwkAMMJJlVRhH1mcQq-8gvWpsL8_0qP9az1Bdqiksdka-bz2HSt29JRwG1Rxm-W2RbF-wgGoo9l_AXHmJLNc1rdmROkgUipCJ5gqklZJieXSLs7Y2Csw"
+             alt="Serbian Parliament" class="hero-img">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="headline-xl">Српска Демократска Лига (СДЛ)</h1>
+        <p class="body-lg">Градимо заједничку будућност засновану на традицији, демократији и напретку.</p>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <section class="form-section">
+      <mat-card class="form-card">
+        <div class="form-header">
+          <div class="icon-container">
+            <mat-icon>how_to_reg</mat-icon>
+          </div>
+          <div>
+            <h2 class="headline-lg">Приступница странци</h2>
+            <p class="body-sm text-tertiary">Попуните образац како бисте постали члан наше породице.</p>
+          </div>
+        </div>
+
+        <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()" class="application-form">
+          <!-- Name -->
+          <div class="form-field-full">
+            <label class="label-md" for="fullName">Ime i prezime</label>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>person</mat-icon>
+              <input matInput id="fullName" formControlName="fullName" placeholder="Петar Петровић">
+            </mat-form-field>
+          </div>
+
+          <!-- Address -->
+          <div class="form-field-full">
+            <label class="label-md" for="address">Adresa stanovanja</label>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>home</mat-icon>
+              <input matInput id="address" formControlName="address" placeholder="Немањина 11, Београд">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- JMBG -->
+            <div class="form-field-half">
+              <label class="label-md" for="jmbg">EMBG</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>badge</mat-icon>
+                <input matInput id="jmbg" formControlName="jmbg" maxlength="13" placeholder="13-цифрени број">
+              </mat-form-field>
+            </div>
+
+            <!-- Nationality -->
+            <div class="form-field-half">
+              <label class="label-md" for="nationality">Nacionalnost</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>flag</mat-icon>
+                <mat-select id="nationality" formControlName="nationality" placeholder="Изаберите">
+                  <mat-option value="serbian">Србин / Српкиња</mat-option>
+                  <mat-option value="other">Остало</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Reason -->
+          <div class="form-field-full">
+            <label class="label-md" for="reason">Razlog učlanjenja</label>
+            <mat-form-field appearance="outline">
+              <textarea matInput id="reason" formControlName="reason" rows="5" placeholder="Ваша мотивација и разлози за приступање СДЛ..."></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- Consent -->
+          <div class="consent-container">
+            <mat-checkbox formControlName="consent" color="primary">
+              <span class="body-sm">
+                Слажем се са <a href="#" class="link">правилником странке</a> и потврђујем да су сви наведени подаци тачни и истинити. Овим путем дајем сагласност за обраду података у сврху чланства.
+              </span>
+            </mat-checkbox>
+          </div>
+
+          <!-- Submit -->
+          <div class="submit-container">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!applicationForm.valid || isSubmitted" class="submit-button">
+              <span *ngIf="!isSubmitted">Поднеси пријаву</span>
+              <span *ngIf="isSubmitted">Обрада...</span>
+              <mat-icon *ngIf="!isSubmitted">send</mat-icon>
+              <mat-icon *ngIf="isSubmitted" class="spinner">sync</mat-icon>
+            </button>
+          </div>
+        </form>
+      </mat-card>
+
+      <!-- Side Info Bento-style -->
+      <div class="info-grid">
+        <div class="info-card border-primary">
+          <mat-icon class="text-primary">verified_user</mat-icon>
+          <h3 class="label-md">Сигурност података</h3>
+          <p class="body-sm text-tertiary">Ваши подаци су заштићени у складу са највишим стандардима приватности.</p>
+        </div>
+        <div class="info-card border-secondary">
+          <mat-icon class="text-secondary">calendar_today</mat-icon>
+          <h3 class="label-md">Брза обрада</h3>
+          <p class="body-sm text-tertiary">Наш тим ће обрадити вашу пријаву у року од 48 радних сати.</p>
+        </div>
+        <div class="info-card border-tertiary">
+          <mat-icon class="text-tertiary">help</mat-icon>
+          <h3 class="label-md">Треба вам помоћ?</h3>
+          <p class="body-sm text-tertiary">Контактирајте нашу службу за подршку чланству путем имејла или телефона.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">SerbianConnect</div>
+        <div class="footer-copyright">© 2024 SerbianConnect. All rights reserved.</div>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="#">Privacy Policy</a>
+        <a class="footer-link" href="#">Terms of Service</a>
+        <a class="footer-link" href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
