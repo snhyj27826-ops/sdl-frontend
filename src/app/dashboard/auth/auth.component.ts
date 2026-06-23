@@ -96,7 +96,7 @@ export class AuthComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.http.login(this.loginForm.value).subscribe((res: any) => {
-        this.utils.saveToken(res.Token);
+        this.utils.saveToken(res.accessToken);
         this.utils.navigateTo('dashboard');
       }, (error: any) => {
         if (error.status === 401) {
@@ -114,7 +114,12 @@ export class AuthComponent {
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
       this.http.register(this.registerForm.value).subscribe((res: any) => {
-        this.showVerification = true
+        if (res.accessToken) {
+          this.utils.saveToken(res.accessToken);
+          this.utils.navigateTo('dashboard');
+        } else {
+          this.showVerification = true;
+        }
       }, (error: any) => {
         if (error.status === 409) {
           alert('Already Registered !');

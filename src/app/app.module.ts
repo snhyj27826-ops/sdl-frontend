@@ -11,9 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HttpClient } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ApplicationModule } from './application/application.module';
 
 @NgModule({ declarations: [
         AppComponent
@@ -21,6 +22,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         DashboardModule,
+        ApplicationModule,
         BrowserAnimationsModule,
         MatCardModule,
         MatFormFieldModule,
@@ -28,6 +30,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
         MatButtonModule,
         MatIconModule,
         MatCheckboxModule,
+        MatTooltipModule,
         TranslateModule.forRoot()
     ],
     providers: [

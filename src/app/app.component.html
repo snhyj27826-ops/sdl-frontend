@@ -1,6 +1,12 @@
 <div class="language-switcher">
-  <button mat-button (click)="switchLanguage('en')">{{ 'ENGLISH' | translate }}</button>
-  <button mat-button (click)="switchLanguage('sr')">{{ 'SERBIAN' | translate }}</button>
-  <button mat-button (click)="switchLanguage('mk')">{{ 'MACEDONIAN' | translate }}</button>
+  <button mat-icon-button (click)="switchLanguage('sr')" [matTooltip]="'SERBIAN' | translate">
+    <img src="assets/flags/sr.svg" alt="Serbian">
+  </button>
+  <button mat-icon-button (click)="switchLanguage('mk')" [matTooltip]="'MACEDONIAN' | translate">
+    <img src="assets/flags/mk.svg" alt="Macedonian">
+  </button>
+  <button mat-icon-button (click)="switchLanguage('en')" [matTooltip]="'ENGLISH' | translate">
+    <img src="assets/flags/en.svg" alt="English">
+  </button>
 </div>
 <router-outlet></router-outlet>

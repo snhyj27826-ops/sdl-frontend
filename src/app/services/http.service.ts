@@ -10,14 +10,14 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   login(body: any) {
-    return this.http.post(`${env.backendUrl}/api/user/login`, body)
+    return this.http.post(`${env.backendUrl}/api/auth/login`, body)
   }
 
   register(body: any) {
-    return this.http.post(`${env.backendUrl}/api/user/register`, body)
+    return this.http.post(`${env.backendUrl}/api/auth/register`, body)
   }
 
   verifyAccount(token: string): any {
-    return this.http.get(`${env.backendUrl}/api/user/verify-account/${token}`);
+    return this.http.get(`${env.backendUrl}/api/auth/verify-account/${token}`);
   }
 }

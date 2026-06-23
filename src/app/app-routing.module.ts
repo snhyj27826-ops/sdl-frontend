@@ -5,8 +5,13 @@ import { AuthComponent } from './dashboard/auth/auth.component';
 import { NotFoundComponent } from './dashboard/not-found/not-found.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { ApplicationFormComponent } from './application/application-form/application-form.component';
 
 const routes: Routes = [
+  {
+    path: 'apply',
+    component: ApplicationFormComponent
+  },
   {
     path: 'login',
     component: AuthComponent
