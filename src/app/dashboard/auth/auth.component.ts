@@ -19,7 +19,7 @@ import {FooterComponent} from "@src/app/shared/components/footer/footer.componen
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
-    styleUrls: ['./auth.component.css'],
+    styleUrls: ['./auth.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
   imports: [

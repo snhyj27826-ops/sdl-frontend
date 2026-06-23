@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css'],
+    styleUrls: ['./dashboard.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
     imports: [TranslateModule]

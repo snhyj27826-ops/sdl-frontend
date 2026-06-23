@@ -26,7 +26,7 @@ import {MatButton} from "@angular/material/button";
     HeaderComponent,
     MatButton
   ],
-  styleUrls: ['./application-form.component.css']
+  styleUrls: ['./application-form.component.scss']
 })
 export class ApplicationFormComponent implements OnInit {
   public isLoginPage = false;

@@ -22,7 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ],
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent {
   @Input() registerForm!: FormGroup;
