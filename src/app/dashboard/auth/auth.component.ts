@@ -12,6 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 @Component({
@@ -30,11 +31,11 @@ import { RegistrationFormComponent } from './registration-form/registration-form
       MatIconModule,
       MatCheckboxModule,
       TranslateModule,
+      HeaderComponent,
       RegistrationFormComponent
     ]
 })
 export class AuthComponent {
-
   // Variables
   isLoginPage: Boolean = false;
   showVerification: Boolean = false;

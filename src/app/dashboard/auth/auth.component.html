@@ -1,18 +1,4 @@
-<header class="main-header">
-  <nav class="nav-container">
-    <div class="logo" (click)="utils.navigateTo('dashboard')">
-      Српска Демократска Лига
-    </div>
-    <div class="nav-links">
-      <a class="nav-link" href="javascript:void(0)">{{ 'SUPPORT' | translate }}</a>
-      <a class="nav-link" [class.nav-link-active]="!isLoginPage" (click)="utils.navigateTo('register')">{{ 'SIGN_UP' | translate }}</a>
-      <a class="nav-link" [class.nav-link-active]="isLoginPage" (click)="utils.navigateTo('login')">{{ 'SIGN_IN' | translate }}</a>
-    </div>
-    <button class="header-btn" (click)="isLoginPage ? utils.navigateTo('login') : utils.navigateTo('register')">
-      {{ (isLoginPage ? 'SIGN_IN' : 'SIGN_UP') | translate }}
-    </button>
-  </nav>
-</header>
+<app-header></app-header>
 
 <main class="auth-container">
   <div class="background-gradients">
