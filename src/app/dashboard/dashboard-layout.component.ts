@@ -6,6 +6,7 @@ import {HeaderComponent, HeaderMenuItem} from "@src/app/shared/components/header
 
 @Component({
   selector: 'app-board-layout',
+  standalone: true,
   imports: [
     HeaderComponent,
     RouterOutlet

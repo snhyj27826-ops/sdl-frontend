@@ -14,6 +14,8 @@ import {MatButton} from "@angular/material/button";
 @Component({
   selector: 'app-application-form',
   templateUrl: './application-form.component.html',
+  styleUrls: ['./application-form.component.scss'],
+  standalone: true,
   imports: [
     MatIcon,
     ReactiveFormsModule,
@@ -24,8 +26,7 @@ import {MatButton} from "@angular/material/button";
     MatCheckbox,
     MatInput,
     MatButton
-  ],
-  styleUrls: ['./application-form.component.scss']
+  ]
 })
 export class ApplicationFormComponent implements OnInit {
   public isLoginPage = false;

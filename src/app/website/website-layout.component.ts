@@ -10,7 +10,8 @@ import {filter} from "rxjs";
     RouterOutlet,
     HeaderComponent
   ],
-  templateUrl: './website-layout.component.html'
+  templateUrl: './website-layout.component.html',
+  standalone: true
 })
 export class WebsiteLayoutComponent {
   public headerMenuItems: HeaderMenuItem[] = [];
