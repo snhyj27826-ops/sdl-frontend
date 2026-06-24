@@ -2,15 +2,19 @@
   <div class="header-top">
     <div class="language-switcher">
       <button mat-icon-button (click)="switchLanguage('sr')" [matTooltip]="'SERBIAN' | translate">
-        <img src="assets/flags/sr.svg" alt="Serbian">
+        <img src="assets/flags/sr.svg" alt="Serbian" />
       </button>
 
-      <button mat-icon-button (click)="switchLanguage('mk')" [matTooltip]="'MACEDONIAN' | translate">
-        <img src="assets/flags/mk.svg" alt="Macedonian">
+      <button
+        mat-icon-button
+        (click)="switchLanguage('mk')"
+        [matTooltip]="'MACEDONIAN' | translate"
+      >
+        <img src="assets/flags/mk.svg" alt="Macedonian" />
       </button>
 
       <button mat-icon-button (click)="switchLanguage('en')" [matTooltip]="'ENGLISH' | translate">
-        <img src="assets/flags/en.svg" alt="English">
+        <img src="assets/flags/en.svg" alt="English" />
       </button>
     </div>
   </div>
@@ -26,7 +30,8 @@
           class="nav-link"
           [routerLink]="item.route"
           routerLinkActive="nav-link-active"
-          [routerLinkActiveOptions]="{ exact: item.route === '/' }">
+          [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+        >
           {{ item.label | translate }}
         </a>
       }

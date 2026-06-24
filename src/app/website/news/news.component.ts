@@ -1,15 +1,13 @@
-import {Component} from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'news',
   templateUrl: 'news.component.html',
   styleUrls: ['news.component.scss'],
-  standalone: true
+  standalone: true,
 })
-
 export class NewsComponent {
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {}
 }

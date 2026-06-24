@@ -8,7 +8,12 @@
     <label class="form-label" for="firstName">{{ 'FIRST_NAME' | translate }}</label>
     <mat-form-field appearance="outline">
       <mat-icon matPrefix>person</mat-icon>
-      <input matInput id="firstName" placeholder="{{ 'FIRST_NAME_PLACEHOLDER' | translate }}" formControlName="firstName">
+      <input
+        matInput
+        id="firstName"
+        placeholder="{{ 'FIRST_NAME_PLACEHOLDER' | translate }}"
+        formControlName="firstName"
+      />
     </mat-form-field>
   </div>
 
@@ -16,7 +21,12 @@
     <label class="form-label" for="lastName">{{ 'LAST_NAME' | translate }}</label>
     <mat-form-field appearance="outline">
       <mat-icon matPrefix>person</mat-icon>
-      <input matInput id="lastName" placeholder="{{ 'LAST_NAME_PLACEHOLDER' | translate }}" formControlName="lastName">
+      <input
+        matInput
+        id="lastName"
+        placeholder="{{ 'LAST_NAME_PLACEHOLDER' | translate }}"
+        formControlName="lastName"
+      />
     </mat-form-field>
   </div>
 
@@ -24,7 +34,12 @@
     <label class="form-label" for="nationality">{{ 'NATIONALITY' | translate }}</label>
     <mat-form-field appearance="outline">
       <mat-icon matPrefix>public</mat-icon>
-      <input matInput id="nationality" placeholder="{{ 'NATIONALITY_PLACEHOLDER' | translate }}" formControlName="nationality">
+      <input
+        matInput
+        id="nationality"
+        placeholder="{{ 'NATIONALITY_PLACEHOLDER' | translate }}"
+        formControlName="nationality"
+      />
     </mat-form-field>
   </div>
 
@@ -32,7 +47,13 @@
     <label class="form-label" for="reg-email">{{ 'EMAIL_ADDRESS' | translate }}</label>
     <mat-form-field appearance="outline">
       <mat-icon matPrefix>mail</mat-icon>
-      <input matInput id="reg-email" placeholder="name@company.com" formControlName="email" type="email">
+      <input
+        matInput
+        id="reg-email"
+        placeholder="name@company.com"
+        formControlName="email"
+        type="email"
+      />
     </mat-form-field>
   </div>
 
@@ -40,14 +61,26 @@
     <label class="form-label" for="reg-password">{{ 'PASSWORD' | translate }}</label>
     <mat-form-field appearance="outline">
       <mat-icon matPrefix>lock</mat-icon>
-      <input matInput id="reg-password" placeholder="••••••••" formControlName="password" [type]="passwordVisible ? 'text' : 'password'">
+      <input
+        matInput
+        id="reg-password"
+        placeholder="••••••••"
+        formControlName="password"
+        [type]="passwordVisible ? 'text' : 'password'"
+      />
       <button mat-icon-button matSuffix (click)="onTogglePassword()" type="button">
         <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
     </mat-form-field>
   </div>
 
-  <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="registerForm.invalid">
+  <button
+    mat-flat-button
+    color="primary"
+    class="submit-btn"
+    type="submit"
+    [disabled]="registerForm.invalid"
+  >
     {{ 'REGISTER_NOW' | translate }}
   </button>
 </form>
@@ -59,11 +92,13 @@
 </div>
 
 <button class="google-btn" type="button">
-  <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+  <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" />
   Google
 </button>
 
 <p class="auth-footer">
   {{ 'ALREADY_HAVE_ACCOUNT' | translate }}
-  <a class="auth-link" href="javascript:void(0)" (click)="onNavigateToLogin()">{{ 'SIGN_IN' | translate }}</a>
+  <a class="auth-link" href="javascript:void(0)" (click)="onNavigateToLogin()">{{
+    'SIGN_IN' | translate
+  }}</a>
 </p>

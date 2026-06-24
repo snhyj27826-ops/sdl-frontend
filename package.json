@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -23,6 +25,7 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "ngx-cookie-service": "^22.0.0",
+    "prettier": "^3.8.4",
     "rxjs": "~7.8.0",
     "swiper": "^12.2.0",
     "tslib": "^2.3.0",

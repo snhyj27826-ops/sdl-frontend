@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0C4076;
+  background-color: #0c4076;
 }
 
 .hero-bg {
@@ -320,9 +320,15 @@
   border-left: 4px solid #e1e3e4;
 }
 
-.border-primary { border-left-color: var(--color-primary); }
-.border-secondary { border-left-color: var(--color-secondary); }
-.border-tertiary { border-left-color: var(--color-text-muted); }
+.border-primary {
+  border-left-color: var(--color-primary);
+}
+.border-secondary {
+  border-left-color: var(--color-secondary);
+}
+.border-tertiary {
+  border-left-color: var(--color-text-muted);
+}
 
 .info-card mat-icon {
   margin-bottom: 8px;
@@ -333,73 +339,12 @@
   color: var(--color-text-main);
 }
 
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-tertiary { color: var(--color-text-muted); }
-
-/* Footer */
-.main-footer {
-  width: 100%;
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-outline);
-  padding: 24px 0;
+.text-primary {
+  color: var(--color-primary);
 }
-
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 64px;
-  max-width: 1280px;
-  margin: 0 auto;
-  gap: 16px;
-}
-
-@media (min-width: 768px) {
-  .footer-content {
-    flex-direction: row;
-    gap: 0;
-  }
-}
-
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media (min-width: 768px) {
-  .footer-brand {
-    align-items: flex-start;
-  }
-}
-
-.footer-logo {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-main);
-  margin-bottom: 4px;
-}
-
-.footer-copyright {
-  font-size: 12px;
-  color: var(--color-text-muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-link {
-  font-size: 12px;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-link:hover {
+.text-secondary {
   color: var(--color-secondary);
 }
-
+.text-tertiary {
+  color: var(--color-text-muted);
+}

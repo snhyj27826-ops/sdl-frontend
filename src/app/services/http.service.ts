@@ -3,18 +3,17 @@ import { Injectable } from '@angular/core';
 import { env } from 'src/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(body: any) {
-    return this.http.post(`${env.backendUrl}/api/auth/login`, body)
+    return this.http.post(`${env.backendUrl}/api/auth/login`, body);
   }
 
   register(body: any) {
-    return this.http.post(`${env.backendUrl}/api/auth/register`, body)
+    return this.http.post(`${env.backendUrl}/api/auth/register`, body);
   }
 
   verifyAccount(token: string): any {

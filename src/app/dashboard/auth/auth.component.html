@@ -18,18 +18,32 @@
             <label class="form-label" for="email">{{ 'EMAIL_ADDRESS' | translate }}</label>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>mail</mat-icon>
-              <input matInput id="email" placeholder="name@company.com" formControlName="email" type="email">
+              <input
+                matInput
+                id="email"
+                placeholder="name@company.com"
+                formControlName="email"
+                type="email"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field-group">
             <div class="form-extras">
               <label class="form-label" for="password">{{ 'PASSWORD' | translate }}</label>
-              <a class="forgot-link" href="javascript:void(0)">{{ 'FORGOT_PASSWORD' | translate }}</a>
+              <a class="forgot-link" href="javascript:void(0)">{{
+                'FORGOT_PASSWORD' | translate
+              }}</a>
             </div>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>lock</mat-icon>
-              <input matInput id="password" placeholder="••••••••" formControlName="password" [type]="passwordVisible ? 'text' : 'password'">
+              <input
+                matInput
+                id="password"
+                placeholder="••••••••"
+                formControlName="password"
+                [type]="passwordVisible ? 'text' : 'password'"
+              />
               <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
                 <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
@@ -40,7 +54,13 @@
             <mat-checkbox color="primary">{{ 'REMEMBER_FOR_30_DAYS' | translate }}</mat-checkbox>
           </div>
 
-          <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="loginForm.invalid">
+          <button
+            mat-flat-button
+            color="primary"
+            class="submit-btn"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
             {{ 'SIGN_IN' | translate }}
           </button>
         </form>
@@ -52,13 +72,18 @@
         </div>
 
         <button class="google-btn" type="button">
-          <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+          <img
+            alt="Google"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          />
           Google
         </button>
 
         <p class="auth-footer">
           {{ 'DONT_HAVE_ACCOUNT' | translate }}
-          <a class="auth-link" href="javascript:void(0)" (click)="utils.navigateTo('register')">{{ 'REGISTER_NOW' | translate }}</a>
+          <a class="auth-link" href="javascript:void(0)" (click)="utils.navigateTo('register')">{{
+            'REGISTER_NOW' | translate
+          }}</a>
         </p>
       </mat-card>
     }
@@ -71,7 +96,8 @@
           [passwordVisible]="passwordVisible"
           (submit)="onRegisterSubmit()"
           (togglePassword)="togglePasswordVisibility()"
-          (navigateToLogin)="utils.navigateTo('login')">
+          (navigateToLogin)="utils.navigateTo('login')"
+        >
         </app-registration-form>
       </mat-card>
     }
@@ -79,12 +105,16 @@
     <!-- Verification Section -->
     @if (showVerification) {
       <mat-card class="auth-card text-center">
-        <h1 class="auth-title">{{ (verifyPageContent ? verifyPageContent : 'VERIFICATION_SENT') | translate }}</h1>
-        <p class="auth-subtitle" style="margin-bottom: 24px;">{{ 'CHECK_INBOX_INSTRUCTIONS' | translate }}</p>
-        <button mat-flat-button color="primary" (click)="utils.navigateTo('login')">{{ 'BACK_TO_LOGIN' | translate }}</button>
+        <h1 class="auth-title">
+          {{ (verifyPageContent ? verifyPageContent : 'VERIFICATION_SENT') | translate }}
+        </h1>
+        <p class="auth-subtitle" style="margin-bottom: 24px">
+          {{ 'CHECK_INBOX_INSTRUCTIONS' | translate }}
+        </p>
+        <button mat-flat-button color="primary" (click)="utils.navigateTo('login')">
+          {{ 'BACK_TO_LOGIN' | translate }}
+        </button>
       </mat-card>
     }
   </div>
 </main>
-
-<app-footer></app-footer>

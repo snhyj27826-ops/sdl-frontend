@@ -1,1 +1,184 @@
-<h1>Contact</h1>
+<main class="max-w-max-width mx-auto px-gutter py-xxl">
+  <div class="text-center mb-xl">
+    <h1 class="font-headline-xl text-headline-xl mb-md text-on-background">Контакт</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+      Ту смо да саслушамо ваше предлоге, одговоримо на питања и заједно градимо бољу будућност
+      Србије. Контактирајте нас путем форме или посетите наше канцеларије.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-start">
+    <div class="md:col-span-4 space-y-lg">
+      <div
+        appAtmosphericCard
+        class="bg-surface-container-low p-lg rounded-xl elevation-1 border border-outline-variant/30"
+      >
+        <h3 class="font-headline-md text-headline-md mb-lg text-secondary">Главна канцеларија</h3>
+        <div class="space-y-md">
+          <div class="flex items-start gap-md">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-variation-settings: 'FILL' 1"
+              >location_on</span
+            >
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">Адреса</p>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Краља Милана 15, 11000 Скопље
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-md">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-variation-settings: 'FILL' 1"
+              >phone</span
+            >
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">Телефон</p>
+              <p class="font-body-md text-body-md text-on-surface-variant">+389 70 123 456</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-md">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-variation-settings: 'FILL' 1"
+              >mail</span
+            >
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">Е-пошта</p>
+              <p class="font-body-md text-body-md text-on-surface-variant">info[at]sdl.org.mk</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-xl pt-lg border-t border-outline-variant">
+          <h4 class="font-label-md text-label-md mb-md text-on-surface">Радно време</h4>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Понедељак - Петак: 09:00 - 17:00
+          </p>
+        </div>
+      </div>
+
+      <div
+        appAtmosphericCard
+        class="relative h-64 rounded-xl overflow-hidden elevation-1 border border-outline-variant/30 group"
+      >
+        <div
+          class="absolute inset-0 grayscale transition-all duration-500 group-hover:grayscale-0"
+          data-location="Belgrade"
+          style="
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9mSX-Ck6IPLmVFlcOEYtswsGt14nw5-vHtBxQp74GHZhY01FfWbqPHLX-NrLQeXmX3O87BNRF0M1k3hmfzrhts05Ju3VQv_EJbQMM8mepFIvCdewDku0dGlKPPirwDlukFc7yXZxGZZSrOOnOCAkFfsau0Xj3TktPwp--hsq4BHENarByOwQCzc7HpzjviR-dFyY8tFLVw5RmYuarfVebnYH5AT_T6OcFeSiDkWkJbto4JVkGy8dM2zFiWtaROBcGr-sOKsVZIcU');
+          "
+        ></div>
+        <div class="absolute inset-0 bg-secondary/10 pointer-events-none"></div>
+        <div
+          class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-md py-sm rounded-lg border border-outline-variant elevation-2"
+        >
+          <span class="font-label-sm text-label-sm text-secondary"
+            >ГПС Координате: 44.8125° N, 20.4612° E</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-8">
+      <div
+        class="bg-surface-container-lowest p-lg md:p-xl rounded-xl elevation-2 border border-outline-variant/20"
+      >
+        <mat-card class="form-card">
+          <div class="form-header">
+            <div class="icon-container">
+              <mat-icon>mail</mat-icon>
+            </div>
+            <div>
+              <h2 class="headline-lg">Контакт</h2>
+              <p class="body-sm text-tertiary">
+                Пошаљите нам поруку и одговорићемо у најкраћем року.
+              </p>
+            </div>
+          </div>
+
+          <form class="application-form" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-field-half">
+                <label class="label-md" for="name">Име и презиме</label>
+                <mat-form-field appearance="outline">
+                  <mat-icon matPrefix>person</mat-icon>
+                  <input
+                    matInput
+                    id="name"
+                    [formField]="contactForm.name"
+                    placeholder="Марко Марковић"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="form-field-half">
+                <label class="label-md" for="email">Е-пошта</label>
+                <mat-form-field appearance="outline">
+                  <mat-icon matPrefix>email</mat-icon>
+                  <input
+                    matInput
+                    id="email"
+                    [formField]="contactForm.email"
+                    placeholder="marko@primer.rs"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-field-full">
+              <label class="label-md" for="subject">Тема поруке</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>topic</mat-icon>
+                <mat-select id="subject" [formField]="contactForm.subject">
+                  <mat-option value="general">Општа питања</mat-option>
+                  <mat-option value="membership">Чланство и приступнице</mat-option>
+                  <mat-option value="press">Медији и саопштења</mat-option>
+                  <mat-option value="local">Локални одбори</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-full">
+              <label class="label-md" for="message">Ваша порука</label>
+              <mat-form-field appearance="outline">
+                <textarea
+                  matInput
+                  id="message"
+                  [formField]="contactForm.message"
+                  rows="6"
+                  placeholder="Напишите вашу поруку овде..."
+                ></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="consent-container">
+              <mat-checkbox [formField]="contactForm.consent" color="primary">
+                <span class="body-sm"
+                  >Слажем се са <a href="#" class="link">политиком приватности</a> и обрадом мојих
+                  података.</span
+                >
+              </mat-checkbox>
+            </div>
+
+            <div class="submit-container">
+              <button
+                mat-flat-button
+                color="primary"
+                type="submit"
+                [disabled]="!contactForm().valid() || isSubmitting()"
+                class="submit-button"
+              >
+                <span>{{ isSubmitting() ? 'Обрада...' : 'Пошаљи поруку' }}</span>
+                <mat-icon [class.spinner]="isSubmitting()">{{
+                  isSubmitting() ? 'sync' : 'send'
+                }}</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</main>

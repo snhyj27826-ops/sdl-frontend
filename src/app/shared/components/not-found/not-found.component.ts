@@ -8,10 +8,8 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./not-found.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
-  imports: [TranslateModule]
+  imports: [TranslateModule],
 })
 export class NotFoundComponent {
-
-  constructor(public utils: UtilsService) { }
-
+  constructor(public utils: UtilsService) {}
 }

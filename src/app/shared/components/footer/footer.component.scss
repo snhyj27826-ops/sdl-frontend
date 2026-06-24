@@ -3,7 +3,7 @@
   width: 100%;
   border-top: 1px solid var(--color-outline);
   background-color: var(--color-white);
-  padding: 24px 0;
+  padding: 12px 0;
 }
 
 .footer-container {
@@ -37,12 +37,21 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: 2px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.flag-red { height: 33.33%; background: #a41b27; }
-.flag-blue { height: 33.33%; background: #0c4076; }
-.flag-white { height: 33.33%; background: #ffffff; }
+.flag-red {
+  height: 33.33%;
+  background: #a41b27;
+}
+.flag-blue {
+  height: 33.33%;
+  background: #0c4076;
+}
+.flag-white {
+  height: 33.33%;
+  background: #ffffff;
+}
 
 .footer-copyright {
   font-size: 12px;

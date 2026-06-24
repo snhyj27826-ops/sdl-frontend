@@ -1,7 +1,10 @@
 <app-header
   [menuItems]="headerMenuItems"
   [primaryButtonLabel]="isLoginPage ? 'SIGN_UP' : 'SIGN_IN'"
-  (primaryButtonClick)="handleAuthButtonClick()">
+  (primaryButtonClick)="handleAuthButtonClick()"
+>
 </app-header>
 
 <router-outlet></router-outlet>
+
+<app-footer />

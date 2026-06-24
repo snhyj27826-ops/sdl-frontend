@@ -1,8 +1,8 @@
 import { provideRouter } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
-import {provideTranslateService} from "@ngx-translate/core";
-import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { register } from 'swiper/element/bundle';
 
 import { AppComponent } from './app/app.component';
@@ -18,8 +18,8 @@ bootstrapApplication(AppComponent, {
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './assets/i18n/',
-        suffix: '.json'
-      })
-    })
-  ]
+        suffix: '.json',
+      }),
+    }),
+  ],
 });

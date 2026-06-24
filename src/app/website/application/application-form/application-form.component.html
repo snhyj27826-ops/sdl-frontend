@@ -3,13 +3,18 @@
     <!-- Hero Decorative Section -->
     <div class="hero-section">
       <div class="hero-bg">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTAwPKNuaSwKYF3sEZCkHALLgjmnFSk_RYViGCvGKhytFS9PfAeOxIQDWWyMtGylFQpGYap3V_OIYBZgljE1S_t7ZRul91nQ3YOaV3QPqpDHsVM1TobofmLPxz2S1W_wAu_SAB8XFV6XkD0uTJzIysg3sUwkAMMJJlVRhH1mcQq-8gvWpsL8_0qP9az1Bdqiksdka-bz2HSt29JRwG1Rxm-W2RbF-wgGoo9l_AXHmJLNc1rdmROkgUipCJ5gqklZJieXSLs7Y2Csw"
-             alt="Serbian Parliament" class="hero-img">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTAwPKNuaSwKYF3sEZCkHALLgjmnFSk_RYViGCvGKhytFS9PfAeOxIQDWWyMtGylFQpGYap3V_OIYBZgljE1S_t7ZRul91nQ3YOaV3QPqpDHsVM1TobofmLPxz2S1W_wAu_SAB8XFV6XkD0uTJzIysg3sUwkAMMJJlVRhH1mcQq-8gvWpsL8_0qP9az1Bdqiksdka-bz2HSt29JRwG1Rxm-W2RbF-wgGoo9l_AXHmJLNc1rdmROkgUipCJ5gqklZJieXSLs7Y2Csw"
+          alt="Serbian Parliament"
+          class="hero-img"
+        />
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1 class="headline-xl">Српска Демократска Лига (СДЛ)</h1>
-        <p class="body-lg">Градимо заједничку будућност засновану на традицији, демократији и напретку.</p>
+        <p class="body-lg">
+          Градимо заједничку будућност засновану на традицији, демократији и напретку.
+        </p>
       </div>
     </div>
 
@@ -22,7 +27,9 @@
           </div>
           <div>
             <h2 class="headline-lg">Приступница странци</h2>
-            <p class="body-sm text-tertiary">Попуните образац како бисте постали члан наше породице.</p>
+            <p class="body-sm text-tertiary">
+              Попуните образац како бисте постали члан наше породице.
+            </p>
           </div>
         </div>
 
@@ -32,7 +39,12 @@
             <label class="label-md" for="fullName">Ime i prezime</label>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>person</mat-icon>
-              <input matInput id="fullName" formControlName="fullName" placeholder="Петar Петровић">
+              <input
+                matInput
+                id="fullName"
+                formControlName="fullName"
+                placeholder="Петar Петровић"
+              />
             </mat-form-field>
           </div>
 
@@ -41,7 +53,12 @@
             <label class="label-md" for="address">Adresa stanovanja</label>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>home</mat-icon>
-              <input matInput id="address" formControlName="address" placeholder="Немањина 11, Београд">
+              <input
+                matInput
+                id="address"
+                formControlName="address"
+                placeholder="Немањина 11, Београд"
+              />
             </mat-form-field>
           </div>
 
@@ -51,7 +68,13 @@
               <label class="label-md" for="jmbg">EMBG</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>badge</mat-icon>
-                <input matInput id="jmbg" formControlName="jmbg" maxlength="13" placeholder="13-цифрени број">
+                <input
+                  matInput
+                  id="jmbg"
+                  formControlName="jmbg"
+                  maxlength="13"
+                  placeholder="13-цифрени број"
+                />
               </mat-form-field>
             </div>
 
@@ -72,7 +95,13 @@
           <div class="form-field-full">
             <label class="label-md" for="reason">Razlog učlanjenja</label>
             <mat-form-field appearance="outline">
-              <textarea matInput id="reason" formControlName="reason" rows="5" placeholder="Ваша мотивација и разлози за приступање СДЛ..."></textarea>
+              <textarea
+                matInput
+                id="reason"
+                formControlName="reason"
+                rows="5"
+                placeholder="Ваша мотивација и разлози за приступање СДЛ..."
+              ></textarea>
             </mat-form-field>
           </div>
 
@@ -80,14 +109,22 @@
           <div class="consent-container">
             <mat-checkbox formControlName="consent" color="primary">
               <span class="body-sm">
-                Слажем се са <a href="#" class="link">правилником странке</a> и потврђујем да су сви наведени подаци тачни и истинити. Овим путем дајем сагласност за обраду података у сврху чланства.
+                Слажем се са <a href="#" class="link">правилником странке</a> и потврђујем да су сви
+                наведени подаци тачни и истинити. Овим путем дајем сагласност за обраду података у
+                сврху чланства.
               </span>
             </mat-checkbox>
           </div>
 
           <!-- Submit -->
           <div class="submit-container">
-            <button mat-flat-button color="primary" type="submit" [disabled]="!applicationForm.valid || isSubmitted" class="submit-button">
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              [disabled]="!applicationForm.valid || isSubmitted"
+              class="submit-button"
+            >
               <span>{{ isSubmitted ? 'Обрада...' : 'Поднеси пријаву' }}</span>
 
               <mat-icon [class.spinner]="isSubmitted">
@@ -103,17 +140,23 @@
         <div class="info-card border-primary">
           <mat-icon class="text-primary">verified_user</mat-icon>
           <h3 class="label-md">Сигурност података</h3>
-          <p class="body-sm text-tertiary">Ваши подаци су заштићени у складу са највишим стандардима приватности.</p>
+          <p class="body-sm text-tertiary">
+            Ваши подаци су заштићени у складу са највишим стандардима приватности.
+          </p>
         </div>
         <div class="info-card border-secondary">
           <mat-icon class="text-secondary">calendar_today</mat-icon>
           <h3 class="label-md">Брза обрада</h3>
-          <p class="body-sm text-tertiary">Наш тим ће обрадити вашу пријаву у року од 48 радних сати.</p>
+          <p class="body-sm text-tertiary">
+            Наш тим ће обрадити вашу пријаву у року од 48 радних сати.
+          </p>
         </div>
         <div class="info-card border-tertiary">
           <mat-icon class="text-tertiary">help</mat-icon>
           <h3 class="label-md">Треба вам помоћ?</h3>
-          <p class="body-sm text-tertiary">Контактирајте нашу службу за подршку чланству путем имејла или телефона.</p>
+          <p class="body-sm text-tertiary">
+            Контактирајте нашу службу за подршку чланству путем имејла или телефона.
+          </p>
         </div>
       </div>
     </section>
@@ -134,4 +177,3 @@
     </div>
   </footer>
 </div>
-

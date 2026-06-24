@@ -4,11 +4,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { env } from 'src/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
-
-  constructor(private router: Router, private cookieService: CookieService) { }
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+  ) {}
 
   // Method to navigate to the component dynamically
   navigateTo(componentName: string): void {
@@ -33,7 +35,6 @@ export class UtilsService {
   // Check if user is authenticated
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return !!token;  // Returns true if token exists, false otherwise
+    return !!token; // Returns true if token exists, false otherwise
   }
-
 }

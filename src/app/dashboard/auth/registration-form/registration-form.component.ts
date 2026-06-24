@@ -19,10 +19,10 @@ import { TranslateModule } from '@ngx-translate/core';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslateModule
+    TranslateModule,
   ],
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent {
   @Input() registerForm!: FormGroup;
@@ -43,4 +43,3 @@ export class RegistrationFormComponent {
     this.navigateToLogin.emit();
   }
 }
-

@@ -22,11 +22,8 @@ import { ApplicationFormComponent } from './application-form/application-form.co
     MatSelectModule,
     MatCheckboxModule,
     MatIconModule,
-    ApplicationFormComponent
+    ApplicationFormComponent,
   ],
-  exports: [
-    ApplicationFormComponent
-  ]
+  exports: [ApplicationFormComponent],
 })
-export class ApplicationModule { }
-
+export class ApplicationModule {}

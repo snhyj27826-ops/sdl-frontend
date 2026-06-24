@@ -1,10 +1,10 @@
-import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils.service';
-import {MatIconButton} from "@angular/material/button";
-import {MatTooltip} from "@angular/material/tooltip";
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import { MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 export interface HeaderMenuItem {
   label: string;
@@ -18,7 +18,7 @@ export interface HeaderMenuItem {
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip, RouterLink, RouterLinkActive]
+  imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip, RouterLink, RouterLinkActive],
 })
 export class HeaderComponent {
   @Input() menuItems: HeaderMenuItem[] = [];
@@ -28,7 +28,10 @@ export class HeaderComponent {
 
   @Output() primaryButtonClick = new EventEmitter<void>();
 
-  constructor(private translate: TranslateService, private utils: UtilsService) {
+  constructor(
+    private translate: TranslateService,
+    private utils: UtilsService,
+  ) {
     translate.setDefaultLang('en');
     const savedLang = localStorage.getItem('language');
     if (savedLang) {
