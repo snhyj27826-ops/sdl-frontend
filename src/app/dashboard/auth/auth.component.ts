@@ -33,7 +33,6 @@ import { FooterComponent } from '@src/app/shared/components/footer/footer.compon
     MatCheckboxModule,
     TranslateModule,
     RegistrationFormComponent,
-    FooterComponent,
   ],
 })
 export class AuthComponent implements OnInit {
