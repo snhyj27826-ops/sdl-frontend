@@ -1,0 +1,20 @@
+<swiper-container slides-per-view="1" navigation="true" pagination="true" loop="true" speed="800">
+  @for (slide of slides; track slide.imageUrl) {
+    <swiper-slide>
+      <div class="slide">
+        <img [src]="slide.imageUrl" [alt]="slide.title" />
+
+        <div class="slide-overlay">
+          <h1>{{ slide.title }}</h1>
+          <p>{{ slide.subtitle }}</p>
+
+          @if (slide.buttonText) {
+            <a [routerLink]="slide.buttonLink" class="hero-button">
+              {{ slide.buttonText }}
+            </a>
+          }
+        </div>
+      </div>
+    </swiper-slide>
+  }
+</swiper-container>
