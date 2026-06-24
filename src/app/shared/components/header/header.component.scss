@@ -54,9 +54,16 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  padding: 16px 32px;
+  padding: 4px 16px;
   max-width: 1280px;
   margin: 0 auto;
+
+  .logo {
+    .logo-image {
+      display: flex;
+      width: 65px;
+    }
+  }
 }
 
 .logo {
