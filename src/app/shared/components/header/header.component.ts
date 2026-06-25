@@ -6,6 +6,7 @@ import {
   HostListener,
   SimpleChanges,
   OnChanges,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -29,7 +30,7 @@ export interface HeaderMenuItem {
   standalone: true,
   imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip, RouterLink, RouterLinkActive],
 })
-export class HeaderComponent implements OnChanges {
+export class HeaderComponent implements OnChanges, OnDestroy {
   @Input() menuItems: HeaderMenuItem[] = [];
   @Input() logoText: string = 'СДЛ';
   @Input() primaryButtonLabel: string = 'SIGN_IN';
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnChanges {
   @Output() primaryButtonClick = new EventEmitter<void>();
 
   public openSubmenus: Set<string> = new Set();
+  public isMobileMenuOpen = false;
 
   constructor(
     private translate: TranslateService,
@@ -97,12 +99,40 @@ export class HeaderComponent implements OnChanges {
   @HostListener('document:click', ['$event'])
   public onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('.nav-link-wrapper')) {
+    if (!target.closest('.nav-link-wrapper') && !target.closest('.mobile-menu-overlay')) {
       this.openSubmenus.clear();
     }
   }
 
   public getSubmenuKey(item: HeaderMenuItem, index: number): string {
     return `${item.label}-${index}`;
+  }
+
+  public toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    if (this.isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  public closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  public handleMobilePrimaryClick(): void {
+    this.closeMobileMenu();
+    this.primaryButtonClick.emit();
+  }
+
+  public handleMobileRegisterClick(): void {
+    this.closeMobileMenu();
+    this.utils.navigateTo('dashboard/register');
+  }
+
+  public ngOnDestroy(): void {
+    document.body.style.overflow = '';
   }
 }

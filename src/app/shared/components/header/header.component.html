@@ -138,5 +138,96 @@
         {{ primaryButtonLabel | translate }}
       </button>
     }
+
+    <button class="hamburger-btn" (click)="toggleMobileMenu()" aria-label="Open menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
   </nav>
 </header>
+
+@if (isMobileMenuOpen) {
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu-container">
+      <!-- Mobile Header -->
+      <div class="mobile-menu-header">
+        <div class="logo" (click)="handleLogoClick(); closeMobileMenu()">
+          <img src="assets/sdl-logo.png" alt="SDL Logo" class="logo-image" />
+        </div>
+        <button class="close-btn" (click)="toggleMobileMenu()" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Mobile Body (Links) -->
+      <div class="mobile-menu-body">
+        <ul class="mobile-nav-list">
+          @for (item of menuItems; track item.route; let i = $index) {
+            <li class="mobile-nav-item" [class.has-children]="item.hasChildren">
+              @if (item.hasChildren) {
+                <button
+                  class="mobile-nav-link-btn"
+                  [class.active]="isSubmenuOpen(getSubmenuKey(item, i))"
+                  (click)="toggleSubmenu(getSubmenuKey(item, i))"
+                >
+                  <span class="mobile-nav-label">{{ item.label | translate }}</span>
+                  <span class="chevron-icon material-symbols-outlined">
+                    {{ isSubmenuOpen(getSubmenuKey(item, i)) ? 'expand_more' : 'chevron_right' }}
+                  </span>
+                </button>
+                
+                @if (isSubmenuOpen(getSubmenuKey(item, i))) {
+                  <ul class="mobile-submenu-list">
+                    @for (subitem of item.children; track subitem.route) {
+                      <li class="mobile-submenu-item">
+                        <a
+                          class="mobile-submenu-link"
+                          [routerLink]="subitem.route"
+                          routerLinkActive="active"
+                          (click)="subitem.action && subitem.action(); closeMobileMenu()"
+                        >
+                          {{ subitem.label | translate }}
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                }
+              } @else {
+                <a
+                  class="mobile-nav-link"
+                  [routerLink]="item.route"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+                  (click)="item.action && item.action(); closeMobileMenu()"
+                >
+                  <span class="mobile-nav-label">{{ item.label | translate }}</span>
+                  <span class="chevron-icon material-symbols-outlined">chevron_right</span>
+                </a>
+              }
+            </li>
+          }
+
+          <!-- Dynamically insert "Пријава" (Sign In) if showPrimaryButton is true -->
+          @if (showPrimaryButton) {
+            <li class="mobile-nav-item">
+              <a
+                class="mobile-nav-link"
+                (click)="handleMobilePrimaryClick()"
+              >
+                <span class="mobile-nav-label">{{ primaryButtonLabel | translate }}</span>
+                <span class="chevron-icon material-symbols-outlined">chevron_right</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Mobile Footer (Register button) -->
+      <div class="mobile-menu-footer">
+        <button class="register-btn" (click)="handleMobileRegisterClick()">
+          <span class="register-label">{{ 'SIGN_UP' | translate }}</span>
+          <span class="material-symbols-outlined">person_add</span>
+        </button>
+      </div>
+    </div>
+  </div>
+}
