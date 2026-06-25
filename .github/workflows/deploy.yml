@@ -32,6 +32,10 @@ jobs:
       - name: Build Angular
         run: npm run build -- --configuration production --base-href /sdl-frontend/
 
+      - name: Show dist output
+        run: |
+          find dist -maxdepth 4 -type f
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
