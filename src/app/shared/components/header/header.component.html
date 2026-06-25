@@ -135,7 +135,8 @@
         class="header-btn"
         (click)="handlePrimaryButtonClick()"
       >
-        {{ primaryButtonLabel | translate }}
+        <span>{{ primaryButtonLabel | translate }}</span>
+        <span class="material-symbols-outlined">person_add</span>
       </button>
     }
 
@@ -205,29 +206,18 @@
               }
             </li>
           }
-
-          <!-- Dynamically insert "Пријава" (Sign In) if showPrimaryButton is true -->
-          @if (showPrimaryButton) {
-            <li class="mobile-nav-item">
-              <a
-                class="mobile-nav-link"
-                (click)="handleMobilePrimaryClick()"
-              >
-                <span class="mobile-nav-label">{{ primaryButtonLabel | translate }}</span>
-                <span class="chevron-icon material-symbols-outlined">chevron_right</span>
-              </a>
-            </li>
-          }
         </ul>
       </div>
 
-      <!-- Mobile Footer (Register button) -->
-      <div class="mobile-menu-footer">
-        <button class="register-btn" (click)="handleMobileRegisterClick()">
-          <span class="register-label">{{ 'SIGN_UP' | translate }}</span>
-          <span class="material-symbols-outlined">person_add</span>
-        </button>
-      </div>
+      <!-- Mobile Footer (Primary button) -->
+      @if (showPrimaryButton) {
+        <div class="mobile-menu-footer">
+          <button class="register-btn" (click)="handleMobilePrimaryClick()">
+            <span class="register-label">{{ primaryButtonLabel | translate }}</span>
+            <span class="material-symbols-outlined">person_add</span>
+          </button>
+        </div>
+      }
     </div>
   </div>
 }
