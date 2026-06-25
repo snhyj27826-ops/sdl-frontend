@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
-import { email, form, FormField, required } from '@angular/forms/signals';
-import { AtmosphericCardDirective } from '@src/app/shared/directives/atmospheric-card.directive';
+import { CommonModule } from '@angular/common';
+import { email, form, required } from '@angular/forms/signals';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,8 +18,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./contact.component.scss'],
   standalone: true,
   imports: [
-    FormField,
-    AtmosphericCardDirective,
+    CommonModule,
+    TranslateModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -39,12 +40,15 @@ export class ContactComponent implements OnInit {
     message: '',
     consent: false,
   });
+  
+  constructor(private translate: TranslateService) {}
+
   protected readonly contactForm = form(this.contactModel, (rules) => {
-    required(rules.name, { message: 'Име је обавезно' });
-    required(rules.email, { message: 'Е-пошта је обавезна' });
-    email(rules.email, { message: 'Унесите исправну е-пошту' });
-    required(rules.message, { message: 'Порука је обавезна' });
-    required(rules.consent, { message: 'Морате прихватити услове' });
+    required(rules.name, { message: this.translate.instant('CONTACT_VALIDATION_NAME_REQUIRED') });
+    required(rules.email, { message: this.translate.instant('CONTACT_VALIDATION_EMAIL_REQUIRED') });
+    email(rules.email, { message: this.translate.instant('CONTACT_VALIDATION_EMAIL_INVALID') });
+    required(rules.message, { message: this.translate.instant('CONTACT_VALIDATION_MESSAGE_REQUIRED') });
+    required(rules.consent, { message: this.translate.instant('CONTACT_VALIDATION_CONSENT_REQUIRED') });
   });
 
   ngOnInit(): void {}
@@ -54,7 +58,7 @@ export class ContactComponent implements OnInit {
       this.isSubmitting.set(true);
 
       setTimeout(() => {
-        alert('Хвала вам на поруци!');
+        alert(this.translate.instant('CONTACT_SUCCESS_MESSAGE'));
         this.isSubmitting.set(false);
         this.contactForm().reset();
       }, 1500);
