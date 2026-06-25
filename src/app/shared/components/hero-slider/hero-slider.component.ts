@@ -12,23 +12,23 @@ import { RouterLink } from '@angular/router';
 export class HeroSliderComponent implements OnInit {
   slides = [
     {
-      imageUrl: '/assets/carousel/screen.png',
-      title: 'Some text here',
-      subtitle: 'Track and manage your fleet in real time.',
+      imageUrl: 'assets/carousel/screen.png',
+      title: 'Dummy text here',
+      subtitle: 'Dummy text here',
       buttonText: 'Learn More',
-      buttonLink: '/services',
-    },
-    {
-      imageUrl: '/assets/carousel/screen2.png',
-      title: 'Some other text here',
-      subtitle: 'Connected operations across continents.',
-      buttonText: 'Explore',
       buttonLink: '/about',
     },
     {
-      imageUrl: '/assets/images/slide-3.jpg',
-      title: 'Smart Solutions',
-      subtitle: 'Built for modern businesses.',
+      imageUrl: 'assets/carousel/screen2.png',
+      title: 'Dummy other text here',
+      subtitle: 'Dummy other text here',
+      buttonText: 'Explore',
+      buttonLink: '/news',
+    },
+    {
+      imageUrl: 'assets/carousel/screen.png',
+      title: 'Dummy other other text here',
+      subtitle: 'Dummy other other text here',
       buttonText: 'Contact Us',
       buttonLink: '/contact',
     },
