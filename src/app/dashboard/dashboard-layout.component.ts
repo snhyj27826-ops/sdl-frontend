@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { HttpService } from '@src/app/services/http.service';
 import { UtilsService } from '@src/app/services/utils.service';
 import {
   HeaderComponent,
