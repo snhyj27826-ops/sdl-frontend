@@ -130,8 +130,13 @@
       </div>
     </ng-template>
 
-    <button class="header-btn" (click)="handlePrimaryButtonClick()">
-      {{ primaryButtonLabel | translate }}
-    </button>
+    @if (showPrimaryButton) {
+      <button
+        class="header-btn"
+        (click)="handlePrimaryButtonClick()"
+      >
+        {{ primaryButtonLabel | translate }}
+      </button>
+    }
   </nav>
 </header>

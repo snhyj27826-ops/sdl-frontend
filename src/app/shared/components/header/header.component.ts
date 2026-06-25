@@ -1,10 +1,11 @@
 import {
   Component,
   Input,
-  ChangeDetectionStrategy,
   Output,
   EventEmitter,
   HostListener,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -25,11 +26,10 @@ export interface HeaderMenuItem {
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, TranslateModule, MatIconButton, MatTooltip, RouterLink, RouterLinkActive],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnChanges {
   @Input() menuItems: HeaderMenuItem[] = [];
   @Input() logoText: string = 'СДЛ';
   @Input() primaryButtonLabel: string = 'SIGN_IN';
@@ -51,6 +51,10 @@ export class HeaderComponent {
       const browserLang = translate.getBrowserLang();
       translate.use(browserLang?.match(/en|sr|mk/) ? browserLang : 'en');
     }
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log('HeaderComponent inputs changed:', changes);
   }
 
   public switchLanguage(lang: string) {

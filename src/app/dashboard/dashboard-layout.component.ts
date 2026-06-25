@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HttpService } from '@src/app/services/http.service';
 import { UtilsService } from '@src/app/services/utils.service';
 import {
@@ -7,6 +7,7 @@ import {
   HeaderMenuItem,
 } from '@src/app/shared/components/header/header.component';
 import { FooterComponent } from '@src/app/shared/components/footer/footer.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-board-layout',
@@ -15,21 +16,20 @@ import { FooterComponent } from '@src/app/shared/components/footer/footer.compon
   templateUrl: './dashboard-layout.component.html',
 })
 export class DashboardLayoutComponent implements OnInit {
-  public isLoginPage: boolean = false;
+  public isLoginPage = false;
   public headerMenuItems: HeaderMenuItem[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private http: HttpService,
+    private router: Router,
     public utils: UtilsService,
   ) {
+    this.updateCurrentPageState();
     this.updateHeaderMenuItems();
   }
 
-  public ngOnInit() {
-    // Check if the current route is '/login' or '/register'
-    this.route.url.subscribe((urlSegment) => {
-      this.isLoginPage = urlSegment[0]?.path === 'login';
+  public ngOnInit(): void {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      this.updateCurrentPageState();
       this.updateHeaderMenuItems();
     });
   }
@@ -42,24 +42,23 @@ export class DashboardLayoutComponent implements OnInit {
     }
   }
 
+  private updateCurrentPageState(): void {
+    this.isLoginPage = this.router.url === '/dashboard/login';
+  }
+
   private updateHeaderMenuItems(): void {
     this.headerMenuItems = [
       {
         label: 'SUPPORT',
         route: '/support',
-        action: () => {
-          /* Support action */
-        },
       },
       {
         label: 'SIGN_UP',
         route: '/dashboard/register',
-        action: () => this.utils.navigateTo('register'),
       },
       {
         label: 'SIGN_IN',
         route: '/dashboard/login',
-        action: () => this.utils.navigateTo('login'),
       },
     ];
   }
