@@ -11,6 +11,7 @@ import { NewsComponent } from '@src/app/website/news/news.component';
 import { ContactComponent } from '@src/app/website/contact/contact.component';
 import { WebsiteLayoutComponent } from '@src/app/website/website-layout.component';
 import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.component';
+import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent,
+      },
+      {
+        path: 'agenda',
+        component: AgendaComponent,
       },
       {
         path: 'news',

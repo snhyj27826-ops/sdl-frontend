@@ -7,6 +7,7 @@ import { UtilsService } from '@src/app/services/utils.service';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { FooterComponent } from '@src/app/shared/components/footer/footer.component';
+import { getWebsiteMenuItems } from './menu-config';
 
 @Component({
   selector: 'app-website-layout',
@@ -28,30 +29,7 @@ export class WebsiteLayoutComponent {
   }
 
   private initializeHeaderMenu(): void {
-    const currentUrl = this.router.url;
-
-    this.headerMenuItems = [
-      {
-        label: 'HOME',
-        route: '/',
-        action: () => this.utils.navigateTo(''),
-      },
-      {
-        label: 'NEWS',
-        route: '/news',
-        action: () => this.utils.navigateTo('news'),
-      },
-      {
-        label: 'ABOUT',
-        route: '/about',
-        action: () => this.utils.navigateTo('about'),
-      },
-      {
-        label: 'CONTACT',
-        route: '/contact',
-        action: () => this.utils.navigateTo('contact'),
-      },
-    ];
+    this.headerMenuItems = getWebsiteMenuItems(this.utils);
   }
 
   public handleAuthButtonClick(): void {

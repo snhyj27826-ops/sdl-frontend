@@ -25,17 +25,110 @@
     </div>
 
     <div class="nav-links">
-      @for (item of menuItems; track item.route) {
-        <a
-          class="nav-link"
-          [routerLink]="item.route"
-          routerLinkActive="nav-link-active"
-          [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+      @for (item of menuItems; track item.route; let i = $index) {
+        <div
+          class="nav-link-wrapper"
+          [class.has-children]="item.hasChildren"
+          (mouseenter)="item.hasChildren && openSubmenu(getSubmenuKey(item, i))"
+          (mouseleave)="item.hasChildren && closeSubmenu(getSubmenuKey(item, i))"
         >
-          {{ item.label | translate }}
-        </a>
+          @if (item.hasChildren) {
+            <button
+              class="nav-link nav-link-button"
+              (click)="toggleSubmenu(getSubmenuKey(item, i), $event)"
+              (touchend)="toggleSubmenu(getSubmenuKey(item, i), $event)"
+            >
+              {{ item.label | translate }}
+              <span class="dropdown-icon">▼</span>
+            </button>
+            @if (isSubmenuOpen(getSubmenuKey(item, i))) {
+              <div class="submenu">
+                @for (subitem of item.children; track subitem.route; let j = $index) {
+                  <ng-container
+                    *ngTemplateOutlet="
+                      menuItemTemplate;
+                      context: {
+                        $implicit: subitem,
+                        level: 1,
+                        index: j,
+                        parentKey: getSubmenuKey(item, i)
+                      }
+                    "
+                  ></ng-container>
+                }
+              </div>
+            }
+          } @else {
+            <a
+              class="nav-link"
+              [routerLink]="item.route"
+              routerLinkActive="nav-link-active"
+              [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+              (click)="item.action && item.action()"
+            >
+              {{ item.label | translate }}
+            </a>
+          }
+        </div>
       }
     </div>
+
+    <ng-template
+      #menuItemTemplate
+      let-item
+      let-level="level"
+      let-index="index"
+      let-parentKey="parentKey"
+    >
+      <div
+        class="nav-link-wrapper menu-item-level-{{ level }}"
+        [class.has-children]="item.hasChildren"
+        (mouseenter)="
+          item.hasChildren && openSubmenu(parentKey + '-' + getSubmenuKey(item, index))
+        "
+        (mouseleave)="
+          item.hasChildren && closeSubmenu(parentKey + '-' + getSubmenuKey(item, index))
+        "
+      >
+        @if (item.hasChildren) {
+          <button
+            class="nav-link nav-link-button submenu-item"
+            (click)="toggleSubmenu(parentKey + '-' + getSubmenuKey(item, index), $event)"
+            (touchend)="toggleSubmenu(parentKey + '-' + getSubmenuKey(item, index), $event)"
+          >
+            {{ item.label | translate }}
+            <span class="dropdown-icon">▶</span>
+          </button>
+          @if (isSubmenuOpen(parentKey + '-' + getSubmenuKey(item, index))) {
+            <div class="submenu">
+              @for (subitem of item.children; track subitem.route; let k = $index) {
+                <ng-container
+                  *ngTemplateOutlet="
+                    menuItemTemplate;
+                    context: {
+                      $implicit: subitem,
+                      level: level + 1,
+                      index: k,
+                      parentKey: parentKey + '-' + getSubmenuKey(item, index)
+                    }
+                  "
+                ></ng-container>
+              }
+            </div>
+          }
+        } @else {
+          <a
+            class="nav-link submenu-item"
+            [routerLink]="item.route"
+            routerLinkActive="nav-link-active"
+            [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+            (click)="item.action && item.action()"
+          >
+            {{ item.label | translate }}
+          </a>
+        }
+      </div>
+    </ng-template>
 
     <button class="header-btn" (click)="handlePrimaryButtonClick()">
       {{ primaryButtonLabel | translate }}

@@ -1,4 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -9,7 +16,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export interface HeaderMenuItem {
   label: string;
   route: string;
-  action: () => void;
+  action?: () => void;
+  hasChildren?: boolean;
+  children?: HeaderMenuItem[];
 }
 
 @Component({
@@ -27,6 +36,8 @@ export class HeaderComponent {
   @Input() showPrimaryButton: boolean = true;
 
   @Output() primaryButtonClick = new EventEmitter<void>();
+
+  public openSubmenus: Set<string> = new Set();
 
   constructor(
     private translate: TranslateService,
@@ -53,5 +64,41 @@ export class HeaderComponent {
 
   public handlePrimaryButtonClick(): void {
     this.primaryButtonClick.emit();
+  }
+
+  public toggleSubmenu(key: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (this.openSubmenus.has(key)) {
+      this.openSubmenus.delete(key);
+    } else {
+      this.openSubmenus.add(key);
+    }
+  }
+
+  public openSubmenu(key: string): void {
+    this.openSubmenus.add(key);
+  }
+
+  public closeSubmenu(key: string): void {
+    this.openSubmenus.delete(key);
+  }
+
+  public isSubmenuOpen(key: string): boolean {
+    return this.openSubmenus.has(key);
+  }
+
+  @HostListener('document:click', ['$event'])
+  public onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.nav-link-wrapper')) {
+      this.openSubmenus.clear();
+    }
+  }
+
+  public getSubmenuKey(item: HeaderMenuItem, index: number): string {
+    return `${item.label}-${index}`;
   }
 }
