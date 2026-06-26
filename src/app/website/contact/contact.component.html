@@ -13,7 +13,7 @@
     <aside class="contact-sidebar">
       <mat-card class="sidebar-card">
         <h3 class="sidebar-title">{{ 'CONTACT_MAIN_OFFICE' | translate }}</h3>
-        
+
         <!-- Address -->
         <div class="contact-info-item">
           <mat-icon class="contact-icon">location_on</mat-icon>
@@ -78,26 +78,32 @@
               <label class="label-md" for="name">{{ 'CONTACT_NAME_LABEL' | translate }}</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>person</mat-icon>
-                <input matInput 
-                       id="name"
-                       [(ngModel)]="contactModel().name"
-                       name="name"
-                       [placeholder]="'CONTACT_NAME_PLACEHOLDER' | translate"
-                       [disabled]="isSubmitting()">
+                <input
+                  matInput
+                  id="name"
+                  [(ngModel)]="contactModel().name"
+                  name="name"
+                  [placeholder]="'CONTACT_NAME_PLACEHOLDER' | translate"
+                  [disabled]="isSubmitting()"
+                />
               </mat-form-field>
             </div>
 
             <div class="form-field-half">
-              <label class="label-md" for="email">{{ 'CONTACT_EMAIL_FORM_LABEL' | translate }}</label>
+              <label class="label-md" for="email">{{
+                'CONTACT_EMAIL_FORM_LABEL' | translate
+              }}</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>email</mat-icon>
-                <input matInput 
-                       id="email"
-                       type="email"
-                       [(ngModel)]="contactModel().email"
-                       name="email"
-                       [placeholder]="'CONTACT_EMAIL_PLACEHOLDER' | translate"
-                       [disabled]="isSubmitting()">
+                <input
+                  matInput
+                  id="email"
+                  type="email"
+                  [(ngModel)]="contactModel().email"
+                  name="email"
+                  [placeholder]="'CONTACT_EMAIL_PLACEHOLDER' | translate"
+                  [disabled]="isSubmitting()"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -107,14 +113,20 @@
             <label class="label-md" for="subject">{{ 'CONTACT_SUBJECT_LABEL' | translate }}</label>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>category</mat-icon>
-              <mat-select id="subject" 
-                         [(ngModel)]="contactModel().subject"
-                         name="subject"
-                         [disabled]="isSubmitting()">
+              <mat-select
+                id="subject"
+                [(ngModel)]="contactModel().subject"
+                name="subject"
+                [disabled]="isSubmitting()"
+              >
                 <mat-option value="general">{{ 'CONTACT_SUBJECT_GENERAL' | translate }}</mat-option>
                 <mat-option value="support">{{ 'CONTACT_SUBJECT_SUPPORT' | translate }}</mat-option>
-                <mat-option value="collaboration">{{ 'CONTACT_SUBJECT_COLLABORATION' | translate }}</mat-option>
-                <mat-option value="feedback">{{ 'CONTACT_SUBJECT_FEEDBACK' | translate }}</mat-option>
+                <mat-option value="collaboration">{{
+                  'CONTACT_SUBJECT_COLLABORATION' | translate
+                }}</mat-option>
+                <mat-option value="feedback">{{
+                  'CONTACT_SUBJECT_FEEDBACK' | translate
+                }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -123,22 +135,26 @@
           <div class="form-field-full">
             <label class="label-md" for="message">{{ 'CONTACT_MESSAGE_LABEL' | translate }}</label>
             <mat-form-field appearance="outline">
-              <textarea matInput 
-                        id="message"
-                        [(ngModel)]="contactModel().message"
-                        name="message"
-                        [placeholder]="'CONTACT_MESSAGE_PLACEHOLDER' | translate"
-                        rows="6"
-                        [disabled]="isSubmitting()"></textarea>
+              <textarea
+                matInput
+                id="message"
+                [(ngModel)]="contactModel().message"
+                name="message"
+                [placeholder]="'CONTACT_MESSAGE_PLACEHOLDER' | translate"
+                rows="6"
+                [disabled]="isSubmitting()"
+              ></textarea>
             </mat-form-field>
           </div>
 
           <!-- Privacy Checkbox -->
           <div class="consent-container">
-            <mat-checkbox [(ngModel)]="contactModel().consent"
-                         name="consent"
-                         color="primary"
-                         [disabled]="isSubmitting()">
+            <mat-checkbox
+              [(ngModel)]="contactModel().consent"
+              name="consent"
+              color="primary"
+              [disabled]="isSubmitting()"
+            >
               <span class="body-sm">
                 {{ 'CONTACT_CONSENT' | translate }}
               </span>
@@ -147,12 +163,16 @@
 
           <!-- Submit Button -->
           <div class="submit-container">
-            <button mat-flat-button 
-                    color="primary" 
-                    type="submit"
-                    class="submit-button"
-                    [disabled]="isSubmitting()">
-              <span>{{ (isSubmitting() ? 'CONTACT_SUBMITTING' : 'CONTACT_SUBMIT_BUTTON') | translate }}</span>
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              class="submit-button"
+              [disabled]="isSubmitting()"
+            >
+              <span>{{
+                (isSubmitting() ? 'CONTACT_SUBMITTING' : 'CONTACT_SUBMIT_BUTTON') | translate
+              }}</span>
               <mat-icon [class.spinner]="isSubmitting()">
                 {{ isSubmitting() ? 'sync' : 'send' }}
               </mat-icon>

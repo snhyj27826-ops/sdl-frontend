@@ -1,3 +1,46 @@
-<h1>
-  <a (click)="this.utils.navigateTo('')">{{ 'NOT_FOUND' | translate }}</a>
-</h1>
+<div class="not-found-page">
+  <app-header
+    [menuItems]="menuItems"
+    [primaryButtonLabel]="'JOIN_US'"
+    (primaryButtonClick)="navigateTo('dashboard/register')"
+  />
+
+  <main class="not-found-main">
+    <section class="not-found-hero" aria-labelledby="not-found-title">
+      <div class="error-mark" aria-hidden="true">
+        <span class="error-digit">4</span>
+        <div class="error-badge-circle">
+          <span class="error-badge-icon">!</span>
+        </div>
+        <span class="error-digit">4</span>
+      </div>
+
+      <h1 id="not-found-title">{{ 'NOT_FOUND_TITLE' | translate }}</h1>
+      <p class="not-found-description">{{ 'NOT_FOUND_DESCRIPTION' | translate }}</p>
+
+      <div class="not-found-actions">
+        <button type="button" class="primary-action" (click)="goHome()">
+          <span class="material-symbols-outlined">home</span>
+          {{ 'NOT_FOUND_HOME' | translate }}
+        </button>
+
+        <button type="button" class="secondary-action" (click)="goBack()">
+          <span class="material-symbols-outlined">arrow_back</span>
+          {{ 'NOT_FOUND_BACK' | translate }}
+        </button>
+      </div>
+    </section>
+
+    <section class="not-found-links" aria-label="Quick links">
+      @for (item of quickLinks; track item.route) {
+        <div class="link-card" (click)="navigateTo(item.route)">
+          <span class="link-card-icon material-symbols-outlined">{{ item.icon }}</span>
+          <h2 class="link-card-title">{{ item.title | translate }}</h2>
+          <p class="link-card-description">{{ item.description | translate }}</p>
+        </div>
+      }
+    </section>
+  </main>
+
+  <app-footer />
+</div>

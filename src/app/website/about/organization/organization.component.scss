@@ -116,7 +116,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-4px);
@@ -160,14 +162,14 @@
     .member-role {
       font-size: 11px;
       font-weight: 600;
-      color: #8D706E;
+      color: #8d706e;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 16px;
     }
 
     .bio-link {
-      color: #8D706E;
+      color: #8d706e;
       font-size: 13px;
       font-weight: 500;
       text-decoration: none;

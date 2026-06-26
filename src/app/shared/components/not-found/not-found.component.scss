@@ -1,0 +1,255 @@
+:host {
+  display: block;
+}
+
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  background-image: radial-gradient(#e2d6d4 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.not-found-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px 120px;
+}
+
+.not-found-hero {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.error-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  user-select: none;
+}
+
+.error-digit {
+  font-size: 240px;
+  font-weight: 700;
+  color: rgba(164, 27, 39, 0.08);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.error-badge-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(164, 27, 39, 0.25);
+  margin: 0 4px;
+}
+
+.error-badge-icon {
+  font-family: var(--font-family), sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.not-found-hero h1 {
+  margin: 0 0 16px;
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.not-found-description {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.not-found-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.primary-action,
+.secondary-action {
+  min-width: 240px;
+  padding: 14px 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-action {
+  background: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary);
+
+  &:hover {
+    background: var(--color-primary-container);
+    border-color: var(--color-primary-container);
+    box-shadow: 0 4px 12px rgba(164, 27, 39, 0.2);
+  }
+}
+
+.secondary-action {
+  background: transparent;
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+
+  &:hover {
+    background: rgba(12, 64, 118, 0.05);
+  }
+}
+
+.primary-action .material-symbols-outlined,
+.secondary-action .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.not-found-links {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.link-card {
+  background: white;
+  padding: 32px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(141, 112, 110, 0.12);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 12px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(12, 64, 118, 0.1);
+  }
+}
+
+.link-card-icon {
+  font-size: 32px;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.link-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.link-card-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+@media (max-width: 960px) {
+  .not-found-links {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .not-found-main {
+    padding: 60px 18px 80px;
+  }
+
+  .error-mark {
+    margin-bottom: 16px;
+  }
+
+  .error-digit {
+    font-size: 160px;
+  }
+
+  .error-badge-circle {
+    width: 80px;
+    height: 80px;
+    margin: 0 2px;
+  }
+
+  .error-badge-icon {
+    font-size: 44px;
+  }
+
+  .not-found-hero h1 {
+    font-size: 32px;
+  }
+
+  .not-found-description {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .not-found-actions {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-digit {
+    font-size: 110px;
+  }
+
+  .error-badge-circle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .error-badge-icon {
+    font-size: 32px;
+  }
+
+  .not-found-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+    min-width: 0;
+  }
+}

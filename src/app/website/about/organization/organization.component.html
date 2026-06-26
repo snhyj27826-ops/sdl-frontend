@@ -7,7 +7,11 @@
   <!-- President Highlight Card -->
   <div class="president-card">
     <div class="president-image-wrapper">
-      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=800" [alt]="'PRESIDENT_NAME' | translate" class="president-image">
+      <img
+        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=800"
+        [alt]="'PRESIDENT_NAME' | translate"
+        class="president-image"
+      />
       <span class="president-badge">{{ 'ROLE_PRESIDENT' | translate }}</span>
     </div>
     <div class="president-info">
@@ -22,7 +26,7 @@
     @for (member of teamMembers; track member.nameKey) {
       <div class="team-card">
         <div class="member-image-wrapper">
-          <img [src]="member.imageUrl" [alt]="member.nameKey | translate" class="member-image">
+          <img [src]="member.imageUrl" [alt]="member.nameKey | translate" class="member-image" />
         </div>
         <div class="member-info">
           <h3 class="member-name">{{ member.nameKey | translate }}</h3>

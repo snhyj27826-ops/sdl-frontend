@@ -40,15 +40,19 @@ export class ContactComponent implements OnInit {
     message: '',
     consent: false,
   });
-  
+
   constructor(private translate: TranslateService) {}
 
   protected readonly contactForm = form(this.contactModel, (rules) => {
     required(rules.name, { message: this.translate.instant('CONTACT_VALIDATION_NAME_REQUIRED') });
     required(rules.email, { message: this.translate.instant('CONTACT_VALIDATION_EMAIL_REQUIRED') });
     email(rules.email, { message: this.translate.instant('CONTACT_VALIDATION_EMAIL_INVALID') });
-    required(rules.message, { message: this.translate.instant('CONTACT_VALIDATION_MESSAGE_REQUIRED') });
-    required(rules.consent, { message: this.translate.instant('CONTACT_VALIDATION_CONSENT_REQUIRED') });
+    required(rules.message, {
+      message: this.translate.instant('CONTACT_VALIDATION_MESSAGE_REQUIRED'),
+    });
+    required(rules.consent, {
+      message: this.translate.instant('CONTACT_VALIDATION_CONSENT_REQUIRED'),
+    });
   });
 
   ngOnInit(): void {}

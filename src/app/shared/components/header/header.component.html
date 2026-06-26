@@ -51,7 +51,7 @@
                         $implicit: subitem,
                         level: 1,
                         index: j,
-                        parentKey: getSubmenuKey(item, i)
+                        parentKey: getSubmenuKey(item, i),
                       }
                     "
                   ></ng-container>
@@ -83,9 +83,7 @@
       <div
         class="nav-link-wrapper menu-item-level-{{ level }}"
         [class.has-children]="item.hasChildren"
-        (mouseenter)="
-          item.hasChildren && openSubmenu(parentKey + '-' + getSubmenuKey(item, index))
-        "
+        (mouseenter)="item.hasChildren && openSubmenu(parentKey + '-' + getSubmenuKey(item, index))"
         (mouseleave)="
           item.hasChildren && closeSubmenu(parentKey + '-' + getSubmenuKey(item, index))
         "
@@ -109,7 +107,7 @@
                       $implicit: subitem,
                       level: level + 1,
                       index: k,
-                      parentKey: parentKey + '-' + getSubmenuKey(item, index)
+                      parentKey: parentKey + '-' + getSubmenuKey(item, index),
                     }
                   "
                 ></ng-container>
@@ -131,10 +129,7 @@
     </ng-template>
 
     @if (showPrimaryButton) {
-      <button
-        class="header-btn"
-        (click)="handlePrimaryButtonClick()"
-      >
+      <button class="header-btn" (click)="handlePrimaryButtonClick()">
         <span>{{ primaryButtonLabel | translate }}</span>
         <span class="material-symbols-outlined">person_add</span>
       </button>
@@ -175,7 +170,7 @@
                     {{ isSubmenuOpen(getSubmenuKey(item, i)) ? 'expand_more' : 'chevron_right' }}
                   </span>
                 </button>
-                
+
                 @if (isSubmenuOpen(getSubmenuKey(item, i))) {
                   <ul class="mobile-submenu-list">
                     @for (subitem of item.children; track subitem.route) {
