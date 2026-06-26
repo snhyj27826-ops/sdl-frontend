@@ -1,0 +1,46 @@
+<div class="org-container">
+  <div class="org-header">
+    <h1 class="org-title">{{ 'ORGANIZATION_TITLE' | translate }}</h1>
+    <p class="org-subtitle">{{ 'ORGANIZATION_SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- President Highlight Card -->
+  <div class="president-card">
+    <div class="president-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=800" [alt]="'PRESIDENT_NAME' | translate" class="president-image">
+      <span class="president-badge">{{ 'ROLE_PRESIDENT' | translate }}</span>
+    </div>
+    <div class="president-info">
+      <h2 class="president-name">{{ 'PRESIDENT_NAME' | translate }}</h2>
+      <p class="president-bio">{{ 'PRESIDENT_BIO' | translate }}</p>
+      <a class="bio-link" href="javascript:void(0)">{{ 'BIOGRAPHY' | translate }}</a>
+    </div>
+  </div>
+
+  <!-- Team Grid -->
+  <div class="team-grid">
+    @for (member of teamMembers; track member.nameKey) {
+      <div class="team-card">
+        <div class="member-image-wrapper">
+          <img [src]="member.imageUrl" [alt]="member.nameKey | translate" class="member-image">
+        </div>
+        <div class="member-info">
+          <h3 class="member-name">{{ member.nameKey | translate }}</h3>
+          <p class="member-role">{{ member.roleKey | translate }}</p>
+          <a class="bio-link" href="javascript:void(0)">{{ 'BIOGRAPHY' | translate }}</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- CTA Join Us Section -->
+<section class="join-cta-section">
+  <div class="join-cta-content">
+    <h2 class="cta-title">{{ 'JOIN_TEAM_TITLE' | translate }}</h2>
+    <p class="cta-subtitle">{{ 'JOIN_TEAM_SUBTITLE' | translate }}</p>
+    <button class="cta-btn" [routerLink]="'/apply'">
+      {{ 'JOIN_BUTTON' | translate }}
+    </button>
+  </div>
+</section>

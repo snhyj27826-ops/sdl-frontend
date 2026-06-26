@@ -7,6 +7,7 @@ import { DashboardComponent } from '@src/app/dashboard/board/dashboard.component
 import { AuthGuard } from '@src/app/auth.guard';
 import { ApplicationFormComponent } from '@src/app/website/application/application-form/application-form.component';
 import { AboutComponent } from '@src/app/website/about/about.component';
+import { OrganizationComponent } from '@src/app/website/about/organization/organization.component';
 import { NewsComponent } from '@src/app/website/news/news.component';
 import { ContactComponent } from '@src/app/website/contact/contact.component';
 import { WebsiteLayoutComponent } from '@src/app/website/website-layout.component';
@@ -29,6 +30,10 @@ export const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent,
+      },
+      {
+        path: 'about/organization',
+        component: OrganizationComponent,
       },
       {
         path: 'agenda',
