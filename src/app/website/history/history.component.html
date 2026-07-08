@@ -1,0 +1,58 @@
+<div class="history-container">
+  <!-- Header -->
+  <div class="history-header">
+    <div class="badge">{{ 'НАША БАЛИТИНА' | translate }}</div>
+    <h1>{{ 'HISTORY_TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'HISTORY_SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Timeline Content -->
+  <div class="timeline-wrapper">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-container">
+      <div
+        *ngFor="let entry of timelineEntries; let even = even"
+        [class.even]="even"
+        class="timeline-entry"
+      >
+        <!-- Left side (years 1990, 2010, 2020) -->
+        <div class="timeline-side timeline-year">
+          <span class="year">{{ entry.year }}.</span>
+        </div>
+
+        <!-- Center - Timeline dot -->
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <!-- Right side (content and image) -->
+        <div class="timeline-side timeline-content">
+          <div class="content-card">
+            <h3 class="entry-title">{{ entry.title }}</h3>
+            <p class="entry-description">{{ entry.description }}</p>
+            <span class="category-badge" *ngIf="entry.category">
+              {{ entry.category }}
+            </span>
+          </div>
+          <img
+            *ngIf="entry.image"
+            [src]="entry.image"
+            [alt]="entry.title"
+            class="entry-image"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="cta-section">
+    <h2>{{ 'CTA_TITLE' | translate }}</h2>
+    <p>{{ 'CTA_DESCRIPTION' | translate }}</p>
+    <div class="cta-buttons">
+      <button class="btn btn-primary">{{ 'CTA_JOIN' | translate }}</button>
+      <button class="btn btn-secondary">{{ 'CTA_CONTACT' | translate }}</button>
+    </div>
+  </div>
+</div>
