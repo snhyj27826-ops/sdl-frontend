@@ -1,58 +1,73 @@
 <div class="history-container">
-  <!-- Header -->
-  <div class="history-header">
-    <div class="badge">{{ 'НАША БАЛИТИНА' | translate }}</div>
-    <h1>{{ 'HISTORY_TITLE' | translate }}</h1>
+  <header class="history-header">
+    <div class="badge">{{ 'HISTORY_TITLE' | translate }}</div>
     <p class="subtitle">{{ 'HISTORY_SUBTITLE' | translate }}</p>
-  </div>
+  </header>
 
-  <!-- Timeline Content -->
-  <div class="timeline-wrapper">
-    <div class="timeline-line"></div>
+  @if (loading) {
+    <p class="state-message">Loading timeline...</p>
+  } @else if (error) {
+    <p class="state-message error">{{ error }}</p>
+  } @else if (timelineEntries.length === 0) {
+    <p class="state-message">No timeline entries available.</p>
+  } @else {
+    <section
+      class="timeline-wrapper"
+      aria-label="Historical timeline"
+    >
+      <div class="timeline-line"></div>
 
-    <div class="timeline-container">
-      <div
-        *ngFor="let entry of timelineEntries; let even = even"
-        [class.even]="even"
-        class="timeline-entry"
-      >
-        <!-- Left side (years 1990, 2010, 2020) -->
-        <div class="timeline-side timeline-year">
-          <span class="year">{{ entry.year }}.</span>
-        </div>
+      <div class="timeline-container">
+        @for (entry of timelineEntries; track entry._id || (entry.year + entry.title); let even = $even) {
+          <article class="timeline-entry" [class.even]="even">
+            <div class="timeline-side timeline-year">
+              <span class="year">{{ entry.year }}.</span>
+            </div>
 
-        <!-- Center - Timeline dot -->
-        <div class="timeline-center">
-          <div class="timeline-dot"></div>
-        </div>
+            <div class="timeline-center" aria-hidden="true">
+              <div class="timeline-dot"></div>
+            </div>
 
-        <!-- Right side (content and image) -->
-        <div class="timeline-side timeline-content">
-          <div class="content-card">
-            <h3 class="entry-title">{{ entry.title }}</h3>
-            <p class="entry-description">{{ entry.description }}</p>
-            <span class="category-badge" *ngIf="entry.category">
-              {{ entry.category }}
-            </span>
-          </div>
-          <img
-            *ngIf="entry.image"
-            [src]="entry.image"
-            [alt]="entry.title"
-            class="entry-image"
-          />
-        </div>
+            <div class="timeline-side timeline-content">
+              <div class="content-card">
+                <h3 class="entry-title">{{ entry.title }}</h3>
+                <p class="entry-description">{{ entry.description }}</p>
+
+                @if (entry.category) {
+                  <span class="category-badge">{{ entry.category }}</span>
+                }
+              </div>
+
+              @if (entry.image) {
+                <img
+                  [src]="entry.image"
+                  [alt]="entry.title"
+                  class="entry-image"
+                  loading="lazy"
+                />
+              }
+            </div>
+          </article>
+        }
+        <div #loadMoreTrigger></div>
       </div>
-    </div>
-  </div>
 
-  <!-- CTA Section -->
-  <div class="cta-section">
-    <h2>{{ 'CTA_TITLE' | translate }}</h2>
-    <p>{{ 'CTA_DESCRIPTION' | translate }}</p>
-    <div class="cta-buttons">
-      <button class="btn btn-primary">{{ 'CTA_JOIN' | translate }}</button>
-      <button class="btn btn-secondary">{{ 'CTA_CONTACT' | translate }}</button>
+      @if (loadingMore) {
+        <div class="loading-more">
+          <p>Loading more events...</p>
+        </div>
+      }
+    </section>
+  }
+
+  <!-- CTA Join Us Section -->
+  <section class="join-cta-section">
+    <div class="join-cta-content">
+      <h2 class="cta-title">{{ 'JOIN_TEAM_TITLE' | translate }}</h2>
+      <p class="cta-subtitle">{{ 'JOIN_TEAM_SUBTITLE' | translate }}</p>
+      <button class="cta-btn" [routerLink]="'/apply'">
+        {{ 'JOIN_BUTTON' | translate }}
+      </button>
     </div>
-  </div>
+  </section>
 </div>

@@ -13,6 +13,7 @@ import { ContactComponent } from '@src/app/website/contact/contact.component';
 import { WebsiteLayoutComponent } from '@src/app/website/website-layout.component';
 import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.component';
 import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
+import { HistoryComponent } from '@src/app/website/history/history.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'news',
         component: NewsComponent,
+      },
+      {
+        path: 'history',
+        component: HistoryComponent,
       },
       {
         path: 'contact',

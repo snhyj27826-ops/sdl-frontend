@@ -10,6 +10,19 @@
   max-width: 800px;
   margin: 0 auto 50px auto;
 
+  .badge {
+    display: inline-block;
+    background-color: #f5d5d7;
+    color: var(--color-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
   .org-title {
     font-family: Georgia, serif;
     color: var(--color-primary);

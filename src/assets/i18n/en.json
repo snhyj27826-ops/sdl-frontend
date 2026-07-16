@@ -50,6 +50,7 @@
   "LAST_NAME_PLACEHOLDER": "Enter your last name",
   "NATIONALITY_PLACEHOLDER": "e.g. Serbian",
   "news": "News",
+  "history": "History",
   "about": "About",
   "agenda": "Agenda",
   "organization": "Organization",
@@ -113,5 +114,7 @@
   "NAME_PAVLE_KOSTIC": "Pavle Kostic",
   "JOIN_TEAM_TITLE": "Join our team",
   "JOIN_TEAM_SUBTITLE": "We believe in the power of unity and professionalism. Become a part of the movement that changes Serbia for the better.",
-  "JOIN_BUTTON": "Become a member"
+  "JOIN_BUTTON": "Become a member",
+  "HISTORY_TITLE": "History",
+  "HISTORY_SUBTITLE": "Important dates"
 }

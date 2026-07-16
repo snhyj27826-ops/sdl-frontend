@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { env } from 'src/environment';
+import { TimelineEntry } from '@src/app/website/history/history.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +9,29 @@ import { env } from 'src/environment';
 export class HttpService {
   constructor(private http: HttpClient) {}
 
-  login(body: any) {
+  public login(body: any) {
     return this.http.post(`${env.backendUrl}/api/auth/login`, body);
   }
 
-  register(body: any) {
+  public register(body: any) {
     return this.http.post(`${env.backendUrl}/api/auth/register`, body);
   }
 
-  verifyAccount(token: string): any {
+  public verifyAccount(token: string): any {
     return this.http.get(`${env.backendUrl}/api/auth/verify-account/${token}`);
+  }
+
+  public getHistory(page: number = 1, limit: number = 3) {
+    return this.http.get<{ data: TimelineEntry[]; total: number; hasMore: boolean }>(
+      `${env.backendUrl}/api/history?page=${page}&limit=${limit}`,
+    );
+  }
+
+  public getOrganization() {
+    return this.http.get(`${env.backendUrl}/api/organization`);
+  }
+
+  public getMedia() {
+    return this.http.get(`${env.backendUrl}/api/media`);
   }
 }

@@ -50,6 +50,7 @@
   "LAST_NAME_PLACEHOLDER": "Внесете го вашето презиме",
   "NATIONALITY_PLACEHOLDER": "на пр. Македонска",
   "news": "Вести",
+  "history": "Историја",
   "about": "За нас",
   "agenda": "Програма",
   "organization": "Организација",
@@ -113,5 +114,7 @@
   "NAME_PAVLE_KOSTIC": "Павле Костиќ",
   "JOIN_TEAM_TITLE": "Придружете се на нашиот тим",
   "JOIN_TEAM_SUBTITLE": "Веруваме во силата на заедништвото и професионализмот. Станете дел од движењето кое ја менува Србија на подобро.",
-  "JOIN_BUTTON": "Станете член"
+  "JOIN_BUTTON": "Станете член",
+  "HISTORY_TITLE": "Историја",
+  "HISTORY_SUBTITLE": "Важни датуми"
 }

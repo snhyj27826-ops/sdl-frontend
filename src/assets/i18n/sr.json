@@ -50,6 +50,7 @@
   "LAST_NAME_PLACEHOLDER": "Унесите ваше презиме",
   "NATIONALITY_PLACEHOLDER": "нпр. Српска",
   "news": "Вести",
+  "history": "Историја",
   "about": "О нама",
   "agenda": "Програма",
   "organization": "Организација",
@@ -113,5 +114,7 @@
   "NAME_PAVLE_KOSTIC": "Павле Костић",
   "JOIN_TEAM_TITLE": "Придружите се нашем тиму",
   "JOIN_TEAM_SUBTITLE": "Верујемо у снагу заједништва и професионализма. Постаните део покрета који мења Србију на боље.",
-  "JOIN_BUTTON": "Постани члан"
+  "JOIN_BUTTON": "Постани члан",
+  "HISTORY_TITLE": "Историја",
+  "HISTORY_SUBTITLE": "Важни датуми"
 }
