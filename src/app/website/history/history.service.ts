@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 import { HttpService } from '@src/app/services/http.service';
 
 export interface TimelineEntry {
@@ -17,12 +19,18 @@ export interface TimelineEntry {
   providedIn: 'root',
 })
 export class HistoryService {
+  private readonly httpService = inject(HttpService);
+  private readonly translateService = inject(TranslateService);
+
   private readonly ITEMS_PER_PAGE = 3;
 
-  constructor(private httpService: HttpService) {}
+  getTimeline(page: number = 1, locale?: string) {
+    const currentLocale =
+      locale ||
+      this.translateService.getCurrentLang() ||
+      this.translateService.getFallbackLang() ||
+      'en';
 
-  getTimeline(page: number = 1) {
-    const currentLocale = localStorage.getItem('language') || 'en';
     return this.httpService.getHistory(page, this.ITEMS_PER_PAGE, currentLocale);
   }
 }
