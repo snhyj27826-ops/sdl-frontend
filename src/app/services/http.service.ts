@@ -21,9 +21,9 @@ export class HttpService {
     return this.http.get(`${env.backendUrl}/api/auth/verify-account/${token}`);
   }
 
-  public getHistory(page: number = 1, limit: number = 3) {
+  public getHistory(page: number = 1, limit: number = 3, locale: string = 'en') {
     return this.http.get<{ data: TimelineEntry[]; total: number; hasMore: boolean }>(
-      `${env.backendUrl}/api/history?page=${page}&limit=${limit}`,
+      `${env.backendUrl}/api/history?page=${page}&limit=${limit}&locale=${locale}`,
     );
   }
 

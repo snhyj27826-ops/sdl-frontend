@@ -22,6 +22,7 @@ export class HistoryService {
   constructor(private httpService: HttpService) {}
 
   getTimeline(page: number = 1) {
-    return this.httpService.getHistory(page, this.ITEMS_PER_PAGE);
+    const currentLocale = localStorage.getItem('language') || 'en';
+    return this.httpService.getHistory(page, this.ITEMS_PER_PAGE, currentLocale);
   }
 }

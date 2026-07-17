@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
@@ -26,6 +26,7 @@ export class HistoryComponent implements OnInit {
   private readonly historyService = inject(HistoryService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly translateService = inject(TranslateService);
 
   private intersectionObserver?: IntersectionObserver;
 
@@ -53,6 +54,12 @@ export class HistoryComponent implements OnInit {
     });
 
     this.loadInitialTimeline();
+
+    this.translateService.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.loadInitialTimeline();
+      });
   }
 
   private observeLoadMoreTrigger(element: HTMLDivElement): void {
