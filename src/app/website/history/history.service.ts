@@ -1,6 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-
+import { Observable } from 'rxjs';
 import { HttpService } from '@src/app/services/http.service';
 
 export interface TimelineEntry {
@@ -15,22 +16,33 @@ export interface TimelineEntry {
   isPublished?: boolean;
 }
 
+export interface TimelineResponse {
+  data: TimelineEntry[];
+  hasMore: boolean;
+}
+
+interface TimelineRequest {
+  page: number;
+  limit: number;
+  locale: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class HistoryService {
-  private readonly httpService = inject(HttpService);
+  private readonly http = inject(HttpService);
   private readonly translateService = inject(TranslateService);
 
-  private readonly ITEMS_PER_PAGE = 3;
+  private readonly itemsPerPage = 3;
 
-  getTimeline(page: number = 1, locale?: string) {
-    const currentLocale =
-      locale ||
-      this.translateService.getCurrentLang() ||
-      this.translateService.getFallbackLang() ||
-      'en';
+  getTimeline(page = 1): Observable<TimelineResponse> {
+    const body: TimelineRequest = {
+      page,
+      limit: this.itemsPerPage,
+      locale: this.translateService.getCurrentLang() || 'en',
+    };
 
-    return this.httpService.getHistory(page, this.ITEMS_PER_PAGE, currentLocale);
+    return this.http.getHistory(body.page, body.limit, body.locale);
   }
 }

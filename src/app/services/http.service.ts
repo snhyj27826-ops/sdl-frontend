@@ -1,37 +1,55 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { env } from 'src/environment';
-import { TimelineEntry } from '@src/app/website/history/history.service';
+import { HistoryRequest, HistoryResponse } from '@src/app/website/history/history.models';
+import {
+  OrganizationMember,
+  OrganizationRequest,
+} from '@src/app/website/about/organization/organization.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
-  public login(body: any) {
+  public login(body: unknown): Observable<unknown> {
     return this.http.post(`${env.backendUrl}/api/auth/login`, body);
   }
 
-  public register(body: any) {
+  public register(body: unknown): Observable<unknown> {
     return this.http.post(`${env.backendUrl}/api/auth/register`, body);
   }
 
-  public verifyAccount(token: string): any {
+  public verifyAccount(token: string): Observable<unknown> {
     return this.http.get(`${env.backendUrl}/api/auth/verify-account/${token}`);
   }
 
-  public getHistory(page: number = 1, limit: number = 3, locale: string = 'en') {
-    return this.http.get<{ data: TimelineEntry[]; total: number; hasMore: boolean }>(
-      `${env.backendUrl}/api/history?page=${page}&limit=${limit}&locale=${locale}`,
-    );
+  public getHistory(
+    page: number = 1,
+    limit: number = 3,
+    locale: string = 'en',
+  ): Observable<HistoryResponse> {
+    const body: HistoryRequest = {
+      page,
+      limit,
+      locale,
+    };
+
+    return this.http.post<HistoryResponse>(`${env.backendUrl}/api/history`, body);
   }
 
-  public getOrganization() {
-    return this.http.get(`${env.backendUrl}/api/organization`);
+  public getOrganization(locale: string = 'en'): Observable<OrganizationMember[]> {
+    const body: OrganizationRequest = {
+      locale,
+    };
+
+    return this.http.post<OrganizationMember[]>(`${env.backendUrl}/api/organization`, body);
   }
 
-  public getMedia() {
+  public getMedia(): Observable<unknown> {
     return this.http.get(`${env.backendUrl}/api/media`);
   }
 }
