@@ -222,5 +222,12 @@
     "REQUIRED": "This field is required.",
     "MINLENGTH": "Must be at least {{ requiredLength }} characters (currently {{ actualLength }}).",
     "MAX": "Maximum value allowed is {{ max }}."
+  },
+  "TERMS_DIALOG": {
+    "TITLE": "Party Rules",
+    "DECLINE": "Decline",
+    "ACCEPT": "Accept",
+    "CONTENT": ""
+
   }
 }

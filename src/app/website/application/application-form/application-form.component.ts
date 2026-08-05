@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatError, MatFormField, MatInput } from '@angular/material/input';
@@ -13,6 +13,8 @@ import { email } from '@angular/forms/signals';
 import { FieldErrorComponent } from '@src/app/shared/components/form-field-error/form-field-error.component';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { OnSubmitErrorStateMatcher } from '@src/app/shared/onSubmitErrorStateMatcher';
+import { MatDialog } from '@angular/material/dialog';
+import { GenericDialogComponent } from '@src/app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-application-form',
@@ -35,6 +37,7 @@ import { OnSubmitErrorStateMatcher } from '@src/app/shared/onSubmitErrorStateMat
   ],
 })
 export class ApplicationFormComponent implements OnInit {
+  private dialog = inject(MatDialog);
   public isLoginPage = false;
   public applicationForm: FormGroup;
   public isSubmitted = false;
@@ -67,6 +70,33 @@ export class ApplicationFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.url.subscribe((urlSegment) => {
       this.isLoginPage = urlSegment[0]?.path === 'login';
+    });
+  }
+
+  public openTermsDialog(): void {
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+      width: '650px',
+      maxHeight: '80vh',
+      disableClose: false,
+      data: {
+        title: 'TERMS_DIALOG.TITLE',
+        // HTML or plain text body for terms:
+        content: 'TERMS_DIALOG.CONTENT',
+        isHtml: true,
+        confirmText: 'TERMS_DIALOG.ACCEPT',
+        cancelText: 'TERMS_DIALOG.DECLINE',
+        confirmColor: 'primary',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((accepted: boolean) => {
+      if (accepted) {
+        // Set the form control value to true and mark as dirty/touched
+        const consentControl = this.applicationForm.get('consent');
+        consentControl?.setValue(true);
+        consentControl?.markAsDirty();
+        consentControl?.markAsTouched();
+      }
     });
   }
 

@@ -181,8 +181,13 @@
             <mat-checkbox formControlName="consent" color="primary">
               <span class="body-sm">
                 {{ 'APPLICATION_FORM_CONSENT_PREFIX' | translate }}
-                <a href="#" class="link">{{ 'APPLICATION_FORM_CONSENT_LINK' | translate }}</a>
-                {{ 'APPLICATION_FORM_CONSENT_SUFFIX' | translate }}
+                <a
+                  href="#"
+                  class="link"
+                  (click)="$event.preventDefault(); openTermsDialog()"
+                >
+                  {{ 'APPLICATION_FORM_CONSENT_LINK' | translate }}
+                </a>
               </span>
             </mat-checkbox>
           </div>
