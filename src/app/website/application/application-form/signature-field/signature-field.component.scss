@@ -1,0 +1,229 @@
+:host {
+  display: block;
+}
+
+.signature-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(141, 112, 110, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: var(--color-primary);
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+/* ── Tabs ── */
+
+.signature-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(141, 112, 110, 0.2);
+  background: rgba(12, 64, 118, 0.03);
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    background 0.2s;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &.active {
+    color: var(--color-primary);
+    background: #fff;
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  &:hover:not(.active) {
+    color: var(--color-secondary);
+    background: rgba(12, 64, 118, 0.04);
+  }
+}
+
+/* ── Draw mode ── */
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+  background: #fdfdfe;
+}
+
+.signature-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  touch-action: none;
+
+  &.drawing {
+    cursor: crosshair;
+  }
+}
+
+.canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgba(141, 112, 110, 0.45);
+  pointer-events: none;
+  user-select: none;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.canvas-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-top: 1px solid rgba(141, 112, 110, 0.15);
+  background: rgba(12, 64, 118, 0.02);
+  min-height: 40px;
+}
+
+.clear-btn {
+  color: var(--color-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 0 8px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  min-width: unset !important;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+}
+
+/* ── Upload mode ── */
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 36px 24px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background: rgba(12, 64, 118, 0.03);
+  }
+
+  &.drag-over {
+    background: rgba(12, 64, 118, 0.06);
+    border-color: var(--color-primary);
+  }
+}
+
+.upload-icon {
+  font-size: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+.upload-label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+/* ── Upload preview ── */
+
+.upload-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  min-height: 120px;
+  background: #fdfdfe;
+}
+
+.preview-img {
+  max-width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--color-secondary) !important;
+}
+
+/* ── Shared ── */
+
+.hint-text {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.signed-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(34, 139, 34, 0.06);
+  border-top: 1px solid rgba(34, 139, 34, 0.2);
+  color: #2a7a2a;
+  font-size: 12px;
+  font-weight: 600;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}

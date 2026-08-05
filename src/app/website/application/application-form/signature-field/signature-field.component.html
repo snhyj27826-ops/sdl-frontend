@@ -1,0 +1,110 @@
+<div class="signature-field" [class.disabled]="isDisabled">
+  <!-- Mode Tabs -->
+  <div class="signature-tabs" role="tablist">
+    <button
+      type="button"
+      role="tab"
+      class="tab-btn"
+      [class.active]="mode === 'draw'"
+      (click)="setMode('draw')"
+    >
+      <mat-icon>draw</mat-icon>
+      <span>Nacrtajte potpis</span>
+    </button>
+    <button
+      type="button"
+      role="tab"
+      class="tab-btn"
+      [class.active]="mode === 'upload'"
+      (click)="setMode('upload')"
+    >
+      <mat-icon>upload_file</mat-icon>
+      <span>Otpremite sliku</span>
+    </button>
+  </div>
+
+  <!-- Draw Mode -->
+  @if (mode === 'draw') {
+    <div class="canvas-container">
+      <canvas
+        #canvas
+        [width]="800"
+        [height]="200"
+        class="signature-canvas"
+        [class.drawing]="!isDisabled"
+        (pointerdown)="onPointerDown($event)"
+        (pointermove)="onPointerMove($event)"
+        (pointerup)="onPointerUp($event)"
+        (pointerleave)="onPointerUp($event)"
+      ></canvas>
+
+      @if (!hasDrawnStrokes) {
+        <div class="canvas-placeholder" (click)="false">
+          <mat-icon>gesture</mat-icon>
+          <span>Potpišite se ovde</span>
+        </div>
+      }
+    </div>
+
+    <div class="canvas-actions">
+      <span class="hint-text">Koristite miš, dodir ili olovku</span>
+      @if (hasDrawnStrokes) {
+        <button type="button" mat-button class="clear-btn" (click)="clearCanvas()">
+          <mat-icon>restart_alt</mat-icon>
+          Obriši
+        </button>
+      }
+    </div>
+  }
+
+  <!-- Upload Mode -->
+  @if (mode === 'upload') {
+    @if (!signature) {
+      <div
+        class="upload-area"
+        [class.drag-over]="isDragOver"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave()"
+        (drop)="onDrop($event)"
+        (click)="triggerFileInput()"
+        (keydown.enter)="triggerFileInput()"
+        (keydown.space)="triggerFileInput()"
+        tabindex="0"
+        role="button"
+        aria-label="Otpremite sliku potpisa"
+      >
+        <input
+          #fileInput
+          type="file"
+          accept="image/png,image/jpeg"
+          (change)="onFileChange($event)"
+          hidden
+        />
+        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+        <p class="upload-label">Prevucite ovde ili kliknite za odabir</p>
+        <span class="hint-text">PNG, JPG</span>
+      </div>
+    } @else {
+      <div class="upload-preview">
+        <img [src]="signature.dataUrl" alt="Otpremljeni potpis" class="preview-img" />
+        <button
+          type="button"
+          mat-icon-button
+          class="remove-btn"
+          aria-label="Ukloni potpis"
+          (click)="clearUpload()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+  }
+
+  <!-- Signed indicator -->
+  @if (signature) {
+    <div class="signed-badge">
+      <mat-icon>check_circle</mat-icon>
+      <span>Potpis dodat</span>
+    </div>
+  }
+</div>
