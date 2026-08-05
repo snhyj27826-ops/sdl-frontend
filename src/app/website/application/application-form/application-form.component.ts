@@ -1,31 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatFormField, MatInput } from '@angular/material/input';
+import { MatError, MatFormField, MatInput } from '@angular/material/input';
 import { MatCard } from '@angular/material/card';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { HeaderMenuItem } from '@src/app/shared/components/header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '@src/app/services/utils.service';
 import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SignatureFieldComponent } from './signature-field/signature-field.component';
+import { email } from '@angular/forms/signals';
+import { FieldErrorComponent } from '@src/app/shared/components/form-field-error/form-field-error.component';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { OnSubmitErrorStateMatcher } from '@src/app/shared/onSubmitErrorStateMatcher';
 
 @Component({
   selector: 'app-application-form',
   templateUrl: './application-form.component.html',
   styleUrls: ['./application-form.component.scss'],
   standalone: true,
+  providers: [{ provide: ErrorStateMatcher, useClass: OnSubmitErrorStateMatcher }],
   imports: [
     MatIcon,
     ReactiveFormsModule,
     MatFormField,
     MatCard,
-    MatOption,
-    MatSelect,
     MatCheckbox,
     MatInput,
     MatButton,
+    SignatureFieldComponent,
+    TranslatePipe,
+    MatError,
+    FieldErrorComponent,
   ],
 })
 export class ApplicationFormComponent implements OnInit {
@@ -39,11 +45,21 @@ export class ApplicationFormComponent implements OnInit {
     private utils: UtilsService,
   ) {
     this.applicationForm = this.fb.group({
-      fullName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      fathersName: [''],
+      lastName: ['', Validators.required],
+      embg: ['', Validators.pattern('^[0-9]{13}$')],
       address: ['', Validators.required],
-      jmbg: ['', [Validators.required, Validators.pattern('^[0-9]{13}$')]],
-      nationality: ['', Validators.required],
-      reason: ['', Validators.required],
+      municipality: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      education: ['', Validators.required],
+      profession: ['', Validators.required],
+      employerName: [''],
+      position: [''],
+      companyName: ['', Validators.required],
+      nameDay: [''],
+      signature: [null, Validators.required],
       consent: [false, Validators.requiredTrue],
     });
   }
@@ -64,4 +80,6 @@ export class ApplicationFormComponent implements OnInit {
       }, 2000);
     }
   }
+
+  protected readonly email = email;
 }

@@ -5,16 +5,14 @@
       <div class="hero-bg">
         <img
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTAwPKNuaSwKYF3sEZCkHALLgjmnFSk_RYViGCvGKhytFS9PfAeOxIQDWWyMtGylFQpGYap3V_OIYBZgljE1S_t7ZRul91nQ3YOaV3QPqpDHsVM1TobofmLPxz2S1W_wAu_SAB8XFV6XkD0uTJzIysg3sUwkAMMJJlVRhH1mcQq-8gvWpsL8_0qP9az1Bdqiksdka-bz2HSt29JRwG1Rxm-W2RbF-wgGoo9l_AXHmJLNc1rdmROkgUipCJ5gqklZJieXSLs7Y2Csw"
-          alt="Serbian Parliament"
+          [attr.alt]="'APPLICATION_FORM_IMG_ALT' | translate"
           class="hero-img"
         />
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1 class="headline-xl">Српска Демократска Лига (СДЛ)</h1>
-        <p class="body-lg">
-          Градимо заједничку будућност засновану на традицији, демократији и напретку.
-        </p>
+        <h1 class="headline-xl">{{ 'APPLICATION_FORM_HERO_TITLE' | translate }}</h1>
+        <p class="body-lg">{{ 'APPLICATION_FORM_HERO_SUBTITLE' | translate }}</p>
       </div>
     </div>
 
@@ -26,92 +24,165 @@
             <mat-icon>how_to_reg</mat-icon>
           </div>
           <div>
-            <h2 class="headline-lg">Приступница странци</h2>
-            <p class="body-sm text-tertiary">
-              Попуните образац како бисте постали члан наше породице.
-            </p>
+            <h2 class="headline-lg">{{ 'APPLICATION_FORM_TITLE' | translate }}</h2>
+            <p class="body-sm text-tertiary">{{ 'APPLICATION_FORM_SUBTITLE' | translate }}</p>
           </div>
         </div>
 
         <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()" class="application-form">
-          <!-- Name -->
+          <!-- Personal Info -->
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="firstName">{{ 'APPLICATION_FORM_FIRST_NAME' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>person</mat-icon>
+                <input matInput id="firstName" formControlName="firstName" [placeholder]="'APPLICATION_FORM_FIRST_NAME_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="fathersName">{{ 'APPLICATION_FORM_FATHERS_NAME' | translate }}</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>person_outline</mat-icon>
+                <input matInput id="fathersName" formControlName="fathersName" [placeholder]="'APPLICATION_FORM_FATHERS_NAME_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+          </div>
+
           <div class="form-field-full">
-            <label class="label-md" for="fullName">Ime i prezime</label>
+            <label class="label-md" for="lastName">{{ 'APPLICATION_FORM_LAST_NAME' | translate }} *</label>
             <mat-form-field appearance="outline">
               <mat-icon matPrefix>person</mat-icon>
-              <input
-                matInput
-                id="fullName"
-                formControlName="fullName"
-                placeholder="Петar Петровић"
-              />
+              <input matInput id="lastName" formControlName="lastName" [placeholder]="'APPLICATION_FORM_LAST_NAME_PLACEHOLDER' | translate" />
             </mat-form-field>
           </div>
 
-          <!-- Address -->
+          <!-- EMBG -->
           <div class="form-field-full">
-            <label class="label-md" for="address">Adresa stanovanja</label>
+            <label class="label-md" for="embg">{{ 'APPLICATION_FORM_EMBG' | translate }}</label>
             <mat-form-field appearance="outline">
-              <mat-icon matPrefix>home</mat-icon>
+              <mat-icon matPrefix>badge</mat-icon>
               <input
                 matInput
-                id="address"
-                formControlName="address"
-                placeholder="Немањина 11, Београд"
+                id="embg"
+                formControlName="embg"
+                maxlength="13"
+                [placeholder]="'APPLICATION_FORM_EMBG_PLACEHOLDER' | translate"
               />
             </mat-form-field>
           </div>
 
+          <!-- Address & Municipality -->
           <div class="form-row">
-            <!-- JMBG -->
             <div class="form-field-half">
-              <label class="label-md" for="jmbg">EMBG</label>
+              <label class="label-md" for="address">{{ 'APPLICATION_FORM_ADDRESS' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>home</mat-icon>
+                <input matInput id="address" formControlName="address" [placeholder]="'APPLICATION_FORM_ADDRESS_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="municipality">{{ 'APPLICATION_FORM_MUNICIPALITY' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>location_city</mat-icon>
+                <input matInput id="municipality" formControlName="municipality" [placeholder]="'APPLICATION_FORM_MUNICIPALITY_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="phoneNumber">{{ 'APPLICATION_FORM_PHONE' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>phone</mat-icon>
+                <input matInput id="phoneNumber" formControlName="phoneNumber" [placeholder]="'APPLICATION_FORM_PHONE_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="email">{{ 'APPLICATION_FORM_EMAIL' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>email</mat-icon>
+                <input matInput id="email" formControlName="email" type="email" [placeholder]="'APPLICATION_FORM_EMAIL_PLACEHOLDER' | translate" />
+                <mat-error>
+                  <app-field-error [control]="applicationForm.controls['email']" />
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Education & Profession -->
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="education">{{ 'APPLICATION_FORM_EDUCATION' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>school</mat-icon>
+                <input matInput id="education" formControlName="education" [placeholder]="'APPLICATION_FORM_EDUCATION_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="profession">{{ 'APPLICATION_FORM_PROFESSION' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>work_outline</mat-icon>
+                <input matInput id="profession" formControlName="profession" [placeholder]="'APPLICATION_FORM_PROFESSION_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Employment -->
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="employerName">{{ 'APPLICATION_FORM_EMPLOYER_NAME' | translate }}</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>business</mat-icon>
+                <input matInput id="employerName" formControlName="employerName" [placeholder]="'APPLICATION_FORM_EMPLOYER_NAME_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="position">{{ 'APPLICATION_FORM_POSITION' | translate }}</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>badge</mat-icon>
-                <input
-                  matInput
-                  id="jmbg"
-                  formControlName="jmbg"
-                  maxlength="13"
-                  placeholder="13-цифрени број"
-                />
-              </mat-form-field>
-            </div>
-
-            <!-- Nationality -->
-            <div class="form-field-half">
-              <label class="label-md" for="nationality">Nacionalnost</label>
-              <mat-form-field appearance="outline">
-                <mat-icon matPrefix>flag</mat-icon>
-                <mat-select id="nationality" formControlName="nationality" placeholder="Изаберите">
-                  <mat-option value="serbian">Србин / Српкиња</mat-option>
-                  <mat-option value="other">Остало</mat-option>
-                </mat-select>
+                <input matInput id="position" formControlName="position" [placeholder]="'APPLICATION_FORM_POSITION_PLACEHOLDER' | translate" />
               </mat-form-field>
             </div>
           </div>
 
-          <!-- Reason -->
+          <!-- Company & Name Day -->
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="companyName">{{ 'APPLICATION_FORM_COMPANY_NAME' | translate }} *</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>apartment</mat-icon>
+                <input matInput id="companyName" formControlName="companyName" [placeholder]="'APPLICATION_FORM_COMPANY_NAME_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="nameDay">{{ 'APPLICATION_FORM_NAME_DAY' | translate }}</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>celebration</mat-icon>
+                <input matInput id="nameDay" formControlName="nameDay" [placeholder]="'APPLICATION_FORM_NAME_DAY_PLACEHOLDER' | translate" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Signature -->
           <div class="form-field-full">
-            <label class="label-md" for="reason">Razlog učlanjenja</label>
-            <mat-form-field appearance="outline">
-              <textarea
-                matInput
-                id="reason"
-                formControlName="reason"
-                rows="5"
-                placeholder="Ваша мотивација и разлози за приступање СДЛ..."
-              ></textarea>
-            </mat-form-field>
+            <label class="label-md">{{ 'APPLICATION_FORM_SIGNATURE' | translate }} *</label>
+            <app-signature-field formControlName="signature"></app-signature-field>
           </div>
 
           <!-- Consent -->
           <div class="consent-container">
             <mat-checkbox formControlName="consent" color="primary">
               <span class="body-sm">
-                Слажем се са <a href="#" class="link">правилником странке</a> и потврђујем да су сви
-                наведени подаци тачни и истинити. Овим путем дајем сагласност за обраду података у
-                сврху чланства.
+                {{ 'APPLICATION_FORM_CONSENT_PREFIX' | translate }}
+                <a href="#" class="link">{{ 'APPLICATION_FORM_CONSENT_LINK' | translate }}</a>
+                {{ 'APPLICATION_FORM_CONSENT_SUFFIX' | translate }}
               </span>
             </mat-checkbox>
           </div>
@@ -125,7 +196,7 @@
               [disabled]="!applicationForm.valid || isSubmitted"
               class="submit-button"
             >
-              <span>{{ isSubmitted ? 'Обрада...' : 'Поднеси пријаву' }}</span>
+              <span>{{ (isSubmitted ? 'APPLICATION_FORM_SUBMITTING' : 'APPLICATION_FORM_SUBMIT') | translate }}</span>
 
               <mat-icon [class.spinner]="isSubmitted">
                 {{ isSubmitted ? 'sync' : 'send' }}
@@ -139,24 +210,18 @@
       <div class="info-grid">
         <div class="info-card border-primary">
           <mat-icon class="text-primary">verified_user</mat-icon>
-          <h3 class="label-md">Сигурност података</h3>
-          <p class="body-sm text-tertiary">
-            Ваши подаци су заштићени у складу са највишим стандардима приватности.
-          </p>
+          <h3 class="label-md">{{ 'APPLICATION_FORM_INFO_SECURITY_TITLE' | translate }}</h3>
+          <p class="body-sm text-tertiary">{{ 'APPLICATION_FORM_INFO_SECURITY_DESC' | translate }}</p>
         </div>
         <div class="info-card border-secondary">
           <mat-icon class="text-secondary">calendar_today</mat-icon>
-          <h3 class="label-md">Брза обрада</h3>
-          <p class="body-sm text-tertiary">
-            Наш тим ће обрадити вашу пријаву у року од 48 радних сати.
-          </p>
+          <h3 class="label-md">{{ 'APPLICATION_FORM_INFO_PROCESSING_TITLE' | translate }}</h3>
+          <p class="body-sm text-tertiary">{{ 'APPLICATION_FORM_INFO_PROCESSING_DESC' | translate }}</p>
         </div>
         <div class="info-card border-tertiary">
           <mat-icon class="text-tertiary">help</mat-icon>
-          <h3 class="label-md">Треба вам помоћ?</h3>
-          <p class="body-sm text-tertiary">
-            Контактирајте нашу службу за подршку чланству путем имејла или телефона.
-          </p>
+          <h3 class="label-md">{{ 'APPLICATION_FORM_INFO_HELP_TITLE' | translate }}</h3>
+          <p class="body-sm text-tertiary">{{ 'APPLICATION_FORM_INFO_HELP_DESC' | translate }}</p>
         </div>
       </div>
     </section>
