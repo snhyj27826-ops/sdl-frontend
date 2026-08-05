@@ -25,6 +25,11 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
           action: () => utils.navigateTo('about/organization'),
         },
         {
+          label: 'SDL',
+          route: '/about/sdl',
+          action: () => utils.navigateTo('about/sdl'),
+        },
+        {
           label: 'statute',
           route: '/about/statute',
           action: () => utils.navigateTo('about/statute'),

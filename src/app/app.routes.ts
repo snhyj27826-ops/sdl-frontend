@@ -14,6 +14,7 @@ import { WebsiteLayoutComponent } from '@src/app/website/website-layout.componen
 import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.component';
 import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 import { HistoryComponent } from '@src/app/website/history/history.component';
+import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,10 @@ export const routes: Routes = [
       {
         path: 'about/organization',
         component: OrganizationComponent,
+      },
+      {
+        path: 'about/sdl',
+        component: SdlComponent,
       },
       {
         path: 'agenda',
