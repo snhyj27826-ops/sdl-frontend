@@ -57,22 +57,36 @@
             </mat-form-field>
           </div>
 
-          <!-- EMBG -->
-          <div class="form-field-full">
-            <label class="label-md" for="embg">{{ 'APPLICATION_FORM_EMBG' | translate }}</label>
-            <mat-form-field appearance="outline">
-              <mat-icon matPrefix>badge</mat-icon>
-              <input
-                matInput
-                id="embg"
-                formControlName="embg"
-                maxlength="13"
-                [placeholder]="'APPLICATION_FORM_EMBG_PLACEHOLDER' | translate"
-              />
-            </mat-form-field>
+          <div class="form-row">
+            <div class="form-field-half">
+              <label class="label-md" for="embg">{{ 'APPLICATION_FORM_EMBG' | translate }}</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>badge</mat-icon>
+                <input
+                  matInput
+                  id="embg"
+                  formControlName="embg"
+                  maxlength="13"
+                  [placeholder]="'APPLICATION_FORM_EMBG_PLACEHOLDER' | translate"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-half">
+              <label class="label-md" for="idCardNumber">{{ 'APPLICATION_FORM_ID_CARD_NUMBER' | translate }}</label>
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix>credit_card</mat-icon>
+                <input
+                  matInput
+                  id="idCardNumber"
+                  formControlName="idCardNumber"
+                  maxlength="8"
+                  [placeholder]="'APPLICATION_FORM_ID_CARD_NUMBER_PLACEHOLDER' | translate"
+                />
+              </mat-form-field>
+            </div>
           </div>
 
-          <!-- Address & Municipality -->
           <div class="form-row">
             <div class="form-field-half">
               <label class="label-md" for="address">{{ 'APPLICATION_FORM_ADDRESS' | translate }} *</label>
@@ -91,7 +105,6 @@
             </div>
           </div>
 
-          <!-- Contact -->
           <div class="form-row">
             <div class="form-field-half">
               <label class="label-md" for="phoneNumber">{{ 'APPLICATION_FORM_PHONE' | translate }} *</label>
@@ -135,18 +148,18 @@
           <!-- Employment -->
           <div class="form-row">
             <div class="form-field-half">
-              <label class="label-md" for="employerName">{{ 'APPLICATION_FORM_EMPLOYER_NAME' | translate }}</label>
+              <label class="label-md" for="employer">{{ 'APPLICATION_FORM_EMPLOYER_NAME' | translate }}</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>business</mat-icon>
-                <input matInput id="employerName" formControlName="employerName" [placeholder]="'APPLICATION_FORM_EMPLOYER_NAME_PLACEHOLDER' | translate" />
+                <input matInput id="employer" formControlName="employer" [placeholder]="'APPLICATION_FORM_EMPLOYER_NAME_PLACEHOLDER' | translate" />
               </mat-form-field>
             </div>
 
             <div class="form-field-half">
-              <label class="label-md" for="position">{{ 'APPLICATION_FORM_POSITION' | translate }}</label>
+              <label class="label-md" for="workPosition">{{ 'APPLICATION_FORM_POSITION' | translate }}</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>badge</mat-icon>
-                <input matInput id="position" formControlName="position" [placeholder]="'APPLICATION_FORM_POSITION_PLACEHOLDER' | translate" />
+                <input matInput id="workPosition" formControlName="workPosition" [placeholder]="'APPLICATION_FORM_POSITION_PLACEHOLDER' | translate" />
               </mat-form-field>
             </div>
           </div>
@@ -154,10 +167,10 @@
           <!-- Company & Name Day -->
           <div class="form-row">
             <div class="form-field-half">
-              <label class="label-md" for="companyName">{{ 'APPLICATION_FORM_COMPANY_NAME' | translate }} *</label>
+              <label class="label-md" for="employerCompanyName">{{ 'APPLICATION_FORM_COMPANY_NAME' | translate }} *</label>
               <mat-form-field appearance="outline">
                 <mat-icon matPrefix>apartment</mat-icon>
-                <input matInput id="companyName" formControlName="companyName" [placeholder]="'APPLICATION_FORM_COMPANY_NAME_PLACEHOLDER' | translate" />
+                <input matInput id="employerCompanyName" formControlName="employerCompanyName" [placeholder]="'APPLICATION_FORM_COMPANY_NAME_PLACEHOLDER' | translate" />
               </mat-form-field>
             </div>
 
@@ -173,7 +186,7 @@
           <!-- Signature -->
           <div class="form-field-full">
             <label class="label-md">{{ 'APPLICATION_FORM_SIGNATURE' | translate }} *</label>
-            <app-signature-field formControlName="signature"></app-signature-field>
+            <app-signature-field formControlName="handwrittenSignature"></app-signature-field>
           </div>
 
           <!-- Consent -->

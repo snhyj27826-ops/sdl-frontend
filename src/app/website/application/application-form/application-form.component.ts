@@ -15,6 +15,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { OnSubmitErrorStateMatcher } from '@src/app/shared/onSubmitErrorStateMatcher';
 import { MatDialog } from '@angular/material/dialog';
 import { GenericDialogComponent } from '@src/app/shared/components/dialog/dialog.component';
+import { HttpService } from '@src/app/services/http.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-application-form',
@@ -46,23 +48,25 @@ export class ApplicationFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private utils: UtilsService,
+    private http: HttpService,
   ) {
     this.applicationForm = this.fb.group({
       firstName: ['', Validators.required],
       fathersName: [''],
       lastName: ['', Validators.required],
       embg: ['', Validators.pattern('^[0-9]{13}$')],
+      idCardNumber: ['', Validators.pattern('^[A-Za-z]\\d{7}$')],
       address: ['', Validators.required],
       municipality: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       education: ['', Validators.required],
       profession: ['', Validators.required],
-      employerName: [''],
-      position: [''],
-      companyName: ['', Validators.required],
+      employer: [''],
+      workPosition: [''],
+      employerCompanyName: ['', Validators.required],
       nameDay: [''],
-      signature: [null, Validators.required],
+      handwrittenSignature: [null, Validators.required],
       consent: [false, Validators.requiredTrue],
     });
   }
@@ -103,11 +107,14 @@ export class ApplicationFormComponent implements OnInit {
   public onSubmit(): void {
     if (this.applicationForm.valid) {
       this.isSubmitted = true;
-      console.log('Form Submitted', this.applicationForm.value);
-      // Simulate submission
-      setTimeout(() => {
-        // Reset or navigate
-      }, 2000);
+      this.http
+        .createApplication(this.applicationForm.getRawValue())
+        .pipe(finalize(() => (this.isSubmitted = false)))
+        .subscribe({
+          error: (error) => {
+            console.error('Application submission failed', error);
+          },
+        });
     }
   }
 

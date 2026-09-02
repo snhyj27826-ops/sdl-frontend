@@ -52,4 +52,8 @@ export class HttpService {
   public getMedia(): Observable<unknown> {
     return this.http.get(`${env.backendUrl}/api/media`);
   }
+
+  public createApplication(body: unknown): Observable<unknown> {
+    return this.http.post(`${env.backendUrl}/api/applications/create`, body);
+  }
 }
