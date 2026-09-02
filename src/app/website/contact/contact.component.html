@@ -51,7 +51,16 @@
 
         <!-- Map -->
         <div class="map-placeholder">
-          <p>{{ 'CONTACT_GPS_COORDINATES' | translate }}</p>
+          <a
+            mat-stroked-button
+            class="gps-button"
+            href="https://www.google.com/maps/search/?api=1&query=41.9981,21.4254"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="'CONTACT_GPS_COORDINATES' | translate"
+          >
+            {{ 'CONTACT_GPS_COORDINATES' | translate }}
+          </a>
         </div>
       </mat-card>
     </aside>
