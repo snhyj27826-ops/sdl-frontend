@@ -9,7 +9,7 @@
       (click)="setMode('draw')"
     >
       <mat-icon>draw</mat-icon>
-      <span>Nacrtajte potpis</span>
+      <span>{{ 'APPLICATION_FORM_SIG_DRAW' | translate }}</span>
     </button>
     <button
       type="button"
@@ -19,7 +19,7 @@
       (click)="setMode('upload')"
     >
       <mat-icon>upload_file</mat-icon>
-      <span>Otpremite sliku</span>
+      <span>{{ 'APPLICATION_FORM_SIG_UPLOAD' | translate }}</span>
     </button>
   </div>
 
@@ -41,17 +41,17 @@
       @if (!hasDrawnStrokes) {
         <div class="canvas-placeholder" (click)="false">
           <mat-icon>gesture</mat-icon>
-          <span>Potpišite se ovde</span>
+          <span>{{ 'APPLICATION_FORM_SIG_DRAW_HERE' | translate }}</span>
         </div>
       }
     </div>
 
     <div class="canvas-actions">
-      <span class="hint-text">Koristite miš, dodir ili olovku</span>
+      <span class="hint-text">{{ 'APPLICATION_FORM_SIG_DRAW_DESC' | translate }}</span>
       @if (hasDrawnStrokes) {
         <button type="button" mat-button class="clear-btn" (click)="clearCanvas()">
           <mat-icon>restart_alt</mat-icon>
-          Obriši
+          {{ 'APPLICATION_FORM_SIG_DRAW_DELETE' | translate }}
         </button>
       }
     </div>
@@ -71,7 +71,7 @@
         (keydown.space)="triggerFileInput()"
         tabindex="0"
         role="button"
-        aria-label="Otpremite sliku potpisa"
+        aria-label="{{ 'APPLICATION_FORM_SIG_UPLOAD_DESC' | translate }}"
       >
         <input
           #fileInput
@@ -81,7 +81,7 @@
           hidden
         />
         <mat-icon class="upload-icon">cloud_upload</mat-icon>
-        <p class="upload-label">Prevucite ovde ili kliknite za odabir</p>
+        <p class="upload-label">{{ 'APPLICATION_FORM_SIG_UPLOAD_DESC' | translate }}</p>
         <span class="hint-text">PNG, JPG</span>
       </div>
     } @else {

@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface Signature {
   type: 'image' | 'drawn';
@@ -29,7 +30,7 @@ export interface Signature {
   templateUrl: './signature-field.component.html',
   styleUrls: ['./signature-field.component.scss'],
   standalone: true,
-  imports: [MatIcon, MatButton, MatIconButton],
+  imports: [MatIcon, MatButton, MatIconButton, TranslatePipe],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -44,7 +45,9 @@ export interface Signature {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignatureFieldComponent implements ControlValueAccessor, Validator, AfterViewInit, OnDestroy {
+export class SignatureFieldComponent
+  implements ControlValueAccessor, Validator, AfterViewInit, OnDestroy
+{
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>;
 
