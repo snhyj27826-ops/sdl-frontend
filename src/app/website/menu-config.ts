@@ -42,6 +42,11 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
       action: () => utils.navigateTo('news'),
     },
     {
+      label: 'videos',
+      route: '/videos',
+      action: () => utils.navigateTo('videos'),
+    },
+    {
       label: 'history',
       route: '/history',
       action: () => utils.navigateTo('history'),

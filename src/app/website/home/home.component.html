@@ -2,4 +2,28 @@
   <div class="hero-slider">
     <app-hero-slider />
   </div>
+
+  <section class="videos-section" aria-labelledby="home-videos-title">
+    <div class="section-header">
+      <h2 id="home-videos-title">{{ 'VIDEOS_TITLE' | translate }}</h2>
+      <p>{{ 'VIDEOS_DESCRIPTION' | translate }}</p>
+    </div>
+
+    <div class="video-grid">
+      @for (video of featuredVideos; track video.id; let index = $index) {
+        <article class="video-card">
+          <iframe
+            [src]="video.embedUrl"
+            [title]="'VIDEO_IFRAME_TITLE' | translate: { number: index + 1 }"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </article>
+      }
+    </div>
+
+    <a class="more-videos-button" routerLink="/videos">{{ 'MORE_VIDEOS' | translate }}</a>
+  </section>
 </div>

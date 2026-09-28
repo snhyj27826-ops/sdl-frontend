@@ -1,9 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hero-slider',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslateModule],
   templateUrl: './hero-slider.component.html',
   styleUrl: './hero-slider.component.scss',
   standalone: true,
@@ -13,28 +14,26 @@ export class HeroSliderComponent implements OnInit {
   slides = [
     {
       imageUrl: 'assets/carousel/screen.png',
-      title: 'Dummy text here',
-      subtitle: 'Dummy text here',
-      buttonText: 'Learn More',
-      buttonLink: '/about',
+      title: 'HERO_SLIDER_ABOUT_TITLE',
+      subtitle: 'HERO_SLIDER_ABOUT_SUBTITLE',
+      buttonText: 'HERO_SLIDER_ABOUT_BUTTON',
+      buttonLink: '/about/organization',
     },
     {
       imageUrl: 'assets/carousel/screen2.png',
-      title: 'Dummy other text here',
-      subtitle: 'Dummy other text here',
-      buttonText: 'Explore',
-      buttonLink: '/news',
+      title: 'HERO_SLIDER_HISTORY_TITLE',
+      subtitle: 'HERO_SLIDER_HISTORY_SUBTITLE',
+      buttonText: 'HERO_SLIDER_HISTORY_BUTTON',
+      buttonLink: '/history',
     },
     {
       imageUrl: 'assets/carousel/screen.png',
-      title: 'Dummy other other text here',
-      subtitle: 'Dummy other other text here',
-      buttonText: 'Contact Us',
-      buttonLink: '/contact',
+      title: 'HERO_SLIDER_APPLICATION_TITLE',
+      subtitle: 'HERO_SLIDER_APPLICATION_SUBTITLE',
+      buttonText: 'HERO_SLIDER_APPLICATION_BUTTON',
+      buttonLink: '/apply',
     },
   ];
-
-  constructor() {}
 
   public ngOnInit() {}
 }

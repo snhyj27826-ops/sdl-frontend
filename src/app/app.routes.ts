@@ -15,6 +15,7 @@ import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.co
 import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 import { HistoryComponent } from '@src/app/website/history/history.component';
 import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
+import { VideosComponent } from '@src/app/website/videos/videos.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'news',
         component: NewsComponent,
+      },
+      {
+        path: 'videos',
+        component: VideosComponent,
       },
       {
         path: 'history',

@@ -2,15 +2,15 @@
   @for (slide of slides; track slide.imageUrl) {
     <swiper-slide>
       <div class="slide">
-        <img [src]="slide.imageUrl" [alt]="slide.title" />
+        <img [src]="slide.imageUrl" [alt]="slide.title | translate" />
 
         <div class="slide-overlay">
-          <h1>{{ slide.title }}</h1>
-          <p>{{ slide.subtitle }}</p>
+          <h1>{{ slide.title | translate }}</h1>
+          <p>{{ slide.subtitle | translate }}</p>
 
           @if (slide.buttonText) {
             <a [routerLink]="slide.buttonLink" class="hero-button">
-              {{ slide.buttonText }}
+              {{ slide.buttonText | translate }}
             </a>
           }
         </div>
