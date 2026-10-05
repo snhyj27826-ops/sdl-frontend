@@ -16,8 +16,10 @@ import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 import { HistoryComponent } from '@src/app/website/history/history.component';
 import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
 import { VideosComponent } from '@src/app/website/videos/videos.component';
+import { UnderConstructionComponent } from '@src/app/shared/components/under-construction/under-construction.component';
+import { env } from '@src/environment';
 
-export const routes: Routes = [
+const applicationRoutes: Routes = [
   {
     path: '',
     component: WebsiteLayoutComponent,
@@ -92,3 +94,7 @@ export const routes: Routes = [
     component: NotFoundComponent,
   },
 ];
+
+export const routes: Routes = env.constructionMode
+  ? [{ path: '**', component: UnderConstructionComponent }]
+  : applicationRoutes;

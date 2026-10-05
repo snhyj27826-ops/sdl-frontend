@@ -16,15 +16,15 @@ export class HttpService {
   constructor(private readonly http: HttpClient) {}
 
   public login(body: unknown): Observable<unknown> {
-    return this.http.post(`${env.backendUrl}/api/auth/login`, body);
+    return this.http.post(`${env.backendUrl}/${env.backendPrefix}/auth/login`, body);
   }
 
   public register(body: unknown): Observable<unknown> {
-    return this.http.post(`${env.backendUrl}/api/auth/register`, body);
+    return this.http.post(`${env.backendUrl}/${env.backendPrefix}/auth/register`, body);
   }
 
   public verifyAccount(token: string): Observable<unknown> {
-    return this.http.get(`${env.backendUrl}/api/auth/verify-account/${token}`);
+    return this.http.get(`${env.backendUrl}/${env.backendPrefix}/auth/verify-account/${token}`);
   }
 
   public getHistory(
@@ -38,7 +38,7 @@ export class HttpService {
       locale,
     };
 
-    return this.http.post<HistoryResponse>(`${env.backendUrl}/api/history`, body);
+    return this.http.post<HistoryResponse>(`${env.backendUrl}/${env.backendPrefix}/history`, body);
   }
 
   public getOrganization(locale: string = 'en'): Observable<OrganizationMember[]> {
@@ -46,14 +46,17 @@ export class HttpService {
       locale,
     };
 
-    return this.http.post<OrganizationMember[]>(`${env.backendUrl}/api/organization`, body);
+    return this.http.post<OrganizationMember[]>(
+      `${env.backendUrl}/${env.backendPrefix}/organization`,
+      body,
+    );
   }
 
   public getMedia(): Observable<unknown> {
-    return this.http.get(`${env.backendUrl}/api/media`);
+    return this.http.get(`${env.backendUrl}/${env.backendPrefix}/media`);
   }
 
   public createApplication(body: unknown): Observable<unknown> {
-    return this.http.post(`${env.backendUrl}/api/applications/create`, body);
+    return this.http.post(`${env.backendUrl}/${env.backendPrefix}/applications/create`, body);
   }
 }

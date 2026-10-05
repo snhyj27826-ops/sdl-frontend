@@ -11,7 +11,7 @@
         <img
           [src]="
             president.photo
-              ? 'http://localhost:3000' + president.photo
+              ? env.backendUrl + president.photo
               : 'assets/images/organization/default-member.webp'
           "
           [alt]="president.fullName"
@@ -35,7 +35,7 @@
           <img
             [src]="
             member.photo
-              ? 'http://localhost:3000' + member.photo
+              ? env.backendUrl + member.photo
               : 'assets/images/organization/default-member.webp'
           "
             [alt]="member.fullName"

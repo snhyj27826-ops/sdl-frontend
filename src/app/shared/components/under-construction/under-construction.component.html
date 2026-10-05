@@ -1,0 +1,29 @@
+<main class="construction-page">
+  <section class="construction-message" aria-labelledby="construction-title">
+    <img
+      class="construction-logo"
+      src="assets/sdl-logo.png"
+      [alt]="'CONSTRUCTION_LOGO_ALT' | translate"
+    />
+
+    <nav class="language-switcher" [attr.aria-label]="'SELECT_LANGUAGE' | translate">
+      @for (language of languages; track language) {
+        <button
+          type="button"
+          [class.active]="currentLanguage === language"
+          [attr.aria-pressed]="currentLanguage === language"
+          (click)="setLanguage(language)"
+        >
+          {{ language.toUpperCase() }}
+        </button>
+      }
+    </nav>
+
+    <div class="construction-icon" aria-hidden="true">
+      <span class="material-symbols-outlined">construction</span>
+    </div>
+    <p class="eyebrow">{{ 'CONSTRUCTION_EYEBROW' | translate }}</p>
+    <h1 id="construction-title">{{ 'CONSTRUCTION_TITLE' | translate }}</h1>
+    <p class="description">{{ 'CONSTRUCTION_DESCRIPTION' | translate }}</p>
+  </section>
+</main>

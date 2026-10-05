@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.construction-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 24px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(164, 27, 39, 0.07), transparent 36%),
+    var(--color-surface, #f8f9fa);
+  text-align: center;
+}
+
+.construction-message {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  padding-top: 36px;
+}
+
+.construction-logo {
+  display: block;
+  width: clamp(112px, 20vw, 164px);
+  height: auto;
+  margin: 0 auto 28px;
+}
+
+.language-switcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 4px;
+
+  button {
+    border: 0;
+    border-radius: 4px;
+    padding: 6px 8px;
+    background: transparent;
+    color: var(--color-text-muted, #525454);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  button.active {
+    background: rgba(164, 27, 39, 0.1);
+    color: var(--color-primary, #a41b27);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--color-primary, #a41b27);
+    outline-offset: 2px;
+  }
+}
+
+.construction-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: rgba(164, 27, 39, 0.1);
+  color: var(--color-primary, #a41b27);
+
+  .material-symbols-outlined {
+    font-size: 36px;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-primary, #a41b27);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 48px);
+  line-height: 1.12;
+}
+
+.description {
+  margin: 18px 0 0;
+  color: var(--color-text-muted, #525454);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .construction-message {
+    padding-top: 48px;
+  }
+}

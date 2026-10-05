@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { HttpService } from '@src/app/services/http.service';
 import { OrganizationMember } from './organization.models';
+import { env } from '@src/environment';
 
 @Component({
   selector: 'app-organization',
@@ -48,4 +49,6 @@ export class OrganizationComponent implements OnInit {
         },
       });
   }
+
+  protected readonly env = env;
 }
