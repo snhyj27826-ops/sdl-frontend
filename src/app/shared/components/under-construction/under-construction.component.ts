@@ -17,7 +17,7 @@ function isSupportedLanguage(language: string | null | undefined): language is S
 })
 export class UnderConstructionComponent implements OnInit {
   public currentLanguage: SupportedLanguage = 'en';
-  public readonly languages: readonly SupportedLanguage[] = ['en', 'sr', 'mk'];
+  public readonly languages: readonly SupportedLanguage[] = ['mk', 'sr', 'en'];
 
   constructor(private readonly translate: TranslateService) {}
 
@@ -28,7 +28,7 @@ export class UnderConstructionComponent implements OnInit {
       ? savedLanguage
       : isSupportedLanguage(browserLanguage)
         ? browserLanguage
-        : 'en';
+        : 'sr';
 
     this.setLanguage(language);
   }
