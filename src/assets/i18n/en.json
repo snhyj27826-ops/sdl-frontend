@@ -257,5 +257,26 @@
     "DECLINE": "Decline",
     "ACCEPT": "Accept",
     "CONTENT": ""
-  }
+  },
+  "NEWS_PAGE_TITLE": "News & Announcements",
+  "NEWS_PAGE_SUBTITLE": "Stay informed with the latest updates, press releases, and events from the Serbian Democratic League.",
+  "NEWS_FILTER_ALL": "All",
+  "NEWS_FILTER_ANNOUNCEMENTS": "Announcements",
+  "NEWS_FILTER_PRESS": "Press",
+  "NEWS_FILTER_EVENTS": "Events",
+  "NEWS_FILTER_GENERAL": "General",
+  "NEWS_READ_MORE": "Read More",
+  "NEWS_EMPTY_TITLE": "No news found",
+  "NEWS_EMPTY_DESC": "There are currently no articles published in this category.",
+  "NEWS_ERROR_TITLE": "Unable to load news",
+  "NEWS_ERROR_DESC": "An error occurred while loading news. Please check your connection and try again.",
+  "NEWS_RETRY": "Try Again",
+  "NEWS_PAGINATION_PREV": "Previous",
+  "NEWS_PAGINATION_NEXT": "Next",
+  "NEWS_PAGINATION_PAGE": "Page {{ page }} of {{ totalPages }}",
+  "NEWS_DETAIL_BACK": "Back to News",
+  "NEWS_DETAIL_NOT_FOUND_TITLE": "Article Not Found",
+  "NEWS_DETAIL_NOT_FOUND_DESC": "The article you are looking for does not exist or is not available in the selected language.",
+  "NEWS_PUBLISHED_ON": "Published on",
+  "NEWS_BY_AUTHOR": "By"
 }

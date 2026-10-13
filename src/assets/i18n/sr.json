@@ -251,5 +251,26 @@
     "REQUIRED": "Ово поље је обавезно.",
     "MINLENGTH": "Мора имати најмање {{ requiredLength }} карактера (тренутно {{ actualLength }}).",
     "MAX": "Максимална дозвољена вредност је {{ max }}."
-  }
+  },
+  "NEWS_PAGE_TITLE": "Вести и саопштења",
+  "NEWS_PAGE_SUBTITLE": "Будите информисани о најновијим вестима, саопштењима за јавност и догађајима из Српске демократске лиге.",
+  "NEWS_FILTER_ALL": "Све",
+  "NEWS_FILTER_ANNOUNCEMENTS": "Саопштења",
+  "NEWS_FILTER_PRESS": "Саопштења за медије",
+  "NEWS_FILTER_EVENTS": "Догађаји",
+  "NEWS_FILTER_GENERAL": "Опште",
+  "NEWS_READ_MORE": "Прочитај више",
+  "NEWS_EMPTY_TITLE": "Нема пронађених вести",
+  "NEWS_EMPTY_DESC": "Тренутно нема објављених чланака у овој категорији.",
+  "NEWS_ERROR_TITLE": "Није могуће учитати вести",
+  "NEWS_ERROR_DESC": "Дошло је до грешке приликом учитавања вести. Проверите везу и покушајте поново.",
+  "NEWS_RETRY": "Покушај поново",
+  "NEWS_PAGINATION_PREV": "Претходна",
+  "NEWS_PAGINATION_NEXT": "Следећа",
+  "NEWS_PAGINATION_PAGE": "Страна {{ page }} од {{ totalPages }}",
+  "NEWS_DETAIL_BACK": "Назад на вести",
+  "NEWS_DETAIL_NOT_FOUND_TITLE": "Чланак није пронађен",
+  "NEWS_DETAIL_NOT_FOUND_DESC": "Чланак који тражите не постоји или није доступан на изабраном језику.",
+  "NEWS_PUBLISHED_ON": "Објављено",
+  "NEWS_BY_AUTHOR": "Аутор"
 }

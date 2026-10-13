@@ -9,6 +9,7 @@ import { ApplicationFormComponent } from '@src/app/website/application/applicati
 import { AboutComponent } from '@src/app/website/about/about.component';
 import { OrganizationComponent } from '@src/app/website/about/organization/organization.component';
 import { NewsComponent } from '@src/app/website/news/news.component';
+import { NewsDetailComponent } from '@src/app/website/news/news-detail/news-detail.component';
 import { ContactComponent } from '@src/app/website/contact/contact.component';
 import { WebsiteLayoutComponent } from '@src/app/website/website-layout.component';
 import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.component';
@@ -51,6 +52,10 @@ const applicationRoutes: Routes = [
       {
         path: 'news',
         component: NewsComponent,
+      },
+      {
+        path: 'news/:slug',
+        component: NewsDetailComponent,
       },
       {
         path: 'videos',
