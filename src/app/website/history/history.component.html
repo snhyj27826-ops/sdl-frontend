@@ -22,21 +22,6 @@
           <article class="timeline-entry" [class.even]="even">
             <div class="timeline-side timeline-year">
               <span class="year">{{ entry.year }}.</span>
-            </div>
-
-            <div class="timeline-center" aria-hidden="true">
-              <div class="timeline-dot"></div>
-            </div>
-
-            <div class="timeline-side timeline-content">
-              <div class="content-card">
-                <h3 class="entry-title">{{ entry.title }}</h3>
-                <p class="entry-description">{{ entry.description }}</p>
-
-                @if (entry.category) {
-                  <span class="category-badge">{{ entry.category }}</span>
-                }
-              </div>
 
               @if (entry.image) {
                 <img
@@ -46,6 +31,31 @@
                   loading="lazy"
                 />
               }
+            </div>
+
+            <div class="timeline-center" aria-hidden="true">
+              <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-side timeline-content">
+              <div class="content-card">
+                <h3 class="entry-title">{{ entry.title }}</h3>
+                <p class="entry-description">{{ truncateDescription(entry.description) }}</p>
+
+                <div class="card-footer">
+                  <button
+                    type="button"
+                    class="read-more-btn"
+                    (click)="openDetailDialog(entry)"
+                  >
+                    {{ 'READ_MORE' | translate }}
+                  </button>
+
+                  @if (entry.category) {
+                    <span class="category-badge">{{ entry.category }}</span>
+                  }
+                </div>
+              </div>
             </div>
           </article>
         }

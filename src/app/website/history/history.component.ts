@@ -11,8 +11,10 @@
   import { TranslateModule, TranslateService } from '@ngx-translate/core';
   import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   import { RouterLink } from '@angular/router';
+  import { MatDialog } from '@angular/material/dialog';
 
   import { HistoryService, TimelineEntry } from './history.service';
+  import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
 
   @Component({
     selector: 'app-history',
@@ -27,6 +29,7 @@
     private readonly destroyRef = inject(DestroyRef);
     private readonly changeDetectorRef = inject(ChangeDetectorRef);
     private readonly translateService = inject(TranslateService);
+    private readonly dialog = inject(MatDialog);
 
     private intersectionObserver?: IntersectionObserver;
 
@@ -47,6 +50,26 @@
     private currentPage = 1;
     private hasMore = true;
     private isLoadingInProgress = false;
+
+    truncateDescription(text?: string, limit = 500): string {
+      if (!text) {
+        return '';
+      }
+      if (text.length > limit) {
+        return text.slice(0, limit) + '...';
+      }
+      return text;
+    }
+
+    openDetailDialog(entry: TimelineEntry): void {
+      this.dialog.open(HistoryDialogComponent, {
+        data: entry,
+        width: '640px',
+        maxWidth: '92vw',
+        maxHeight: '90vh',
+        autoFocus: false,
+      });
+    }
 
     ngOnInit(): void {
       this.destroyRef.onDestroy(() => {
@@ -92,7 +115,10 @@
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
-            this.timelineEntries = response.data;
+            this.timelineEntries = (response.data || []).map((entry) => ({
+              ...entry,
+              image: entry.image || 'uploads/timeline/maricka-bitka.jpg',
+            }));
             this.hasMore = response.hasMore;
             this.loading = false;
             this.changeDetectorRef.markForCheck();
@@ -123,7 +149,11 @@
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
-            this.timelineEntries = [...this.timelineEntries, ...response.data];
+            const newEntries = (response.data || []).map((entry) => ({
+              ...entry,
+              image: entry.image || 'uploads/timeline/maricka-bitka.jpg',
+            }));
+            this.timelineEntries = [...this.timelineEntries, ...newEntries];
 
             this.hasMore = response.hasMore;
             this.loadingMore = false;
