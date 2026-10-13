@@ -1,0 +1,121 @@
+<div class="news-detail-container">
+  <!-- Back / Breadcrumb Navigation -->
+  <div class="navigation-bar">
+    <button type="button" class="back-btn" (click)="goBack()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>{{ 'NEWS_DETAIL_BACK' | translate }}</span>
+    </button>
+  </div>
+
+  @if (loading) {
+    <!-- Loading Detail Skeleton -->
+    <div class="detail-skeleton">
+      <div class="skeleton-line skeleton-meta"></div>
+      <div class="skeleton-line skeleton-title"></div>
+      <div class="skeleton-line skeleton-subtitle"></div>
+      <div class="skeleton-banner"></div>
+      <div class="skeleton-paragraphs">
+        <div class="skeleton-line skeleton-p"></div>
+        <div class="skeleton-line skeleton-p"></div>
+        <div class="skeleton-line skeleton-p short"></div>
+      </div>
+    </div>
+  } @else if (notFound || !article) {
+    <!-- 404 / Article Not Found State -->
+    <div class="state-container not-found-state">
+      <div class="state-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h1 class="state-title">{{ 'NEWS_DETAIL_NOT_FOUND_TITLE' | translate }}</h1>
+      <p class="state-description">{{ 'NEWS_DETAIL_NOT_FOUND_DESC' | translate }}</p>
+      <button type="button" class="action-btn back-to-news-btn" (click)="goBack()">
+        {{ 'NEWS_DETAIL_BACK' | translate }}
+      </button>
+    </div>
+  } @else {
+    <!-- Full Article View -->
+    <article class="article-detail">
+      <header class="article-header">
+        <div class="meta-row">
+          @if (article.category) {
+            <span class="category-badge">
+              {{ 'NEWS_FILTER_' + (article.category.toUpperCase()) | translate }}
+            </span>
+          }
+
+          <span class="meta-item publish-date">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            {{ 'NEWS_PUBLISHED_ON' | translate }}: {{ article.publishedAt | date: 'longDate' }}
+          </span>
+
+          @if (article.author) {
+            <span class="meta-item author-name">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              {{ 'NEWS_BY_AUTHOR' | translate }}: {{ article.author }}
+            </span>
+          }
+        </div>
+
+        <h1 class="article-title">{{ article.title }}</h1>
+
+        @if (article.excerpt) {
+          <p class="article-lead">{{ article.excerpt }}</p>
+        }
+      </header>
+
+      <!-- Featured Image Banner -->
+      <div class="article-banner-wrapper">
+        <img
+          [src]="getCoverImageUrl(article)"
+          [alt]="article.title"
+          class="article-banner-image"
+          (error)="onImageError($event)"
+        />
+      </div>
+
+      <!-- Article Content Body -->
+      <div class="article-body">
+        @for (paragraph of getParagraphs(article.content); track $index) {
+          <p class="content-paragraph">{{ paragraph }}</p>
+        }
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="article-footer">
+        <button type="button" class="back-btn-bottom" (click)="goBack()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>{{ 'NEWS_DETAIL_BACK' | translate }}</span>
+        </button>
+      </footer>
+    </article>
+  }
+
+  <!-- CTA Join Us Section -->
+  <section class="join-cta-section">
+    <div class="join-cta-content">
+      <h2 class="cta-title">{{ 'JOIN_TEAM_TITLE' | translate }}</h2>
+      <p class="cta-subtitle">{{ 'JOIN_TEAM_SUBTITLE' | translate }}</p>
+      <button class="cta-btn" [routerLink]="'/apply'">
+        {{ 'JOIN_BUTTON' | translate }}
+      </button>
+    </div>
+  </section>
+</div>
