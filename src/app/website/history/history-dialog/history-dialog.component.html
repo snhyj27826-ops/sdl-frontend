@@ -1,0 +1,64 @@
+<div class="history-dialog-container">
+  <div class="dialog-header">
+    <div class="header-left">
+      @if (data.year) {
+        <span class="year-badge">{{ data.year }}.</span>
+      }
+      <h2 mat-dialog-title class="dialog-title">{{ data.title }}</h2>
+    </div>
+    <button
+      type="button"
+      class="close-icon-btn"
+      [mat-dialog-close]="true"
+      aria-label="Close dialog"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    @if (data.image) {
+      <div class="image-wrapper">
+        <img
+          [src]="data.image"
+          [alt]="data.title"
+          class="dialog-image"
+          loading="lazy"
+        />
+      </div>
+    }
+
+    @if (data.category) {
+      <div class="category-wrapper">
+        <span class="category-badge">{{ data.category }}</span>
+      </div>
+    }
+
+    <div class="description-wrapper">
+      <p class="dialog-description">{{ data.description }}</p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button
+      type="button"
+      class="dialog-close-btn"
+      [mat-dialog-close]="true"
+    >
+      {{ 'CLOSE' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>
