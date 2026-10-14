@@ -110,6 +110,13 @@ h6 {
   height: 48px !important;
 }
 
+.mat-mdc-icon-button.mat-mdc-button-base {
+  --mdc-icon-button-state-layer-size: 38px;
+  --mat-icon-button-state-layer-size: 20px;
+  width: var(--mdc-icon-button-state-layer-size);
+  height: var(--mat-icon-button-state-layer-size);
+}
+
 .mat-mdc-form-field {
   width: 100%;
 }
