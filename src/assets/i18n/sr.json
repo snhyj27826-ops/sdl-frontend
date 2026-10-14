@@ -272,5 +272,7 @@
   "NEWS_DETAIL_NOT_FOUND_TITLE": "Чланак није пронађен",
   "NEWS_DETAIL_NOT_FOUND_DESC": "Чланак који тражите не постоји или није доступан на изабраном језику.",
   "NEWS_PUBLISHED_ON": "Објављено",
-  "NEWS_BY_AUTHOR": "Аутор"
+  "NEWS_BY_AUTHOR": "Аутор",
+  "NEWS_EXTERNAL_RESOURCES": "Спољни ресурси",
+  "NEWS_WATCH_ON_YOUTUBE": "Гледајте на YouTube"
 }

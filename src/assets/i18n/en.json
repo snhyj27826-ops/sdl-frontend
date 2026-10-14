@@ -278,5 +278,7 @@
   "NEWS_DETAIL_NOT_FOUND_TITLE": "Article Not Found",
   "NEWS_DETAIL_NOT_FOUND_DESC": "The article you are looking for does not exist or is not available in the selected language.",
   "NEWS_PUBLISHED_ON": "Published on",
-  "NEWS_BY_AUTHOR": "By"
+  "NEWS_BY_AUTHOR": "By",
+  "NEWS_EXTERNAL_RESOURCES": "External Resources",
+  "NEWS_WATCH_ON_YOUTUBE": "Watch on YouTube"
 }

@@ -272,5 +272,7 @@
   "NEWS_DETAIL_NOT_FOUND_TITLE": "Написот не е пронајден",
   "NEWS_DETAIL_NOT_FOUND_DESC": "Написот што го барате не постои или не е достапен на избраниот јазик.",
   "NEWS_PUBLISHED_ON": "Објавено на",
-  "NEWS_BY_AUTHOR": "Од"
+  "NEWS_BY_AUTHOR": "Од",
+  "NEWS_EXTERNAL_RESOURCES": "Надворешни ресурси",
+  "NEWS_WATCH_ON_YOUTUBE": "Гледајте на YouTube"
 }

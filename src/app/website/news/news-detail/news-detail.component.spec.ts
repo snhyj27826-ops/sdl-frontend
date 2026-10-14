@@ -21,6 +21,7 @@ describe('NewsDetailComponent', () => {
     category: 'announcements',
     publishedAt: '2025-05-10T14:30:00.000Z',
     author: 'Chief Editor',
+    externalLinks: ['https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'https://example.com/doc'],
   };
 
   beforeEach(async () => {
@@ -54,6 +55,10 @@ describe('NewsDetailComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
     expect(component.article).toEqual(mockArticle);
+    expect(component.resourceLinks.length).toBe(2);
+    expect(component.resourceLinks[0].isYoutube).toBe(true);
+    expect(component.resourceLinks[0].youtubeId).toBe('dQw4w9WgXcQ');
+    expect(component.resourceLinks[1].isYoutube).toBe(false);
     expect(component.loading).toBe(false);
     expect(component.notFound).toBe(false);
   });

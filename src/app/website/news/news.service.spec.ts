@@ -47,6 +47,7 @@ describe('NewsService', () => {
               id: 10,
               url: '/uploads/sample.jpg',
             },
+            externalLinks: ['https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'https://sdl.org.mk'],
           },
         ],
         meta: {
@@ -64,6 +65,8 @@ describe('NewsService', () => {
         expect(res.data[0].title).toBe('Test Article');
         expect(res.data[0].slug).toBe('test-article');
         expect(res.data[0].category).toBe('announcements');
+        expect(res.data[0].externalLinks?.length).toBe(2);
+        expect(res.data[0].externalLinks?.[0]).toBe('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
         expect(res.meta?.pagination?.total).toBe(1);
       });
 

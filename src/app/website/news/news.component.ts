@@ -56,11 +56,9 @@ export class NewsComponent implements OnInit {
   ngOnInit(): void {
     this.loadArticles();
 
-    this.translateService.onLangChange
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.loadArticles();
-      });
+    this.translateService.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      this.loadArticles();
+    });
   }
 
   loadArticles(): void {
@@ -73,10 +71,12 @@ export class NewsComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
+          console.log('Fetched articles:', response.data);
           this.articles = response.data || [];
           const pagination = response.meta?.pagination;
           if (pagination) {
-            this.totalPages = pagination.pageCount || Math.ceil(pagination.total / this.pageSize) || 1;
+            this.totalPages =
+              pagination.pageCount || Math.ceil(pagination.total / this.pageSize) || 1;
             this.totalArticles = pagination.total;
           } else {
             this.totalPages = 1;

@@ -8,10 +8,19 @@ import {
 } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NewsService } from '../news.service';
 import { NewsArticle } from '../news.models';
+
+export interface ExternalResourceLink {
+  url: string;
+  isYoutube: boolean;
+  youtubeId?: string;
+  embedUrl?: SafeResourceUrl;
+  displayTitle: string;
+}
 
 @Component({
   selector: 'app-news-detail',
@@ -26,6 +35,7 @@ export class NewsDetailComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly newsService = inject(NewsService);
   private readonly translateService = inject(TranslateService);
+  private readonly sanitizer = inject(DomSanitizer);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -33,6 +43,7 @@ export class NewsDetailComponent implements OnInit {
   loading = true;
   notFound = false;
   currentSlug: string | null = null;
+  resourceLinks: ExternalResourceLink[] = [];
 
   readonly fallbackImage = 'assets/images/news-placeholder.svg';
 
@@ -69,9 +80,11 @@ export class NewsDetailComponent implements OnInit {
         next: (article) => {
           if (article) {
             this.article = article;
+            this.resourceLinks = this.buildResourceLinks(article);
             this.notFound = false;
           } else {
             this.article = null;
+            this.resourceLinks = [];
             this.notFound = true;
           }
           this.loading = false;
@@ -80,6 +93,7 @@ export class NewsDetailComponent implements OnInit {
         error: (err) => {
           console.error('Failed to load article detail:', err);
           this.article = null;
+          this.resourceLinks = [];
           this.notFound = true;
           this.loading = false;
           this.cdr.markForCheck();
@@ -112,5 +126,43 @@ export class NewsDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/news']);
+  }
+
+  private buildResourceLinks(article: NewsArticle): ExternalResourceLink[] {
+    const urls = article.externalLinks || article.externalUrls || [];
+    return urls.map((url) => {
+      const ytId = this.extractYoutubeId(url);
+      return {
+        url,
+        isYoutube: !!ytId,
+        youtubeId: ytId || undefined,
+        embedUrl: ytId
+          ? this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://www.youtube-nocookie.com/embed/${ytId}`,
+            )
+          : undefined,
+        displayTitle: this.formatResourceTitle(url, ytId),
+      };
+    });
+  }
+
+  private extractYoutubeId(url: string): string | null {
+    if (!url) return null;
+    const regExp =
+      /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/;
+    const match = url.match(regExp);
+    return match ? match[1] : null;
+  }
+
+  private formatResourceTitle(url: string, ytId: string | null): string {
+    if (ytId) {
+      return `YouTube Video`;
+    }
+    try {
+      const parsed = new URL(url);
+      return parsed.hostname.replace(/^www\./, '') + (parsed.pathname !== '/' ? parsed.pathname : '');
+    } catch {
+      return url;
+    }
   }
 }

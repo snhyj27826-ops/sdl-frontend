@@ -32,6 +32,28 @@ export class NewsService {
       };
     }
 
+    const rawExternal =
+      item.externalLinks ??
+      attrs.externalLinks ??
+      item.externalUrls ??
+      attrs.externalUrls ??
+      item.externalResources ??
+      attrs.externalResources ??
+      item.resources ??
+      attrs.resources ??
+      [];
+
+    let externalLinks: string[] = [];
+    if (Array.isArray(rawExternal)) {
+      externalLinks = rawExternal
+        .map((link: any) =>
+          typeof link === 'string' ? link.trim() : (link?.url || link?.link || '').trim(),
+        )
+        .filter((url: string) => url.length > 0);
+    } else if (typeof rawExternal === 'string' && rawExternal.trim()) {
+      externalLinks = [rawExternal.trim()];
+    }
+
     return {
       id: item.id,
       documentId: item.documentId || (item.id ? String(item.id) : undefined),
@@ -49,6 +71,8 @@ export class NewsService {
       author: item.author ?? attrs.author ?? 'SDL Team',
       isFeatured: item.isFeatured ?? attrs.isFeatured ?? false,
       coverImage,
+      externalLinks,
+      externalUrls: externalLinks,
     };
   }
 

@@ -95,6 +95,62 @@
         }
       </div>
 
+      <!-- External Resources & Videos Section -->
+      @if (resourceLinks.length > 0) {
+        <section class="article-resources-section">
+          <h2 class="resources-heading">
+            <svg class="heading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            {{ 'NEWS_EXTERNAL_RESOURCES' | translate }}
+          </h2>
+
+          <div class="resources-grid">
+            @for (res of resourceLinks; track res.url) {
+              @if (res.isYoutube && res.embedUrl) {
+                <div class="video-embed-card">
+                  <div class="video-embed-wrapper">
+                    <iframe
+                      [src]="res.embedUrl"
+                      [title]="res.displayTitle"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                  <div class="video-embed-info">
+                    <span class="video-badge">YouTube</span>
+                    <a [href]="res.url" target="_blank" rel="noopener noreferrer" class="resource-external-link">
+                      {{ 'NEWS_WATCH_ON_YOUTUBE' | translate }}
+                      <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              } @else {
+                <a [href]="res.url" target="_blank" rel="noopener noreferrer" class="resource-link-card">
+                  <div class="resource-link-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </div>
+                  <div class="resource-link-content">
+                    <span class="resource-link-title">{{ res.displayTitle }}</span>
+                    <span class="resource-link-url">{{ res.url }}</span>
+                  </div>
+                </a>
+              }
+            }
+          </div>
+        </section>
+      }
+
       <!-- Article Footer -->
       <footer class="article-footer">
         <button type="button" class="back-btn-bottom" (click)="goBack()">
