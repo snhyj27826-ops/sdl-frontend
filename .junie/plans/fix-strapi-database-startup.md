@@ -183,7 +183,7 @@ Verification will be executed across two modes: zero-config SQLite mode and Post
 
 # Delivery Steps
 
-###   Step 1: Configure SQLite zero-config runtime and environment variables
+### ✓ Step 1: Configure SQLite zero-config runtime and environment variables
 Configure Strapi environment secrets and zero-config local database support so that `sdl-news` starts immediately without requiring external database services.
 
 - Install `better-sqlite3` dependency in `sdl-news/package.json` to enable local file-based SQLite database execution.
@@ -191,7 +191,7 @@ Configure Strapi environment secrets and zero-config local database support so t
 - Update `sdl-news/.env.example` with clear documentation for both SQLite and PostgreSQL configurations.
 - Verify that `sdl-news/config/database.ts` properly resolves SQLite data file paths under `.tmp/data.db` and ensures directory creation if missing.
 
-###   Step 2: Add Docker Compose PostgreSQL setup and workspace startup scripts
+### ✓ Step 2: Add Docker Compose PostgreSQL setup and workspace startup scripts
 Provide a containerized PostgreSQL environment and dual-mode database configuration for production-parity local development.
 
 - Create `docker-compose.yml` (and/or `sdl-news/docker-compose.yml`) defining a lightweight PostgreSQL 16 service matching the default Strapi connection parameters (`user: strapi`, `password: strapi`, `db: strapi`, `port: 5432`).
@@ -199,7 +199,7 @@ Provide a containerized PostgreSQL environment and dual-mode database configurat
 - Add convenience npm scripts in root `package.json` and `sdl-news/package.json` (e.g. `strapi:dev`, `strapi:start`, `db:up`, `db:down`) for unified workflow management.
 - Update `sdl-news/README.md` and root `README.md` with explicit instructions on starting Strapi with SQLite or PostgreSQL.
 
-###   Step 3: Verify Strapi startup, database persistence, and API integration
+### ✓ Step 3: Verify Strapi startup, database persistence, and API integration
 Ensure end-to-end execution of Strapi bootstrap, article seeding, and Angular news service integration.
 
 - Start Strapi in development mode (`npm run develop` in `sdl-news`) and verify schema generation, bootstrap permission seeding, and initial article creation.
