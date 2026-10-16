@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
@@ -47,6 +49,10 @@ describe('NewsService', () => {
               id: 10,
               url: '/uploads/sample.jpg',
             },
+            imageGallery: [
+              { id: 11, url: '/uploads/gallery-1.jpg' },
+              { id: 12, url: '/uploads/gallery-2.jpg' },
+            ],
             externalLinks: ['https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'https://sdl.org.mk'],
           },
         ],
@@ -67,6 +73,11 @@ describe('NewsService', () => {
         expect(res.data[0].category).toBe('announcements');
         expect(res.data[0].externalLinks?.length).toBe(2);
         expect(res.data[0].externalLinks?.[0]).toBe('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        expect(res.data[0].imageGallery).toEqual([
+          { id: 11, url: '/uploads/gallery-1.jpg' },
+          { id: 12, url: '/uploads/gallery-2.jpg' },
+        ]);
+        expect('externalUrls' in res.data[0]).toBe(false);
         expect(res.meta?.pagination?.total).toBe(1);
       });
 
@@ -98,6 +109,16 @@ describe('NewsService', () => {
                   },
                 },
               },
+              imageGallery: {
+                data: [
+                  {
+                    id: 21,
+                    attributes: {
+                      url: '/uploads/v4-gallery-1.png',
+                    },
+                  },
+                ],
+              },
             },
           },
         ],
@@ -108,6 +129,7 @@ describe('NewsService', () => {
         expect(res.data[0].title).toBe('V4 Article');
         expect(res.data[0].slug).toBe('v4-article');
         expect(res.data[0].category).toBe('press');
+        expect(res.data[0].imageGallery).toEqual([{ id: 21, url: '/uploads/v4-gallery-1.png' }]);
       });
 
       const req = httpMock.expectOne((request) => request.url.includes('/api/articles'));
@@ -134,8 +156,10 @@ describe('NewsService', () => {
         expect(article?.slug).toBe('unique-slug');
       });
 
-      const req = httpMock.expectOne((request) =>
-        request.url.includes('/api/articles') && request.params.get('filters[slug][$eq]') === 'unique-slug'
+      const req = httpMock.expectOne(
+        (request) =>
+          request.url.includes('/api/articles') &&
+          request.params.get('filters[slug][$eq]') === 'unique-slug',
       );
       expect(req.request.method).toBe('GET');
       req.flush(mockResponse);

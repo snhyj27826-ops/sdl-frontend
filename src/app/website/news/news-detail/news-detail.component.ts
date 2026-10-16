@@ -11,8 +11,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GalleryImage, ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
 import { NewsService } from '../news.service';
-import { NewsArticle } from '../news.models';
+import { NewsArticle, StrapiMedia } from '../news.models';
 
 export interface ExternalResourceLink {
   url: string;
@@ -25,7 +26,7 @@ export interface ExternalResourceLink {
 @Component({
   selector: 'app-news-detail',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, DatePipe],
+  imports: [CommonModule, TranslateModule, RouterLink, DatePipe, ImageGalleryComponent],
   templateUrl: './news-detail.component.html',
   styleUrls: ['./news-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +45,7 @@ export class NewsDetailComponent implements OnInit {
   notFound = false;
   currentSlug: string | null = null;
   resourceLinks: ExternalResourceLink[] = [];
+  galleryImages: GalleryImage[] = [];
 
   readonly fallbackImage = 'assets/images/news-placeholder.svg';
 
@@ -59,13 +61,11 @@ export class NewsDetailComponent implements OnInit {
       }
     });
 
-    this.translateService.onLangChange
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        if (this.currentSlug) {
-          this.loadArticle(this.currentSlug);
-        }
-      });
+    this.translateService.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      if (this.currentSlug) {
+        this.loadArticle(this.currentSlug);
+      }
+    });
   }
 
   loadArticle(slug: string): void {
@@ -81,10 +81,12 @@ export class NewsDetailComponent implements OnInit {
           if (article) {
             this.article = article;
             this.resourceLinks = this.buildResourceLinks(article);
+            this.galleryImages = this.buildGalleryImages(article);
             this.notFound = false;
           } else {
             this.article = null;
             this.resourceLinks = [];
+            this.galleryImages = [];
             this.notFound = true;
           }
           this.loading = false;
@@ -94,6 +96,7 @@ export class NewsDetailComponent implements OnInit {
           console.error('Failed to load article detail:', err);
           this.article = null;
           this.resourceLinks = [];
+          this.galleryImages = [];
           this.notFound = true;
           this.loading = false;
           this.cdr.markForCheck();
@@ -114,7 +117,7 @@ export class NewsDetailComponent implements OnInit {
   }
 
   /**
-   * Split plain text / markdown paragraphs for clean template rendering if raw text is returned.
+   * Split plain text / Markdown paragraphs for clean template rendering if raw text is returned.
    */
   getParagraphs(content?: string): string[] {
     if (!content) return [];
@@ -129,7 +132,7 @@ export class NewsDetailComponent implements OnInit {
   }
 
   private buildResourceLinks(article: NewsArticle): ExternalResourceLink[] {
-    const urls = article.externalLinks || article.externalUrls || [];
+    const urls = article.externalLinks || [];
     return urls.map((url) => {
       const ytId = this.extractYoutubeId(url);
       return {
@@ -146,6 +149,19 @@ export class NewsDetailComponent implements OnInit {
     });
   }
 
+  private buildGalleryImages(article: NewsArticle): GalleryImage[] {
+    const rawGallery = article.imageGallery;
+    const mediaItems = Array.isArray(rawGallery) ? rawGallery : (rawGallery?.data ?? []);
+
+    return mediaItems
+      .map((media: StrapiMedia): GalleryImage => ({
+        src: this.newsService.getMediaUrl(media),
+        alt: media.alternativeText || article.title,
+        caption: media.caption,
+      }))
+      .filter((image) => image.src.length > 0);
+  }
+
   private extractYoutubeId(url: string): string | null {
     if (!url) return null;
     const regExp =
@@ -160,7 +176,9 @@ export class NewsDetailComponent implements OnInit {
     }
     try {
       const parsed = new URL(url);
-      return parsed.hostname.replace(/^www\./, '') + (parsed.pathname !== '/' ? parsed.pathname : '');
+      return (
+        parsed.hostname.replace(/^www\./, '') + (parsed.pathname !== '/' ? parsed.pathname : '')
+      );
     } catch {
       return url;
     }

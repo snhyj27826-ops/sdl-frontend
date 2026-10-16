@@ -120,3 +120,8 @@ h6 {
 .mat-mdc-form-field {
   width: 100%;
 }
+
+.image-gallery-viewer-dialog .mat-mdc-dialog-surface {
+  border-radius: 0;
+  background: #111;
+}

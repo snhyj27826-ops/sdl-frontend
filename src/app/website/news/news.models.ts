@@ -43,8 +43,8 @@ export interface NewsArticle {
   author?: string;
   isFeatured?: boolean;
   coverImage?: StrapiMedia | { data?: StrapiMedia };
+  imageGallery?: StrapiMedia[] | { data?: StrapiMedia[] };
   externalLinks?: string[];
-  externalUrls?: string[];
   attributes?: {
     title: string;
     slug: string;
@@ -57,8 +57,8 @@ export interface NewsArticle {
     author?: string;
     isFeatured?: boolean;
     coverImage?: { data?: StrapiMedia } | StrapiMedia;
+    imageGallery?: StrapiMedia[] | { data?: StrapiMedia[] };
     externalLinks?: string[];
-    externalUrls?: string[];
   };
 }
 

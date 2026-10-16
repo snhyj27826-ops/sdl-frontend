@@ -280,5 +280,8 @@
   "NEWS_PUBLISHED_ON": "Published on",
   "NEWS_BY_AUTHOR": "By",
   "NEWS_EXTERNAL_RESOURCES": "External Resources",
-  "NEWS_WATCH_ON_YOUTUBE": "Watch on YouTube"
+  "NEWS_WATCH_ON_YOUTUBE": "Watch on YouTube",
+  "NEWS_GALLERY_TITLE": "Photo gallery",
+  "NEWS_GALLERY_OPEN": "Open image in fullscreen viewer",
+  "NEWS_GALLERY_CLOSE": "Close image viewer"
 }

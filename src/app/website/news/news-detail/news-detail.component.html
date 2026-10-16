@@ -95,6 +95,13 @@
         }
       </div>
 
+      @if (galleryImages.length > 0) {
+        <section class="article-gallery-section">
+          <h2>{{ 'NEWS_GALLERY_TITLE' | translate }}</h2>
+          <app-image-gallery [images]="galleryImages" [label]="'NEWS_GALLERY_TITLE' | translate" />
+        </section>
+      }
+
       <!-- External Resources & Videos Section -->
       @if (resourceLinks.length > 0) {
         <section class="article-resources-section">

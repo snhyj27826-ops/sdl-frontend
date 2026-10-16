@@ -32,11 +32,24 @@ export class NewsService {
       };
     }
 
+    const rawImageGallery = item.imageGallery ?? attrs.imageGallery;
+    const galleryItems = Array.isArray(rawImageGallery)
+      ? rawImageGallery
+      : rawImageGallery?.data;
+    const imageGallery = Array.isArray(galleryItems)
+      ? galleryItems.map((media: StrapiMedia) =>
+          media?.attributes
+            ? {
+                id: media.id,
+                ...media.attributes,
+              }
+            : media,
+        )
+      : undefined;
+
     const rawExternal =
       item.externalLinks ??
       attrs.externalLinks ??
-      item.externalUrls ??
-      attrs.externalUrls ??
       item.externalResources ??
       attrs.externalResources ??
       item.resources ??
@@ -71,8 +84,8 @@ export class NewsService {
       author: item.author ?? attrs.author ?? 'SDL Team',
       isFeatured: item.isFeatured ?? attrs.isFeatured ?? false,
       coverImage,
+      imageGallery,
       externalLinks,
-      externalUrls: externalLinks,
     };
   }
 

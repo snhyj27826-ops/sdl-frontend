@@ -1,7 +1,7 @@
 import { isDevMode } from '@angular/core';
 
 const backendUrl = isDevMode() ? 'http://localhost:3000' : '';
-const strapiUrl = isDevMode() ? 'https://cms.sdl.org.mk' : '';
+const strapiUrl = 'https://cms.sdl.org.mk';
 
 export const env = {
   constructionMode: false, // TODO - set to false when the website is ready

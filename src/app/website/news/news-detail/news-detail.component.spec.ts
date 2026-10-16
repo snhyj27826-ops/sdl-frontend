@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,6 +23,13 @@ describe('NewsDetailComponent', () => {
     category: 'announcements',
     publishedAt: '2025-05-10T14:30:00.000Z',
     author: 'Chief Editor',
+    imageGallery: [
+      {
+        url: '/uploads/gallery.jpg',
+        alternativeText: 'Gallery photo',
+        caption: 'Article gallery caption',
+      },
+    ],
     externalLinks: ['https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'https://example.com/doc'],
   };
 
@@ -59,6 +68,13 @@ describe('NewsDetailComponent', () => {
     expect(component.resourceLinks[0].isYoutube).toBe(true);
     expect(component.resourceLinks[0].youtubeId).toBe('dQw4w9WgXcQ');
     expect(component.resourceLinks[1].isYoutube).toBe(false);
+    expect(component.galleryImages).toEqual([
+      {
+        src: 'assets/images/news-placeholder.svg',
+        alt: 'Gallery photo',
+        caption: 'Article gallery caption',
+      },
+    ]);
     expect(component.loading).toBe(false);
     expect(component.notFound).toBe(false);
   });

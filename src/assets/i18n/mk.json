@@ -274,5 +274,8 @@
   "NEWS_PUBLISHED_ON": "Објавено на",
   "NEWS_BY_AUTHOR": "Од",
   "NEWS_EXTERNAL_RESOURCES": "Надворешни ресурси",
-  "NEWS_WATCH_ON_YOUTUBE": "Гледајте на YouTube"
+  "NEWS_WATCH_ON_YOUTUBE": "Гледајте на YouTube",
+  "NEWS_GALLERY_TITLE": "Фото галерија",
+  "NEWS_GALLERY_OPEN": "Отвори слика на цел екран",
+  "NEWS_GALLERY_CLOSE": "Затвори преглед на слика"
 }
