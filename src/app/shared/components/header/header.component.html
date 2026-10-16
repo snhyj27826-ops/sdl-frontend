@@ -28,6 +28,8 @@
       @for (item of menuItems; track item.route; let i = $index) {
         <div
           class="nav-link-wrapper"
+          [hidden]="item.hidden"
+          [class.menu-item-hidden]="item.hidden"
           [class.has-children]="item.hasChildren"
           (mouseenter)="item.hasChildren && openSubmenu(getSubmenuKey(item, i))"
           (mouseleave)="item.hasChildren && closeSubmenu(getSubmenuKey(item, i))"
@@ -82,6 +84,8 @@
     >
       <div
         class="nav-link-wrapper menu-item-level-{{ level }}"
+        [hidden]="item.hidden"
+        [class.menu-item-hidden]="item.hidden"
         [class.has-children]="item.hasChildren"
         (mouseenter)="item.hasChildren && openSubmenu(parentKey + '-' + getSubmenuKey(item, index))"
         (mouseleave)="
@@ -158,7 +162,12 @@
       <div class="mobile-menu-body">
         <ul class="mobile-nav-list">
           @for (item of menuItems; track item.route; let i = $index) {
-            <li class="mobile-nav-item" [class.has-children]="item.hasChildren">
+            <li
+              class="mobile-nav-item"
+              [hidden]="item.hidden"
+              [class.menu-item-hidden]="item.hidden"
+              [class.has-children]="item.hasChildren"
+            >
               @if (item.hasChildren) {
                 <button
                   class="mobile-nav-link-btn"
@@ -174,7 +183,11 @@
                 @if (isSubmenuOpen(getSubmenuKey(item, i))) {
                   <ul class="mobile-submenu-list">
                     @for (subitem of item.children; track subitem.route) {
-                      <li class="mobile-submenu-item">
+                      <li
+                        class="mobile-submenu-item"
+                        [hidden]="subitem.hidden"
+                        [class.menu-item-hidden]="subitem.hidden"
+                      >
                         <a
                           class="mobile-submenu-link"
                           [routerLink]="subitem.route"

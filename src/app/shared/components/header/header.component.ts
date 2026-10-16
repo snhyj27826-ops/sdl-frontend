@@ -20,6 +20,7 @@ export interface HeaderMenuItem {
   route: string;
   action?: () => void;
   hasChildren?: boolean;
+  hidden?: boolean;
   children?: HeaderMenuItem[];
 }
 

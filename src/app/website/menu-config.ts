@@ -28,11 +28,18 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
           label: 'SDL',
           route: '/about/sdl',
           action: () => utils.navigateTo('about/sdl'),
+          hidden: true,
         },
         {
           label: 'statute',
           route: '/about/statute',
           action: () => utils.navigateTo('about/statute'),
+          hidden: true,
+        },
+        {
+          label: 'history',
+          route: '/history',
+          action: () => utils.navigateTo('history'),
         },
       ],
     },
@@ -45,11 +52,6 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
       label: 'videos',
       route: '/videos',
       action: () => utils.navigateTo('videos'),
-    },
-    {
-      label: 'history',
-      route: '/history',
-      action: () => utils.navigateTo('history'),
     },
     {
       label: 'contact',
