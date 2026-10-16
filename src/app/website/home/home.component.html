@@ -3,6 +3,41 @@
     <app-hero-slider />
   </div>
 
+  <section class="news-section" aria-labelledby="home-news-title">
+    <div class="section-header">
+      <h2 id="home-news-title">{{ 'NEWS_PAGE_TITLE' | translate }}</h2>
+      <p>{{ 'NEWS_PAGE_SUBTITLE' | translate }}</p>
+    </div>
+
+    @if (featuredNews.length) {
+      <div class="news-grid">
+        @for (article of featuredNews; track article.id || article.slug) {
+          <article class="news-card">
+            <a class="news-card-link" [routerLink]="['/news', article.slug || article.id]">
+              <img
+                class="news-card-image"
+                [src]="getNewsCoverImage(article)"
+                [alt]="article.title"
+                loading="lazy"
+              />
+              <div class="news-card-content">
+                <time [attr.datetime]="article.publishedAt">
+                  {{ article.publishedAt | date: 'mediumDate' }}
+                </time>
+                <h3>{{ article.title }}</h3>
+                @if (article.excerpt) {
+                  <p>{{ article.excerpt }}</p>
+                }
+              </div>
+            </a>
+          </article>
+        }
+      </div>
+    }
+
+    <a class="more-news-button" routerLink="/news">{{ 'MORE_NEWS' | translate }}</a>
+  </section>
+
   <section class="videos-section" aria-labelledby="home-videos-title">
     <div class="section-header">
       <h2 id="home-videos-title">{{ 'VIDEOS_TITLE' | translate }}</h2>

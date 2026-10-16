@@ -26,6 +26,15 @@ describe('NewsDetailComponent', () => {
     imageGallery: [
       {
         url: '/uploads/gallery.jpg',
+        width: 1600,
+        height: 1067,
+        formats: {
+          thumbnail: {
+            url: '/uploads/gallery-thumbnail.jpg',
+            width: 245,
+            height: 163,
+          },
+        },
         alternativeText: 'Gallery photo',
         caption: 'Article gallery caption',
       },
@@ -71,8 +80,10 @@ describe('NewsDetailComponent', () => {
     expect(component.galleryImages).toEqual([
       {
         src: 'assets/images/news-placeholder.svg',
+        thumb: 'assets/images/news-placeholder.svg',
         alt: 'Gallery photo',
         caption: 'Article gallery caption',
+        lgSize: '1600-1067',
       },
     ]);
     expect(component.loading).toBe(false);

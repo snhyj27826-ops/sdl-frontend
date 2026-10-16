@@ -1,5 +1,8 @@
 /* Import Angular Material Prebuilt Theme */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'lightgallery/css/lightgallery.css';
+@import 'lightgallery/css/lg-thumbnail.css';
+@import 'lightgallery/css/lg-zoom.css';
 
 /* Global variables based on DESIGN.md */
 :root {
@@ -119,9 +122,4 @@ h6 {
 
 .mat-mdc-form-field {
   width: 100%;
-}
-
-.image-gallery-viewer-dialog .mat-mdc-dialog-surface {
-  border-radius: 0;
-  background: #111;
 }

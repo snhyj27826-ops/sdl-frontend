@@ -10,4 +10,5 @@ export const env = {
   backendUrl,
   backendPrefix: 'api',
   strapiUrl,
+  lightGalleryLicenseKey: 'LIG-81217DB5-B63D-40AE-88D0-1540F8DC8337',
 };

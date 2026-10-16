@@ -11,7 +11,10 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { GalleryImage, ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
+import {
+  GalleryImage,
+  ImageGalleryComponent,
+} from '../../../shared/components/image-gallery/image-gallery.component';
 import { NewsService } from '../news.service';
 import { NewsArticle, StrapiMedia } from '../news.models';
 
@@ -156,12 +159,33 @@ export class NewsDetailComponent implements OnInit {
     const mediaItems = Array.isArray(rawGallery) ? rawGallery : (rawGallery?.data ?? []);
 
     return mediaItems
-      .map((media: StrapiMedia): GalleryImage => ({
-        src: this.newsService.getMediaUrl(media),
-        alt: media.alternativeText || article.title,
-        caption: media.caption,
-      }))
-      .filter((image) => image.src.length > 0);
+      .map((media: StrapiMedia): GalleryImage | null => {
+        const width = media.width ?? media.attributes?.width;
+        const height = media.height ?? media.attributes?.height;
+        const src = this.newsService.getMediaUrl(media);
+        const formats = media.formats ?? media.attributes?.formats;
+        const thumbnail = formats?.thumbnail ?? formats?.small ?? formats?.medium;
+
+        if (
+          !src ||
+          typeof width !== 'number' ||
+          width <= 0 ||
+          typeof height !== 'number' ||
+          height <= 0
+        ) {
+          console.error('Skipping news gallery image without a URL or natural dimensions.', media);
+          return null;
+        }
+
+        return {
+          src,
+          thumb: this.newsService.getMediaUrl(thumbnail ?? media),
+          alt: media.alternativeText || media.attributes?.alternativeText || article.title,
+          caption: media.caption || media.attributes?.caption,
+          lgSize: `${width}-${height}`,
+        };
+      })
+      .filter((image): image is GalleryImage => image !== null);
   }
 
   private extractYoutubeId(url: string): string | null {

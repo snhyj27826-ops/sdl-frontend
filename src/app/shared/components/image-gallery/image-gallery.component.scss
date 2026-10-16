@@ -3,51 +3,59 @@
 }
 
 .image-gallery {
-  overflow: hidden;
-  border-radius: 12px;
-  background: #f1f3f5;
-
-  swiper-container {
-    --swiper-navigation-color: #ffffff;
-    --swiper-pagination-color: #ffffff;
-    --swiper-navigation-size: 24px;
-    width: 100%;
-  }
-
-  swiper-slide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 260px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+  gap: 14px;
 }
 
-.gallery-image-button {
+.gallery-image {
+  position: relative;
   display: block;
   width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #e9ecef;
   cursor: zoom-in;
+  text-decoration: none;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 4px 12px rgba(12, 64, 118, 0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 
   img {
     display: block;
     width: 100%;
-    height: clamp(260px, 48vw, 440px);
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 240ms ease;
   }
 
   &:focus-visible {
     outline: 3px solid var(--color-primary);
-    outline-offset: -3px;
+    outline-offset: 3px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(12, 64, 118, 0.14);
+
+    img {
+      transform: scale(1.04);
+    }
   }
 }
 
 .gallery-caption {
-  width: 100%;
-  padding: 10px 16px 14px;
-  color: var(--color-text-muted);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 24px 12px 10px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.68));
+  color: #fff;
   font-size: 14px;
-  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
