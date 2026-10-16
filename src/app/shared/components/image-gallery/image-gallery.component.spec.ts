@@ -24,6 +24,23 @@ describe('ImageGalleryComponent', () => {
 
   afterEach(() => fixture.destroy());
 
+  it('uses masonry layout by default', () => {
+    const gallery = fixture.nativeElement.querySelector('.image-gallery') as HTMLElement;
+
+    expect(gallery.classList.contains('image-gallery--masonry')).toBe(true);
+    expect(gallery.classList.contains('image-gallery--grid')).toBe(false);
+  });
+
+  it('allows overriding the layout', () => {
+    fixture.componentRef.setInput('layout', 'grid');
+    fixture.detectChanges();
+
+    const gallery = fixture.nativeElement.querySelector('.image-gallery') as HTMLElement;
+
+    expect(gallery.classList.contains('image-gallery--grid')).toBe(true);
+    expect(gallery.classList.contains('image-gallery--masonry')).toBe(false);
+  });
+
   it('opens a styled lightbox with animated thumbnails', async () => {
     const consoleError = spyOn(console, 'error');
     const trigger = fixture.nativeElement.querySelector('.gallery-image') as HTMLAnchorElement;

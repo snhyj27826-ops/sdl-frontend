@@ -165,7 +165,7 @@ export class NewsDetailComponent implements OnInit {
         const width = large?.width ?? media.width ?? media.attributes?.width;
         const height = large?.height ?? media.height ?? media.attributes?.height;
         const src = this.newsService.getMediaUrl(large?.url ? large : media);
-        const thumbnail = formats?.thumbnail ?? formats?.small ?? formats?.medium;
+        const thumbnail = formats?.small ?? formats?.thumbnail ?? formats?.medium;
 
         if (
           !src ||

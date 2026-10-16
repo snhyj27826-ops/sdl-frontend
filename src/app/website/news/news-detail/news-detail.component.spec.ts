@@ -34,6 +34,11 @@ describe('NewsDetailComponent', () => {
             width: 245,
             height: 163,
           },
+          medium: {
+            url: '/uploads/gallery-medium.jpg',
+            width: 750,
+            height: 500,
+          },
           large: {
             url: '/uploads/gallery-large.jpg',
             width: 1000,
@@ -93,6 +98,9 @@ describe('NewsDetailComponent', () => {
     ]);
     expect(newsServiceSpy.getMediaUrl).toHaveBeenCalledWith(
       jasmine.objectContaining({ url: '/uploads/gallery-large.jpg' }),
+    );
+    expect(newsServiceSpy.getMediaUrl).toHaveBeenCalledWith(
+      jasmine.objectContaining({ url: '/uploads/gallery-medium.jpg' }),
     );
     expect(component.loading).toBe(false);
     expect(component.notFound).toBe(false);

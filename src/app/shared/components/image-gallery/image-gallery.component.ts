@@ -9,6 +9,7 @@ import { withZoom } from '@lightgallery/angular/plugins/zoom';
 import { env } from '@src/environment';
 
 export type GalleryImage = LgGalleryItem;
+export type GalleryLayout = 'masonry' | 'grid';
 
 @Component({
   selector: 'app-image-gallery',
@@ -21,6 +22,7 @@ export type GalleryImage = LgGalleryItem;
 export class ImageGalleryComponent {
   @Input({ required: true }) images: GalleryImage[] = [];
   @Input() label = 'Image gallery';
+  @Input() layout: GalleryLayout = 'masonry';
 
   readonly features = [withThumbnail({ animateThumb: true }), withZoom()];
   readonly licenseKey = env.lightGalleryLicenseKey;

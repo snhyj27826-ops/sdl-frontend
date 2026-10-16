@@ -1,6 +1,8 @@
 @if (images.length) {
   <lg-gallery
     class="image-gallery"
+    [class.image-gallery--masonry]="layout === 'masonry'"
+    [class.image-gallery--grid]="layout === 'grid'"
     [attr.aria-label]="label"
     [features]="features"
     [licenseKey]="licenseKey"
