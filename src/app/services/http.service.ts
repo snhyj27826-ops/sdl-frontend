@@ -9,6 +9,14 @@ import {
   OrganizationRequest,
 } from '@src/app/website/about/organization/organization.models';
 
+export interface ContactMessageRequest {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  consent: boolean;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -58,5 +66,9 @@ export class HttpService {
 
   public createApplication(body: unknown): Observable<unknown> {
     return this.http.post(`${env.backendUrl}/${env.backendPrefix}/applications/create`, body);
+  }
+
+  public sendContactMessage(body: ContactMessageRequest): Observable<unknown> {
+    return this.http.post(`${env.backendUrl}/${env.backendPrefix}/contact`, body);
   }
 }

@@ -124,6 +124,7 @@
   "CONTACT_VALIDATION_MESSAGE_REQUIRED": "Message is required",
   "CONTACT_VALIDATION_CONSENT_REQUIRED": "You must accept the terms",
   "CONTACT_SUCCESS_MESSAGE": "Thank you for your message!",
+  "CONTACT_ERROR_MESSAGE": "We could not send your message. Please try again later.",
   "ORGANIZATION_TITLE": "Organization",
   "ORGANIZATION_SUBTITLE": "Meet the team behind the vision of a modern Serbia. The Serbian Democratic League gathers experts, visionaries, and dedicated individuals who believe in democratic values and institutional stability.",
   "ROLE_PRESIDENT": "PARTY PRESIDENT",
