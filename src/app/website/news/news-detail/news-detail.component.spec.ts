@@ -34,6 +34,11 @@ describe('NewsDetailComponent', () => {
             width: 245,
             height: 163,
           },
+          large: {
+            url: '/uploads/gallery-large.jpg',
+            width: 1000,
+            height: 667,
+          },
         },
         alternativeText: 'Gallery photo',
         caption: 'Article gallery caption',
@@ -83,9 +88,12 @@ describe('NewsDetailComponent', () => {
         thumb: 'assets/images/news-placeholder.svg',
         alt: 'Gallery photo',
         caption: 'Article gallery caption',
-        lgSize: '1600-1067',
+        lgSize: '1000-667',
       },
     ]);
+    expect(newsServiceSpy.getMediaUrl).toHaveBeenCalledWith(
+      jasmine.objectContaining({ url: '/uploads/gallery-large.jpg' }),
+    );
     expect(component.loading).toBe(false);
     expect(component.notFound).toBe(false);
   });

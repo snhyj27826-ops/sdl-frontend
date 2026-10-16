@@ -160,10 +160,11 @@ export class NewsDetailComponent implements OnInit {
 
     return mediaItems
       .map((media: StrapiMedia): GalleryImage | null => {
-        const width = media.width ?? media.attributes?.width;
-        const height = media.height ?? media.attributes?.height;
-        const src = this.newsService.getMediaUrl(media);
         const formats = media.formats ?? media.attributes?.formats;
+        const large = formats?.large;
+        const width = large?.width ?? media.width ?? media.attributes?.width;
+        const height = large?.height ?? media.height ?? media.attributes?.height;
+        const src = this.newsService.getMediaUrl(large?.url ? large : media);
         const thumbnail = formats?.thumbnail ?? formats?.small ?? formats?.medium;
 
         if (
