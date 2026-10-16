@@ -45,14 +45,11 @@ export class HeaderComponent implements OnChanges, OnDestroy {
     private translate: TranslateService,
     private utils: UtilsService,
   ) {
-    translate.setDefaultLang('en');
+    translate.setDefaultLang('mk');
     const savedLang = localStorage.getItem('language');
-    if (savedLang) {
-      this.translate.use(savedLang);
-    } else {
-      const browserLang = translate.getBrowserLang();
-      translate.use(browserLang?.match(/en|sr|mk/) ? browserLang : 'en');
-    }
+    this.translate.use(
+      savedLang === 'en' || savedLang === 'sr' || savedLang === 'mk' ? savedLang : 'mk',
+    );
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

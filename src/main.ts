@@ -1,4 +1,4 @@
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -7,6 +7,7 @@ import { register } from 'swiper/element/bundle';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+import { LocalizedTitleStrategy } from './app/localized-title.strategy';
 
 register();
 
@@ -14,6 +15,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
+    { provide: TitleStrategy, useClass: LocalizedTitleStrategy },
 
     provideTranslateService({
       loader: provideTranslateHttpLoader({

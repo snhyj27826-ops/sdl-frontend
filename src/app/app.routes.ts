@@ -28,46 +28,57 @@ const applicationRoutes: Routes = [
       {
         path: '',
         component: HomeComponent,
+        title: 'PAGE_TITLE_HOME',
       },
       {
         path: 'apply',
         component: ApplicationFormComponent,
+        title: 'PAGE_TITLE_APPLICATION',
       },
       {
         path: 'about',
         component: AboutComponent,
+        title: 'PAGE_TITLE_ABOUT',
       },
       {
         path: 'about/organization',
         component: OrganizationComponent,
+        title: 'PAGE_TITLE_ORGANIZATION',
       },
       {
         path: 'about/sdl',
         component: SdlComponent,
+        title: 'PAGE_TITLE_ABOUT_SDL',
       },
       {
         path: 'agenda',
         component: AgendaComponent,
+        title: 'PAGE_TITLE_AGENDA',
       },
       {
         path: 'news',
         component: NewsComponent,
+        title: 'PAGE_TITLE_NEWS',
       },
       {
         path: 'news/:slug',
         component: NewsDetailComponent,
+        title: 'PAGE_TITLE_NEWS',
       },
       {
         path: 'videos',
         component: VideosComponent,
+        title: 'PAGE_TITLE_VIDEOS',
       },
       {
         path: 'history',
         component: HistoryComponent,
+        title: 'PAGE_TITLE_HISTORY',
       },
       {
         path: 'contact',
         component: ContactComponent,
+        title: 'PAGE_TITLE_CONTACT',
       },
     ],
   },
@@ -78,28 +89,33 @@ const applicationRoutes: Routes = [
       {
         path: 'login',
         component: AuthComponent,
+        title: 'PAGE_TITLE_SIGN_IN',
       },
       {
         path: 'register',
         component: AuthComponent,
+        title: 'PAGE_TITLE_REGISTER',
       },
       {
         path: 'board',
         component: DashboardComponent,
         canActivate: [AuthGuard],
+        title: 'PAGE_TITLE_DASHBOARD',
       },
       {
         path: 'verify-account/:token',
         component: AuthComponent,
+        title: 'PAGE_TITLE_VERIFY_ACCOUNT',
       },
     ],
   },
   {
     path: '**',
     component: NotFoundComponent,
+    title: 'PAGE_TITLE_NOT_FOUND',
   },
 ];
 
 export const routes: Routes = env.constructionMode
-  ? [{ path: '**', component: UnderConstructionComponent }]
+  ? [{ path: '**', component: UnderConstructionComponent, title: 'PAGE_TITLE_CONSTRUCTION' }]
   : applicationRoutes;

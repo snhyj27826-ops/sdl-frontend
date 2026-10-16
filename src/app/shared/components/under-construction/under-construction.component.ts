@@ -16,19 +16,14 @@ function isSupportedLanguage(language: string | null | undefined): language is S
   imports: [TranslateModule],
 })
 export class UnderConstructionComponent implements OnInit {
-  public currentLanguage: SupportedLanguage = 'en';
+  public currentLanguage: SupportedLanguage = 'mk';
   public readonly languages: readonly SupportedLanguage[] = ['mk', 'sr', 'en'];
 
   constructor(private readonly translate: TranslateService) {}
 
   public ngOnInit(): void {
     const savedLanguage = localStorage.getItem('language');
-    const browserLanguage = this.translate.getBrowserLang();
-    const language = isSupportedLanguage(savedLanguage)
-      ? savedLanguage
-      : isSupportedLanguage(browserLanguage)
-        ? browserLanguage
-        : 'sr';
+    const language = isSupportedLanguage(savedLanguage) ? savedLanguage : 'mk';
 
     this.setLanguage(language);
   }

@@ -1,5 +1,13 @@
-<swiper-container slides-per-view="1" navigation="true" pagination="true" loop="true" speed="800">
-  @for (slide of slides; track slide.imageUrl) {
+<swiper-container
+  #swiper
+  init="false"
+  slides-per-view="1"
+  navigation="true"
+  pagination="true"
+  loop="true"
+  speed="800"
+>
+  @for (slide of slides; track slide.title) {
     <swiper-slide>
       <div class="slide">
         <img [src]="slide.imageUrl" [alt]="slide.title | translate" />

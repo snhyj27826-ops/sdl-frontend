@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GalleryImage, ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
@@ -34,6 +34,7 @@ export interface ExternalResourceLink {
 export class NewsDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
   private readonly newsService = inject(NewsService);
   private readonly translateService = inject(TranslateService);
   private readonly sanitizer = inject(DomSanitizer);
@@ -80,6 +81,7 @@ export class NewsDetailComponent implements OnInit {
         next: (article) => {
           if (article) {
             this.article = article;
+            this.title.setTitle(`${article.title} | SDL`);
             this.resourceLinks = this.buildResourceLinks(article);
             this.galleryImages = this.buildGalleryImages(article);
             this.notFound = false;

@@ -1,6 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+
+interface SwiperContainerElement extends HTMLElement {
+  initialize(): void;
+}
 
 @Component({
   selector: 'app-hero-slider',
@@ -10,7 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HeroSliderComponent implements OnInit {
+export class HeroSliderComponent implements AfterViewInit {
+  @ViewChild('swiper') private swiper!: ElementRef<SwiperContainerElement>;
+
   slides = [
     {
       imageUrl: 'assets/carousel/screen.png',
@@ -35,5 +41,7 @@ export class HeroSliderComponent implements OnInit {
     },
   ];
 
-  public ngOnInit() {}
+  ngAfterViewInit(): void {
+    this.swiper.nativeElement.initialize();
+  }
 }
