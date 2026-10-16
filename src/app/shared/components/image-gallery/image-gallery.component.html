@@ -1,0 +1,27 @@
+@if (images.length) {
+  <section class="image-gallery" [attr.aria-label]="label">
+    <swiper-container
+      slides-per-view="1"
+      navigation="true"
+      pagination="true"
+      keyboard="true"
+      speed="400"
+    >
+      @for (image of images; track image.src; let i = $index) {
+        <swiper-slide>
+          <button
+            type="button"
+            class="gallery-image-button"
+            (click)="openViewer(i)"
+            [attr.aria-label]="'NEWS_GALLERY_OPEN' | translate"
+          >
+            <img [src]="image.src" [alt]="image.alt" />
+          </button>
+          @if (image.caption) {
+            <p class="gallery-caption">{{ image.caption }}</p>
+          }
+        </swiper-slide>
+      }
+    </swiper-container>
+  </section>
+}
