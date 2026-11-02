@@ -7,7 +7,8 @@ import { DashboardComponent } from '@src/app/dashboard/board/dashboard.component
 import { AuthGuard } from '@src/app/auth.guard';
 import { ApplicationFormComponent } from '@src/app/website/application/application-form/application-form.component';
 import { AboutComponent } from '@src/app/website/about/about.component';
-import { OrganizationComponent } from '@src/app/website/about/organization/organization.component';
+import { CentralCommitteeComponent } from '@src/app/website/about/central-committee/central-committee.component';
+import { MemberBiographyComponent } from '@src/app/website/about/member-biography/member-biography.component';
 import { NewsComponent } from '@src/app/website/news/news.component';
 import { NewsDetailComponent } from '@src/app/website/news/news-detail/news-detail.component';
 import { ContactComponent } from '@src/app/website/contact/contact.component';
@@ -41,10 +42,39 @@ const applicationRoutes: Routes = [
         title: 'PAGE_TITLE_ABOUT',
       },
       {
-        path: 'about/organization',
-        component: OrganizationComponent,
-        title: 'PAGE_TITLE_ORGANIZATION',
+        path: 'organization/president',
+        component: MemberBiographyComponent,
+        title: 'PAGE_TITLE_PRESIDENT',
+        data: { memberIndex: 0, titleKey: 'president' },
       },
+      {
+        path: 'organization/vice-president',
+        component: MemberBiographyComponent,
+        title: 'PAGE_TITLE_VICE_PRESIDENT',
+        data: { memberIndex: 1, titleKey: 'vice_president' },
+      },
+      {
+        path: 'organization/secretary-general',
+        component: MemberBiographyComponent,
+        title: 'PAGE_TITLE_SECRETARY_GENERAL',
+        data: { memberIndex: 2, titleKey: 'secretary_general' },
+      },
+      {
+        path: 'organization/central-committee',
+        component: CentralCommitteeComponent,
+        title: 'PAGE_TITLE_CENTRAL_COMMITTEE',
+      },
+      {
+        path: 'public-information/contact-person',
+        component: MemberBiographyComponent,
+        title: 'PAGE_TITLE_CONTACT_PERSON',
+        data: { memberIndex: 3, titleKey: 'contact_person' },
+      },
+      // {
+      //   path: 'organization',
+      //   redirectTo: 'about/organization/central-committee',
+      //   pathMatch: 'full',
+      // },
       {
         path: 'about/sdl',
         component: SdlComponent,

@@ -65,6 +65,36 @@
   }
 }
 
+.contact-sidebar .social-card {
+  margin-bottom: 24px;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--color-white, #fff);
+    }
+  }
+}
+
 .contact-info-item {
   display: flex;
   gap: 16px;

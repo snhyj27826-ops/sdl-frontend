@@ -1,0 +1,27 @@
+<div class="member-container">
+  <div class="member-header">
+    <div class="badge">{{ titleKey | translate }}</div>
+  </div>
+
+  @if (member(); as m) {
+    <div class="member-photo-wrapper">
+      <img
+        [src]="
+          m.photo ? env.backendUrl + m.photo : 'assets/images/organization/default-member.webp'
+        "
+        [alt]="m.fullName"
+        class="member-photo"
+      />
+    </div>
+
+    <h1 class="member-name">{{ m.fullName }}</h1>
+    <p class="member-role">{{ m.role }}</p>
+
+    <section class="member-biography">
+      <h2 class="biography-title">{{ 'BIOGRAPHY' | translate }}</h2>
+      <p class="biography-text">{{ m.biography }}</p>
+    </section>
+  } @else if (loaded()) {
+    <p class="member-empty">{{ 'MEMBER_NOT_FOUND' | translate }}</p>
+  }
+</div>

@@ -53,17 +53,11 @@ export class HeaderComponent implements OnChanges, OnDestroy {
     );
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    console.log('HeaderComponent inputs changed:', changes);
-  }
+  public ngOnChanges(changes: SimpleChanges): void {}
 
   public switchLanguage(lang: string) {
     this.translate.use(lang);
     localStorage.setItem('language', lang);
-  }
-
-  public handleLogoClick(): void {
-    this.utils.navigateTo('');
   }
 
   public handlePrimaryButtonClick(): void {

@@ -8,6 +8,10 @@ import { HttpService } from '@src/app/services/http.service';
 import { OrganizationMember } from './organization.models';
 import { env } from '@src/environment';
 
+/**
+ * @deprecated Replaced by the president, vice-president, secretary-general and
+ * central-committee pages. Kept only as a design reference; it is no longer routed.
+ */
 @Component({
   selector: 'app-organization',
   imports: [CommonModule, TranslateModule, RouterLink],

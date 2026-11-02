@@ -20,9 +20,9 @@
   </div>
 
   <nav class="nav-container">
-    <div class="logo" (click)="handleLogoClick()">
+    <a class="logo" routerLink="/" aria-label="SDL homepage">
       <img src="./assets/sdl-logo.png" alt="SDL Logo" class="logo-image" />
-    </div>
+    </a>
 
     <div class="nav-links">
       @for (item of menuItems; track item.route; let i = $index) {
@@ -150,9 +150,13 @@
     <div class="mobile-menu-container">
       <!-- Mobile Header -->
       <div class="mobile-menu-header">
-        <div class="logo" (click)="handleLogoClick(); closeMobileMenu()">
-          <img src="../../../../../../sdl-news/src/extensions/sdl-logo.png" alt="SDL Logo" class="logo-image" />
-        </div>
+        <a class="logo" routerLink="/" aria-label="SDL homepage" (click)="closeMobileMenu()">
+          <img
+            src="../../../../../../sdl-news/src/extensions/sdl-logo.png"
+            alt="SDL Logo"
+            class="logo-image"
+          />
+        </a>
         <button class="close-btn" (click)="toggleMobileMenu()" aria-label="Close menu">
           <span class="material-symbols-outlined">close</span>
         </button>

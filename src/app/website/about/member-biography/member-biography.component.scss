@@ -1,0 +1,85 @@
+.member-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 24px 60px;
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.member-header .badge {
+  display: inline-block;
+  background-color: #f5d5d7;
+  color: var(--color-primary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.member-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+
+  .member-photo {
+    width: 100%;
+    max-width: 350px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(141, 112, 110, 0.15);
+  }
+}
+
+.member-name {
+  font-family: Georgia, serif;
+  color: var(--color-primary);
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.member-role {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+}
+
+.member-biography {
+  text-align: left;
+
+  .biography-title {
+    font-family: Georgia, serif;
+    color: var(--color-primary);
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .biography-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    white-space: pre-line;
+  }
+}
+
+.member-empty {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 600px) {
+  .member-photo-wrapper .member-photo {
+    height: 320px;
+  }
+
+  .member-name {
+    font-size: 28px;
+  }
+}
