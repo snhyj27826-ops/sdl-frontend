@@ -6,10 +6,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpService } from '@src/app/services/http.service';
 import { OrganizationMember } from '../organization/organization.models';
 import { env } from '@src/environment';
+import { MarkdownPipe } from '@src/app/shared/pipes/markdown.pipe';
 
 @Component({
   selector: 'app-member-biography',
-  imports: [TranslateModule],
+  imports: [TranslateModule, MarkdownPipe],
   templateUrl: './member-biography.component.html',
   styleUrl: './member-biography.component.scss',
   standalone: true,

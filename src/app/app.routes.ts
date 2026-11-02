@@ -60,9 +60,19 @@ const applicationRoutes: Routes = [
         data: { memberIndex: 2, titleKey: 'secretary_general' },
       },
       {
-        path: 'organization/central-committee',
+        path: 'public-information/party-bodies/central-committee',
         component: CentralCommitteeComponent,
         title: 'PAGE_TITLE_CENTRAL_COMMITTEE',
+      },
+      {
+        path: 'public-information/party-bodies/executive-committee',
+        component: UnderConstructionComponent,
+        title: 'PAGE_TITLE_CONSTRUCTION',
+      },
+      {
+        path: 'organization/central-committee',
+        redirectTo: 'public-information/party-bodies/central-committee',
+        pathMatch: 'full',
       },
       {
         path: 'public-information/contact-person',

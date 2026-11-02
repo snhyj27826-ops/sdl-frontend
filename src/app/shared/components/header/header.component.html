@@ -187,20 +187,16 @@
                 @if (isSubmenuOpen(getSubmenuKey(item, i))) {
                   <ul class="mobile-submenu-list">
                     @for (subitem of item.children; track subitem.route) {
-                      <li
-                        class="mobile-submenu-item"
-                        [hidden]="subitem.hidden"
-                        [class.menu-item-hidden]="subitem.hidden"
-                      >
-                        <a
-                          class="mobile-submenu-link"
-                          [routerLink]="subitem.route"
-                          routerLinkActive="active"
-                          (click)="subitem.action && subitem.action(); closeMobileMenu()"
-                        >
-                          {{ subitem.label | translate }}
-                        </a>
-                      </li>
+                      <ng-container
+                        *ngTemplateOutlet="
+                          mobileMenuItemTemplate;
+                          context: {
+                            $implicit: subitem,
+                            index: $index,
+                            parentKey: getSubmenuKey(item, i),
+                          }
+                        "
+                      ></ng-container>
                     }
                   </ul>
                 }
@@ -220,6 +216,56 @@
           }
         </ul>
       </div>
+
+      <ng-template #mobileMenuItemTemplate let-item let-index="index" let-parentKey="parentKey">
+        <li
+          class="mobile-submenu-item"
+          [hidden]="item.hidden"
+          [class.menu-item-hidden]="item.hidden"
+        >
+          @if (item.hasChildren) {
+            <button
+              class="mobile-nav-link-btn"
+              [class.active]="isSubmenuOpen(parentKey + '-' + getSubmenuKey(item, index))"
+              (click)="toggleSubmenu(parentKey + '-' + getSubmenuKey(item, index))"
+            >
+              <span class="mobile-nav-label">{{ item.label | translate }}</span>
+              <span class="chevron-icon material-symbols-outlined">
+                {{
+                  isSubmenuOpen(parentKey + '-' + getSubmenuKey(item, index))
+                    ? 'expand_more'
+                    : 'chevron_right'
+                }}
+              </span>
+            </button>
+            @if (isSubmenuOpen(parentKey + '-' + getSubmenuKey(item, index))) {
+              <ul class="mobile-submenu-list">
+                @for (subitem of item.children; track subitem.route; let childIndex = $index) {
+                  <ng-container
+                    *ngTemplateOutlet="
+                      mobileMenuItemTemplate;
+                      context: {
+                        $implicit: subitem,
+                        index: childIndex,
+                        parentKey: parentKey + '-' + getSubmenuKey(item, index),
+                      }
+                    "
+                  ></ng-container>
+                }
+              </ul>
+            }
+          } @else {
+            <a
+              class="mobile-submenu-link"
+              [routerLink]="item.route"
+              routerLinkActive="active"
+              (click)="item.action && item.action(); closeMobileMenu()"
+            >
+              {{ item.label | translate }}
+            </a>
+          }
+        </li>
+      </ng-template>
 
       <!-- Mobile Footer (Primary button) -->
       @if (showPrimaryButton) {

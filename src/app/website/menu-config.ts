@@ -54,11 +54,6 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
           route: '/organization/secretary-general',
           action: () => utils.navigateTo('organization/secretary-general'),
         },
-        {
-          label: 'central_committee',
-          route: '/organization/central-committee',
-          action: () => utils.navigateTo('organization/central-committee'),
-        },
       ],
     },
     {
@@ -92,7 +87,19 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
         {
           label: 'party_bodies',
           route: '/public-information/party-bodies',
-          action: () => utils.navigateTo('public-information/party-bodies'),
+          hasChildren: true,
+          children: [
+            {
+              label: 'central_committee',
+              route: '/public-information/party-bodies/central-committee',
+              action: () => utils.navigateTo('public-information/party-bodies/central-committee'),
+            },
+            {
+              label: 'executive_committee',
+              route: '/public-information/party-bodies/executive-committee',
+              action: () => utils.navigateTo('public-information/party-bodies/executive-committee'),
+            },
+          ],
         },
         {
           label: 'programs',

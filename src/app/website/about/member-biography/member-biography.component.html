@@ -19,7 +19,7 @@
 
     <section class="member-biography">
       <h2 class="biography-title">{{ 'BIOGRAPHY' | translate }}</h2>
-      <p class="biography-text">{{ m.biography }}</p>
+      <div class="biography-text" [innerHTML]="m.biography | markdown"></div>
     </section>
   } @else if (loaded()) {
     <p class="member-empty">{{ 'MEMBER_NOT_FOUND' | translate }}</p>
