@@ -45,19 +45,19 @@ const applicationRoutes: Routes = [
         path: 'organization/president',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_PRESIDENT',
-        data: { memberIndex: 0, titleKey: 'president' },
+        data: { role: 'President', titleKey: 'president' },
       },
       {
         path: 'organization/vice-president',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_VICE_PRESIDENT',
-        data: { memberIndex: 1, titleKey: 'vice_president' },
+        data: { role: 'Vice President', titleKey: 'vice_president' },
       },
       {
         path: 'organization/secretary-general',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_SECRETARY_GENERAL',
-        data: { memberIndex: 2, titleKey: 'secretary_general' },
+        data: { role: 'Secretary General', titleKey: 'secretary_general' },
       },
       {
         path: 'public-information/party-bodies/central-committee',
@@ -78,7 +78,7 @@ const applicationRoutes: Routes = [
         path: 'public-information/contact-person',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_CONTACT_PERSON',
-        data: { memberIndex: 3, titleKey: 'contact_person' },
+        data: { role: 'Contact Person', titleKey: 'contact_person' },
       },
       // {
       //   path: 'organization',

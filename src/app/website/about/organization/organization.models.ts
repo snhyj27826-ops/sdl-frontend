@@ -11,3 +11,8 @@ export interface OrganizationMember {
 export interface OrganizationRequest {
   locale: string;
 }
+
+export interface OrganizationMemberRequest {
+  locale: string;
+  role: string;
+}

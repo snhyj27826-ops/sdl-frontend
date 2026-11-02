@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,13 +21,11 @@ export class MemberBiographyComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
-  // Position of the member in the sorted organization list (route data `memberIndex`)
-  private readonly memberIndex: number = this.route.snapshot.data['memberIndex'] ?? 0;
+  private readonly role: string = this.route.snapshot.data['role'];
   public readonly titleKey: string = this.route.snapshot.data['titleKey'] ?? '';
 
-  public readonly members = signal<OrganizationMember[]>([]);
+  public readonly member = signal<OrganizationMember | null>(null);
   public readonly loaded = signal(false);
-  public readonly member = computed(() => this.members()[this.memberIndex] ?? null);
 
   protected readonly env = env;
 
@@ -43,15 +41,16 @@ export class MemberBiographyComponent implements OnInit {
     const locale = this.translate.getCurrentLang() || 'en';
 
     this.httpService
-      .getOrganization(locale)
+      .getOrganizationMember(this.role, locale)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (members) => {
-          this.members.set(members);
+        next: (member) => {
+          this.member.set(member);
           this.loaded.set(true);
         },
         error: (error: unknown) => {
-          console.error('Failed to load organization data:', error);
+          console.error('Failed to load organization member:', error);
+          this.member.set(null);
           this.loaded.set(true);
         },
       });

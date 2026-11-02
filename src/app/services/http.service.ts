@@ -6,6 +6,7 @@ import { env } from 'src/environment';
 import { HistoryRequest, HistoryResponse } from '@src/app/website/history/history.models';
 import {
   OrganizationMember,
+  OrganizationMemberRequest,
   OrganizationRequest,
 } from '@src/app/website/about/organization/organization.models';
 
@@ -56,6 +57,18 @@ export class HttpService {
 
     return this.http.post<OrganizationMember[]>(
       `${env.backendUrl}/${env.backendPrefix}/organization`,
+      body,
+    );
+  }
+
+  public getOrganizationMember(
+    role: string,
+    locale: string = 'en',
+  ): Observable<OrganizationMember> {
+    const body: OrganizationMemberRequest = { locale, role };
+
+    return this.http.post<OrganizationMember>(
+      `${env.backendUrl}/${env.backendPrefix}/organization/member`,
       body,
     );
   }
