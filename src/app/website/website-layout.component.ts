@@ -31,8 +31,4 @@ export class WebsiteLayoutComponent {
   private initializeHeaderMenu(): void {
     this.headerMenuItems = getWebsiteMenuItems(this.utils);
   }
-
-  public handleAuthButtonClick(): void {
-    this.utils.navigateTo('dashboard/login');
-  }
 }
