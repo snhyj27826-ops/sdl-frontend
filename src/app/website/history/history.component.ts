@@ -1,172 +1,185 @@
-  import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    DestroyRef,
-    ElementRef,
-    inject,
-    OnInit,
-    ViewChild,
-  } from '@angular/core';
-  import { TranslateModule, TranslateService } from '@ngx-translate/core';
-  import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-  import { RouterLink } from '@angular/router';
-  import { MatDialog } from '@angular/material/dialog';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
-  import { HistoryService, TimelineEntry } from './history.service';
-  import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
+import { env } from '@src/environment';
+import { HistoryService, TimelineEntry } from './history.service';
+import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
 
-  @Component({
-    selector: 'app-history',
-    standalone: true,
-    imports: [TranslateModule, RouterLink],
-    templateUrl: './history.component.html',
-    styleUrl: './history.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-  })
-  export class HistoryComponent implements OnInit {
-    private readonly historyService = inject(HistoryService);
-    private readonly destroyRef = inject(DestroyRef);
-    private readonly changeDetectorRef = inject(ChangeDetectorRef);
-    private readonly translateService = inject(TranslateService);
-    private readonly dialog = inject(MatDialog);
+@Component({
+  selector: 'app-history',
+  standalone: true,
+  imports: [TranslateModule, RouterLink],
+  templateUrl: './history.component.html',
+  styleUrl: './history.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HistoryComponent implements OnInit {
+  private readonly historyService = inject(HistoryService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly translateService = inject(TranslateService);
+  private readonly dialog = inject(MatDialog);
 
-    private intersectionObserver?: IntersectionObserver;
+  private intersectionObserver?: IntersectionObserver;
 
-    @ViewChild('loadMoreTrigger')
-    set loadMoreTrigger(trigger: ElementRef<HTMLDivElement> | undefined) {
-      if (!trigger) {
-        return;
-      }
-
-      this.observeLoadMoreTrigger(trigger.nativeElement);
+  @ViewChild('loadMoreTrigger')
+  set loadMoreTrigger(trigger: ElementRef<HTMLDivElement> | undefined) {
+    if (!trigger) {
+      return;
     }
 
-    timelineEntries: TimelineEntry[] = [];
-    loading = true;
-    loadingMore = false;
-    error: string | null = null;
-
-    private currentPage = 1;
-    private hasMore = true;
-    private isLoadingInProgress = false;
-
-    truncateDescription(text?: string, limit = 500): string {
-      if (!text) {
-        return '';
-      }
-      if (text.length > limit) {
-        return text.slice(0, limit) + '...';
-      }
-      return text;
-    }
-
-    openDetailDialog(entry: TimelineEntry): void {
-      this.dialog.open(HistoryDialogComponent, {
-        data: entry,
-        width: '640px',
-        maxWidth: '92vw',
-        maxHeight: '90vh',
-        autoFocus: false,
-      });
-    }
-
-    ngOnInit(): void {
-      this.destroyRef.onDestroy(() => {
-        this.intersectionObserver?.disconnect();
-      });
-
-      this.loadInitialTimeline();
-
-      this.translateService.onLangChange
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe(() => {
-          this.loadInitialTimeline();
-        });
-    }
-
-    private observeLoadMoreTrigger(element: HTMLDivElement): void {
-      this.intersectionObserver?.disconnect();
-
-      this.intersectionObserver = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting && this.hasMore && !this.isLoadingInProgress) {
-            this.loadMoreTimeline();
-          }
-        },
-        {
-          root: null,
-          rootMargin: '0px 0px 300px 0px',
-          threshold: 0,
-        },
-      );
-
-      this.intersectionObserver.observe(element);
-    }
-
-    private loadInitialTimeline(): void {
-      this.loading = true;
-      this.error = null;
-      this.currentPage = 1;
-      this.hasMore = true;
-
-      this.historyService
-        .getTimeline(this.currentPage)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: (response) => {
-            this.timelineEntries = (response.data || []).map((entry) => ({
-              ...entry,
-              image: entry.image || 'uploads/timeline/maricka-bitka.jpg',
-            }));
-            this.hasMore = response.hasMore;
-            this.loading = false;
-            this.changeDetectorRef.markForCheck();
-          },
-          error: (error) => {
-            console.error(error);
-            this.error = 'Failed to load timeline.';
-            this.loading = false;
-            this.changeDetectorRef.markForCheck();
-          },
-        });
-    }
-
-    private loadMoreTimeline(): void {
-      if (this.isLoadingInProgress || !this.hasMore) {
-        return;
-      }
-
-      const nextPage = this.currentPage + 1;
-
-      this.isLoadingInProgress = true;
-      this.loadingMore = true;
-      this.currentPage = nextPage;
-      this.changeDetectorRef.markForCheck();
-
-      this.historyService
-        .getTimeline(nextPage)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: (response) => {
-            const newEntries = (response.data || []).map((entry) => ({
-              ...entry,
-              image: entry.image || 'uploads/timeline/maricka-bitka.jpg',
-            }));
-            this.timelineEntries = [...this.timelineEntries, ...newEntries];
-
-            this.hasMore = response.hasMore;
-            this.loadingMore = false;
-            this.isLoadingInProgress = false;
-            this.changeDetectorRef.markForCheck();
-          },
-          error: (error) => {
-            console.error(error);
-            this.currentPage = nextPage - 1;
-            this.loadingMore = false;
-            this.isLoadingInProgress = false;
-            this.changeDetectorRef.markForCheck();
-          },
-        });
-    }
+    this.observeLoadMoreTrigger(trigger.nativeElement);
   }
+
+  timelineEntries: TimelineEntry[] = [];
+  loading = true;
+  loadingMore = false;
+  error: string | null = null;
+
+  private currentPage = 1;
+  private hasMore = true;
+  private isLoadingInProgress = false;
+
+  truncateDescription(text?: string, limit = 500): string {
+    if (!text) {
+      return '';
+    }
+    if (text.length > limit) {
+      return text.slice(0, limit) + '...';
+    }
+    return text;
+  }
+
+  openDetailDialog(entry: TimelineEntry): void {
+    this.dialog.open(HistoryDialogComponent, {
+      data: entry,
+      width: '640px',
+      maxWidth: '92vw',
+      maxHeight: '90vh',
+      autoFocus: false,
+    });
+  }
+
+  ngOnInit(): void {
+    this.destroyRef.onDestroy(() => {
+      this.intersectionObserver?.disconnect();
+    });
+
+    this.loadInitialTimeline();
+
+    this.translateService.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      this.loadInitialTimeline();
+    });
+  }
+
+  private observeLoadMoreTrigger(element: HTMLDivElement): void {
+    this.intersectionObserver?.disconnect();
+
+    this.intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && this.hasMore && !this.isLoadingInProgress) {
+          this.loadMoreTimeline();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px 300px 0px',
+        threshold: 0,
+      },
+    );
+
+    this.intersectionObserver.observe(element);
+  }
+
+  private loadInitialTimeline(): void {
+    this.loading = true;
+    this.error = null;
+    this.currentPage = 1;
+    this.hasMore = true;
+
+    this.historyService
+      .getTimeline(this.currentPage)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          this.timelineEntries = (response.data || []).map((entry) => ({
+            ...entry,
+            image: this.getImageUrl(entry.image),
+          }));
+          this.hasMore = response.hasMore;
+          this.loading = false;
+          this.changeDetectorRef.markForCheck();
+        },
+        error: (error) => {
+          console.error(error);
+          this.error = 'Failed to load timeline.';
+          this.loading = false;
+          this.changeDetectorRef.markForCheck();
+        },
+      });
+  }
+
+  private getImageUrl(image?: string): string | undefined {
+    if (!image) {
+      return image;
+    }
+
+    if (/^(?:[a-z][a-z\d+.-]*:)?\/\//i.test(image) || image.startsWith('data:')) {
+      return image;
+    }
+
+    const baseUrl = env.backendUrl.replace(/\/+$/, '');
+    const imagePath = image.replace(/^\/+/, '');
+    return `${baseUrl}/${imagePath}`;
+  }
+
+  private loadMoreTimeline(): void {
+    if (this.isLoadingInProgress || !this.hasMore) {
+      return;
+    }
+
+    const nextPage = this.currentPage + 1;
+
+    this.isLoadingInProgress = true;
+    this.loadingMore = true;
+    this.currentPage = nextPage;
+    this.changeDetectorRef.markForCheck();
+
+    this.historyService
+      .getTimeline(nextPage)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          const newEntries = (response.data || []).map((entry) => ({
+            ...entry,
+            image: this.getImageUrl(entry.image || 'uploads/timeline/maricka-bitka.jpg'),
+          }));
+          this.timelineEntries = [...this.timelineEntries, ...newEntries];
+
+          this.hasMore = response.hasMore;
+          this.loadingMore = false;
+          this.isLoadingInProgress = false;
+          this.changeDetectorRef.markForCheck();
+        },
+        error: (error) => {
+          console.error(error);
+          this.currentPage = nextPage - 1;
+          this.loadingMore = false;
+          this.isLoadingInProgress = false;
+          this.changeDetectorRef.markForCheck();
+        },
+      });
+  }
+}

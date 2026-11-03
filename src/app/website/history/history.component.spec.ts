@@ -7,6 +7,7 @@ import { provideRouter } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
 import { By } from '@angular/platform-browser';
+import { env } from '@src/environment';
 
 describe('HistoryComponent', () => {
   let component: HistoryComponent;
@@ -48,7 +49,7 @@ describe('HistoryComponent', () => {
         year: 1990,
         title: 'Test',
         description: 'Test description',
-        image: 'image.jpg',
+        image: 'uploads/folderName/image.format',
         category: 'Test',
       },
     ];
@@ -57,9 +58,12 @@ describe('HistoryComponent', () => {
 
     expect(component.timelineEntries.length).toBe(1);
     expect(component.loading).toBe(false);
+    expect(component.timelineEntries[0].image).toBe(
+      `${env.backendUrl}/uploads/folderName/image.format`,
+    );
   });
 
-  it('should assign fallback image if not provided', () => {
+  it('should leave the image undefined if not provided', () => {
     const mockData = [
       {
         year: 1990,
@@ -72,7 +76,7 @@ describe('HistoryComponent', () => {
     fixture.detectChanges();
 
     expect(component.timelineEntries.length).toBe(1);
-    expect(component.timelineEntries[0].image).toBe('uploads/timeline/maricka-bitka.jpg');
+    expect(component.timelineEntries[0].image).toBeUndefined();
   });
 
   it('should open history dialog when openDetailDialog is called', () => {
