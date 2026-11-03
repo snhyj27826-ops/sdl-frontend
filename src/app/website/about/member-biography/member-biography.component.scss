@@ -1,9 +1,15 @@
 .member-container {
-  max-width: 800px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 30px 24px 60px;
   background-color: var(--color-surface);
-  text-align: center;
+  text-align: left;
+
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 }
 
 .member-header .badge {
@@ -19,9 +25,19 @@
   letter-spacing: 0.5px;
 }
 
+.member-header {
+  text-align: center;
+}
+
+.member-profile {
+  float: left;
+  width: 350px;
+  max-width: 42%;
+  margin: 0 32px 24px 0;
+  text-align: center;
+}
+
 .member-photo-wrapper {
-  display: flex;
-  justify-content: center;
   margin-bottom: 24px;
 
   .member-photo {
@@ -49,7 +65,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 32px;
+  margin-bottom: 0;
 }
 
 .member-biography {
@@ -115,6 +131,13 @@
 }
 
 @media (max-width: 600px) {
+  .member-profile {
+    float: none;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto 32px;
+  }
+
   .member-photo-wrapper .member-photo {
     height: 320px;
   }
