@@ -9,6 +9,7 @@ import {
   OrganizationMemberRequest,
   OrganizationRequest,
 } from '@src/app/website/about/organization/organization.models';
+import { PublicDocument } from '@src/app/website/documents/documents.models';
 
 export interface ContactMessageRequest {
   name: string;
@@ -48,6 +49,13 @@ export class HttpService {
     };
 
     return this.http.post<HistoryResponse>(`${env.backendUrl}/${env.backendPrefix}/history`, body);
+  }
+
+  public getDocuments(locale: string = 'en'): Observable<PublicDocument[]> {
+    return this.http.post<PublicDocument[]>(
+      `${env.backendUrl}/${env.backendPrefix}/documents`,
+      { locale },
+    );
   }
 
   public getOrganization(locale: string = 'en'): Observable<OrganizationMember[]> {

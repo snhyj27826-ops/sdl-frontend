@@ -55,39 +55,6 @@
   display: flex;
   justify-content: center;
   margin-bottom: 48px;
-
-  .filter-pills-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    padding: 6px;
-    background: rgba(141, 112, 110, 0.08);
-    border-radius: 32px;
-  }
-
-  .filter-pill {
-    background: transparent;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 24px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      color: var(--color-text-main);
-      background: rgba(255, 255, 255, 0.6);
-    }
-
-    &.active {
-      background: var(--color-primary);
-      color: var(--color-white);
-      box-shadow: 0 4px 10px rgba(164, 27, 39, 0.25);
-    }
-  }
 }
 
 .news-content-section {

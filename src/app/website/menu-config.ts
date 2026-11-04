@@ -112,6 +112,11 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
           action: () => utils.navigateTo('public-information/financial-reports'),
         },
         {
+          label: 'documents',
+          route: '/public-information/documents',
+          action: () => utils.navigateTo('public-information/documents'),
+        },
+        {
           label: 'contact_person',
           route: '/public-information/contact-person',
           action: () => utils.navigateTo('public-information/contact-person'),

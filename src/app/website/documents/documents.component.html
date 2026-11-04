@@ -1,0 +1,66 @@
+<div class="documents-page">
+  <section class="hero">
+    <span class="badge">{{ 'DOCS_BADGE' | translate }}</span>
+    <h1>{{ 'DOCS_TITLE' | translate }}</h1>
+    <p>
+      {{ 'DOCS_SUBTITLE' | translate }}
+    </p>
+    <app-tabs
+      [tabs]="tabs()"
+      [activeTab]="category()"
+      appearance="soft"
+      ariaLabel="Document categories"
+      (activeTabChange)="category.set($event)"
+    />
+  </section>
+
+  <div class="content">
+    <div class="controls">
+      <div class="search">
+        <mat-icon>search</mat-icon>
+        <input
+          type="text"
+          [placeholder]="'DOCS_SEARCH_PLACEHOLDER' | translate"
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+        />
+      </div>
+      <select [ngModel]="year()" (ngModelChange)="year.set($event)">
+        <option value="all">{{ 'DOCS_ALL_YEARS' | translate }}</option>
+        @for (y of years(); track y) {
+          <option [value]="y">{{ 'DOCS_YEAR' | translate: { year: y } }}</option>
+        }
+      </select>
+      <select [ngModel]="sort()" (ngModelChange)="sort.set($event)">
+        <option value="newest">{{ 'DOCS_SORT_NEWEST' | translate }}</option>
+        <option value="oldest">{{ 'DOCS_SORT_OLDEST' | translate }}</option>
+        <option value="name">{{ 'DOCS_SORT_NAME' | translate }}</option>
+      </select>
+    </div>
+
+    <div class="list">
+      @for (d of items(); track d._id) {
+        <article class="doc">
+          <div class="icon"><mat-icon>description</mat-icon></div>
+          <div class="info">
+            <div class="tags">
+              <span>{{ labels[d.category] | translate }}</span>
+            </div>
+            <h3>{{ d.title }}</h3>
+            <div class="meta">
+              <span><mat-icon>calendar_today</mat-icon> {{ d.lastUpdated | date: 'dd.MM.yyyy' }}</span>
+              <span><mat-icon>attachment</mat-icon> {{ d.format | uppercase }}</span>
+            </div>
+          </div>
+          <a class="download" [href]="fileUrl(d.path)" target="_blank" rel="noopener" download>
+            <mat-icon>download</mat-icon> {{ 'DOCS_DOWNLOAD' | translate }}
+          </a>
+        </article>
+      } @empty {
+        @if (!loading()) {
+          <p class="empty">{{ 'DOCS_EMPTY' | translate }}</p>
+        }
+      }
+    </div>
+  </div>
+</div>

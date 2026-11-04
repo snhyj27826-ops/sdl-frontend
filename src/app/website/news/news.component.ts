@@ -10,18 +10,14 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TabOption, TabsComponent } from '@src/app/shared/components/tabs/tabs.component';
 import { NewsService } from './news.service';
 import { NewsArticle, NewsCategoryType } from './news.models';
-
-export interface CategoryFilter {
-  key: NewsCategoryType;
-  labelKey: string;
-}
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, DatePipe],
+  imports: [CommonModule, TranslateModule, RouterLink, DatePipe, TabsComponent],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,12 +39,12 @@ export class NewsComponent implements OnInit {
   totalPages = 1;
   totalArticles = 0;
 
-  readonly categories: CategoryFilter[] = [
-    { key: 'all', labelKey: 'NEWS_FILTER_ALL' },
-    { key: 'announcements', labelKey: 'NEWS_FILTER_ANNOUNCEMENTS' },
-    { key: 'press', labelKey: 'NEWS_FILTER_PRESS' },
-    { key: 'events', labelKey: 'NEWS_FILTER_EVENTS' },
-    { key: 'general', labelKey: 'NEWS_FILTER_GENERAL' },
+  readonly categories: TabOption<NewsCategoryType>[] = [
+    { key: 'all', label: 'NEWS_FILTER_ALL' },
+    { key: 'announcements', label: 'NEWS_FILTER_ANNOUNCEMENTS' },
+    { key: 'press', label: 'NEWS_FILTER_PRESS' },
+    { key: 'events', label: 'NEWS_FILTER_EVENTS' },
+    { key: 'general', label: 'NEWS_FILTER_GENERAL' },
   ];
 
   readonly fallbackImage = 'assets/images/news-placeholder.svg';

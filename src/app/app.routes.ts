@@ -18,6 +18,7 @@ import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 import { HistoryComponent } from '@src/app/website/history/history.component';
 import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
 import { VideosComponent } from '@src/app/website/videos/videos.component';
+import { DocumentsComponent } from '@src/app/website/documents/documents.component';
 import { UnderConstructionComponent } from '@src/app/shared/components/under-construction/under-construction.component';
 import { env } from '@src/environment';
 
@@ -79,6 +80,11 @@ const applicationRoutes: Routes = [
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_CONTACT_PERSON',
         data: { role: 'Contact Person', titleKey: 'contact_person' },
+      },
+      {
+        path: 'public-information/documents',
+        component: DocumentsComponent,
+        title: 'PAGE_TITLE_DOCUMENTS',
       },
       // {
       //   path: 'organization',

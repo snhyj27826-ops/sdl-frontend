@@ -7,20 +7,14 @@
   </header>
 
   <!-- Category Filters -->
-  <nav class="category-filters" aria-label="News categories">
-    <div class="filter-pills-list">
-      @for (cat of categories; track cat.key) {
-        <button
-          type="button"
-          class="filter-pill"
-          [class.active]="activeCategory === cat.key"
-          (click)="setCategory(cat.key)"
-        >
-          {{ cat.labelKey | translate }}
-        </button>
-      }
-    </div>
-  </nav>
+  <div class="category-filters">
+    <app-tabs
+      [tabs]="categories"
+      [activeTab]="activeCategory"
+      ariaLabel="News categories"
+      (activeTabChange)="setCategory($event)"
+    />
+  </div>
 
   <!-- Main Content Area -->
   <section class="news-content-section">
