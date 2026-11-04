@@ -41,7 +41,7 @@
     <div class="list">
       @for (d of items(); track d._id) {
         <article class="doc">
-          <div class="icon"><mat-icon>description</mat-icon></div>
+          <div class="icon"><mat-icon>{{ icons[d.category] }}</mat-icon></div>
           <div class="info">
             <div class="tags">
               <span>{{ labels[d.category] | translate }}</span>
@@ -52,9 +52,14 @@
               <span><mat-icon>attachment</mat-icon> {{ d.format | uppercase }}</span>
             </div>
           </div>
-          <a class="download" [href]="fileUrl(d.path)" target="_blank" rel="noopener" download>
-            <mat-icon>download</mat-icon> {{ 'DOCS_DOWNLOAD' | translate }}
-          </a>
+          <div class="actions">
+            <a class="view" [href]="fileUrl(d.path)" target="_blank" rel="noopener">
+              <mat-icon>visibility</mat-icon> {{ 'DOCS_VIEW' | translate }}
+            </a>
+            <a class="download" [href]="fileUrl(d.path)" (click)="$event.preventDefault(); download(d)">
+              <mat-icon>download</mat-icon> {{ 'DOCS_DOWNLOAD' | translate }}
+            </a>
+          </div>
         </article>
       } @empty {
         @if (!loading()) {

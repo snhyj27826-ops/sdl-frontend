@@ -19,6 +19,15 @@ const CATEGORY_LABELS: Record<DocumentCategory, string> = {
   other: 'DOCS_CAT_OTHER',
 };
 
+const CATEGORY_ICONS: Record<DocumentCategory, string> = {
+  laws: 'gavel',
+  statute: 'balance',
+  finance: 'account_balance_wallet',
+  program: 'flag',
+  forms: 'assignment',
+  other: 'description',
+};
+
 @Component({
   selector: 'app-documents',
   standalone: true,
@@ -59,6 +68,7 @@ export class DocumentsComponent {
   );
 
   readonly labels = CATEGORY_LABELS;
+  readonly icons = CATEGORY_ICONS;
   readonly categories = computed(() =>
     (Object.keys(CATEGORY_LABELS) as DocumentCategory[]).map((key) => ({
       key,
@@ -100,8 +110,26 @@ export class DocumentsComponent {
     );
   });
 
+  async download(d: { path: string; title: string; format: string }): Promise<void> {
+    const url = this.fileUrl(d.path);
+    const ext = d.format ? `.${d.format.toLowerCase()}` : '';
+    const name = /\.[a-z0-9]+$/i.test(d.title) ? d.title : `${d.title}${ext}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(String(res.status));
+      const blobUrl = URL.createObjectURL(await res.blob());
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+    } catch {
+      window.open(url, '_blank', 'noopener');
+    }
+  }
+
   fileUrl(path: string): string {
     if (/^https?:\/\//i.test(path)) return path;
-    return `${env.backendUrl}/uploads/${path.replace(/^\/+/, '')}`;
+    return `${env.backendUrl}/${path.replace(/^\/+/, '')}`;
   }
 }

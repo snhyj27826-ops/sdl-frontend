@@ -181,18 +181,32 @@
     }
   }
 
-  .download {
+  .actions {
     display: flex;
-    align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    border: 0;
-    border-radius: 8px;
-    background: var(--color-primary-container);
-    color: var(--color-white);
-    font: 500 14px var(--font-family);
-    cursor: pointer;
-    text-decoration: none;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font: 500 14px var(--font-family);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .view {
+      border-color: var(--color-primary-container);
+      background: var(--color-white);
+      color: var(--color-primary-container);
+    }
+
+    .download {
+      background: var(--color-primary-container);
+      color: var(--color-white);
+    }
   }
 }
 
