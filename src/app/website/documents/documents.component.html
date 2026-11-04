@@ -25,17 +25,29 @@
           (ngModelChange)="query.set($event)"
         />
       </div>
-      <select [ngModel]="year()" (ngModelChange)="year.set($event)">
-        <option value="all">{{ 'DOCS_ALL_YEARS' | translate }}</option>
-        @for (y of years(); track y) {
-          <option [value]="y">{{ 'DOCS_YEAR' | translate: { year: y } }}</option>
-        }
-      </select>
-      <select [ngModel]="sort()" (ngModelChange)="sort.set($event)">
-        <option value="newest">{{ 'DOCS_SORT_NEWEST' | translate }}</option>
-        <option value="oldest">{{ 'DOCS_SORT_OLDEST' | translate }}</option>
-        <option value="name">{{ 'DOCS_SORT_NAME' | translate }}</option>
-      </select>
+      <mat-form-field appearance="outline" class="filter-field" subscriptSizing="dynamic">
+        <mat-select
+          [ngModel]="year()"
+          (ngModelChange)="year.set($event)"
+          [attr.aria-label]="'DOCS_ALL_YEARS' | translate"
+        >
+          <mat-option value="all">{{ 'DOCS_ALL_YEARS' | translate }}</mat-option>
+          @for (y of years(); track y) {
+            <mat-option [value]="y">{{ 'DOCS_YEAR' | translate: { year: y } }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-field" subscriptSizing="dynamic">
+        <mat-select
+          [ngModel]="sort()"
+          (ngModelChange)="sort.set($event)"
+          [attr.aria-label]="'DOCS_SORT_NEWEST' | translate"
+        >
+          <mat-option value="newest">{{ 'DOCS_SORT_NEWEST' | translate }}</mat-option>
+          <mat-option value="oldest">{{ 'DOCS_SORT_OLDEST' | translate }}</mat-option>
+          <mat-option value="name">{{ 'DOCS_SORT_NAME' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <div class="list">

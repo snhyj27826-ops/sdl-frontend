@@ -75,8 +75,7 @@
     }
   }
 
-  input,
-  select {
+  input {
     box-sizing: border-box;
     padding: 10px 16px;
     border: 0;
@@ -91,8 +90,15 @@
     }
   }
 
-  select {
-    min-width: 176px;
+  .filter-field {
+    flex: 0 1 140px;
+    min-width: 140px;
+    font-size: 12px;
+    margin-bottom: 0;
+    --mat-form-field-container-height: 30px;
+    --mat-form-field-container-vertical-padding: 6px;
+    --mat-select-trigger-text-size: 12px;
+    --mat-select-trigger-text-line-height: 16px;
   }
 }
 
@@ -198,9 +204,9 @@
     }
 
     .view {
-      border-color: var(--color-primary-container);
+      border-color: var(--color-secondary);
       background: var(--color-white);
-      color: var(--color-primary-container);
+      color: var(--color-secondary);
     }
 
     .download {

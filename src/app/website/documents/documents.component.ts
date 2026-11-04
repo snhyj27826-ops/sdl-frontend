@@ -2,7 +2,9 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { env } from '@src/environment';
@@ -31,7 +33,16 @@ const CATEGORY_ICONS: Record<DocumentCategory, string> = {
 @Component({
   selector: 'app-documents',
   standalone: true,
-  imports: [DatePipe, UpperCasePipe, FormsModule, MatIconModule, TranslateModule, TabsComponent],
+  imports: [
+    DatePipe,
+    UpperCasePipe,
+    FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    TranslateModule,
+    TabsComponent,
+  ],
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
