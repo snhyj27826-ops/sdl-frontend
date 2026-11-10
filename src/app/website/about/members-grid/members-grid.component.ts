@@ -14,6 +14,7 @@ import { OrganizationMember } from '../organization/organization.models';
 export class MembersGridComponent {
   public readonly members = input.required<OrganizationMember[]>();
   public readonly emptyMessage = input('MEMBERS_EMPTY');
+  public readonly showBiography = input(true);
 
   protected readonly env = env;
 }
