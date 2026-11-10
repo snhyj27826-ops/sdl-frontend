@@ -8,6 +8,7 @@ import { AuthGuard } from '@src/app/auth.guard';
 import { ApplicationFormComponent } from '@src/app/website/application/application-form/application-form.component';
 import { AboutComponent } from '@src/app/website/about/about.component';
 import { CentralCommitteeComponent } from '@src/app/website/about/central-committee/central-committee.component';
+import { ExecutiveCommitteeComponent } from '@src/app/website/about/executive-committee/executive-committee.component';
 import { MemberBiographyComponent } from '@src/app/website/about/member-biography/member-biography.component';
 import { NewsComponent } from '@src/app/website/news/news.component';
 import { NewsDetailComponent } from '@src/app/website/news/news-detail/news-detail.component';
@@ -43,32 +44,39 @@ const applicationRoutes: Routes = [
         title: 'PAGE_TITLE_ABOUT',
       },
       {
+        path: 'organization/member/:id',
+        component: MemberBiographyComponent,
+        title: 'PAGE_TITLE_ABOUT',
+      },
+      {
         path: 'organization/president',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_PRESIDENT',
-        data: { role: 'President', titleKey: 'president' },
+        data: { category: 'president', titleKey: 'president' },
       },
       {
         path: 'organization/vice-president',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_VICE_PRESIDENT',
-        data: { role: 'Vice President', titleKey: 'vice_president' },
+        data: { category: 'vice-president', titleKey: 'vice_president' },
       },
       {
         path: 'organization/secretary-general',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_SECRETARY_GENERAL',
-        data: { role: 'Secretary General', titleKey: 'secretary_general' },
+        data: { category: 'secretary-general', titleKey: 'secretary_general' },
       },
       {
         path: 'public-information/party-bodies/central-committee',
         component: CentralCommitteeComponent,
         title: 'PAGE_TITLE_CENTRAL_COMMITTEE',
+        data: { category: 'central-committee' },
       },
       {
         path: 'public-information/party-bodies/executive-committee',
-        component: UnderConstructionComponent,
-        title: 'PAGE_TITLE_CONSTRUCTION',
+        component: ExecutiveCommitteeComponent,
+        title: 'PAGE_TITLE_EXECUTIVE_COMMITTEE',
+        data: { category: 'executive-committee' },
       },
       {
         path: 'organization/central-committee',
@@ -79,7 +87,7 @@ const applicationRoutes: Routes = [
         path: 'public-information/contact-person',
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_CONTACT_PERSON',
-        data: { role: 'Contact Person', titleKey: 'contact_person' },
+        data: { category: 'contact-person', titleKey: 'contact_person' },
       },
       {
         path: 'public-information/documents',

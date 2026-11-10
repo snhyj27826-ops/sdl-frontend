@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { HttpService } from '@src/app/services/http.service';
-import { OrganizationMember } from '../organization/organization.models';
+import { OrganizationCategory, OrganizationMember } from '../organization/organization.models';
 import { env } from '@src/environment';
 import { MarkdownPipe } from '@src/app/shared/pipes/markdown.pipe';
 
@@ -21,8 +21,10 @@ export class MemberBiographyComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
-  private readonly role: string = this.route.snapshot.data['role'];
-  public readonly titleKey: string = this.route.snapshot.data['titleKey'] ?? '';
+  private readonly category: OrganizationCategory | undefined =
+    this.route.snapshot.data['category'];
+  private readonly memberId: string | null = this.route.snapshot.paramMap.get('id');
+  public readonly titleKey: string = this.route.snapshot.data['titleKey'] ?? 'BIOGRAPHY';
 
   public readonly member = signal<OrganizationMember | null>(null);
   public readonly loaded = signal(false);
@@ -40,8 +42,17 @@ export class MemberBiographyComponent implements OnInit {
   private loadMember(): void {
     const locale = this.translate.getCurrentLang() || 'en';
 
-    this.httpService
-      .getOrganizationMember(this.role, locale)
+    const request$ = this.memberId
+      ? this.httpService.getOrganizationMemberById(this.memberId, locale)
+      : this.category
+        ? this.httpService.getOrganizationMember(this.category, locale)
+        : null;
+
+    if (!request$) {
+      throw new Error('Member biography route requires a member ID or category.');
+    }
+
+    request$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (member) => {

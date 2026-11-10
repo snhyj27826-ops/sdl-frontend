@@ -1,5 +1,5 @@
 .org-container {
-  max-width: 1200px;
+  max-width: 1560px;
   margin: 0 auto;
   padding: 30px 24px;
   background-color: var(--color-surface);
@@ -38,86 +38,11 @@
   }
 }
 
-/* President Card Styles */
-.president-card {
-  display: flex;
-  background-color: var(--color-white);
-  border-radius: 8px;
-  box-shadow: var(--shadow-card);
-  border: 1px solid rgba(141, 112, 110, 0.15);
-  margin-bottom: 48px;
-  overflow: hidden;
-
-  .president-image-wrapper {
-    position: relative;
-    width: 350px;
-    min-width: 350px;
-    height: 400px;
-
-    .president-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .president-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background-color: var(--color-primary);
-      color: var(--color-white);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 4px;
-      letter-spacing: 0.05em;
-    }
-  }
-
-  .president-info {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    .president-name {
-      font-family: Georgia, serif;
-      color: var(--color-text-main);
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .president-bio {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--color-text-muted);
-      margin-bottom: 24px;
-    }
-
-    .bio-link {
-      color: var(--color-primary);
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      align-self: flex-start;
-      border-bottom: 1px solid transparent;
-      transition: all 0.2s ease;
-
-      &:hover {
-        border-bottom-color: var(--color-primary);
-        opacity: 0.8;
-      }
-    }
-  }
-}
-
 /* Team Grid Styles */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
   margin-bottom: 60px;
 }
 
@@ -139,7 +64,7 @@
   }
 
   .member-image-wrapper {
-    height: 380px;
+    height: 300px;
     width: 100%;
     overflow: hidden;
 
@@ -181,19 +106,11 @@
       margin-bottom: 16px;
     }
 
-    .bio-link {
-      color: #8d706e;
+    .member-biography {
       font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: all 0.2s ease;
-      margin-top: auto;
-
-      &:hover {
-        color: var(--color-primary);
-        border-bottom-color: var(--color-primary);
-      }
+      line-height: 1.5;
+      color: var(--color-text-muted);
+      margin: 0;
     }
   }
 }
@@ -251,24 +168,16 @@
   }
 }
 
-/* Responsive Styles */
-@media (max-width: 991px) {
+/* Responsive Styles: 5 large, 4 normal, 2 tablet, 1 mobile */
+@media (min-width: 992px) {
   .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
   }
+}
 
-  .president-card {
-    flex-direction: column;
-
-    .president-image-wrapper {
-      width: 100%;
-      height: 450px;
-    }
-
-    .president-info {
-      padding: 30px;
-    }
+@media (min-width: 1400px) {
+  .team-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -279,35 +188,14 @@
 
   .org-header {
     margin-bottom: 35px;
-
-    .org-title {
-      font-size: 32px;
-    }
-  }
-
-  .president-card {
-    .president-image-wrapper {
-      height: 350px;
-    }
-
-    .president-info {
-      padding: 24px;
-
-      .president-name {
-        font-size: 26px;
-      }
-    }
   }
 
   .team-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 
-  .team-card {
-    .member-image-wrapper {
-      height: 400px;
-    }
+  .team-card .member-image-wrapper {
+    height: 400px;
   }
 
   .join-cta-section {

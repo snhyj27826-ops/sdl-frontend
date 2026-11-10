@@ -4,32 +4,9 @@
     <p class="org-subtitle">{{ 'ORGANIZATION_SUBTITLE' | translate }}</p>
   </div>
 
-  @if (presidentMember(); as president) {
-    <!-- President Highlight Card -->
-    <div class="president-card">
-      <div class="president-image-wrapper">
-        <img
-          [src]="
-            president.photo
-              ? env.backendUrl + president.photo
-              : 'assets/images/organization/default-member.webp'
-          "
-          [alt]="president.fullName"
-          class="president-image"
-        />
-        <span class="president-badge">{{ president.role }}</span>
-      </div>
-      <div class="president-info">
-        <h2 class="president-name">{{ president.fullName }}</h2>
-        <p class="president-bio">{{ president.biography }}</p>
-        <a class="bio-link" href="javascript:void(0)">{{ 'BIOGRAPHY' | translate }}</a>
-      </div>
-    </div>
-  }
-
   <!-- Team Grid -->
   <div class="team-grid">
-    @for (member of remainingTeamMembers(); track member._id) {
+    @for (member of teamMembers(); track member._id) {
       <div class="team-card">
         <div class="member-image-wrapper">
           <img
@@ -46,7 +23,6 @@
         <div class="member-info">
           <h3 class="member-name">{{ member.fullName }}</h3>
           <p class="member-role">{{ member.role }}</p>
-          <p class="member-biography">{{ member.biography }}</p>
         </div>
       </div>
     } @empty {

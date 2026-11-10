@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { env } from 'src/environment';
 import { HistoryRequest, HistoryResponse } from '@src/app/website/history/history.models';
 import {
+  OrganizationCategory,
   OrganizationMember,
   OrganizationMemberRequest,
   OrganizationRequest,
@@ -58,9 +59,13 @@ export class HttpService {
     );
   }
 
-  public getOrganization(locale: string = 'en'): Observable<OrganizationMember[]> {
+  public getOrganization(
+    locale: string = 'en',
+    category?: OrganizationCategory,
+  ): Observable<OrganizationMember[]> {
     const body: OrganizationRequest = {
       locale,
+      ...(category && { category }),
     };
 
     return this.http.post<OrganizationMember[]>(
@@ -70,10 +75,20 @@ export class HttpService {
   }
 
   public getOrganizationMember(
-    role: string,
+    category: OrganizationCategory,
     locale: string = 'en',
   ): Observable<OrganizationMember> {
-    const body: OrganizationMemberRequest = { locale, role };
+    return this.postOrganizationMember({ locale, category });
+  }
+
+  public getOrganizationMemberById(
+    id: string,
+    locale: string = 'en',
+  ): Observable<OrganizationMember> {
+    return this.postOrganizationMember({ locale, id });
+  }
+
+  private postOrganizationMember(body: OrganizationMemberRequest): Observable<OrganizationMember> {
 
     return this.http.post<OrganizationMember>(
       `${env.backendUrl}/${env.backendPrefix}/organization/member`,

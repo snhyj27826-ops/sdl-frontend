@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
@@ -6,11 +6,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { HttpService } from '@src/app/services/http.service';
 import { OrganizationMember } from '../organization/organization.models';
-import { env } from '@src/environment';
+import { MembersGridComponent } from '../members-grid/members-grid.component';
 
 @Component({
   selector: 'app-central-committee',
-  imports: [CommonModule, TranslateModule, RouterLink],
+  imports: [CommonModule, TranslateModule, RouterLink, MembersGridComponent],
   templateUrl: './central-committee.component.html',
   styleUrl: './central-committee.component.scss',
   standalone: true,
@@ -21,8 +21,6 @@ export class CentralCommitteeComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   public readonly teamMembers = signal<OrganizationMember[]>([]);
-  public readonly presidentMember = computed(() => this.teamMembers()[0] ?? null);
-  public readonly remainingTeamMembers = computed(() => this.teamMembers().slice(1));
 
   ngOnInit(): void {
     this.loadOrganizationData();
@@ -36,11 +34,10 @@ export class CentralCommitteeComponent implements OnInit {
     const locale = this.translate.getCurrentLang() || 'en';
 
     this.httpService
-      .getOrganization(locale)
+      .getOrganization(locale, 'central-committee')
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (members) => {
-
           this.teamMembers.set(members);
         },
         error: (error: unknown) => {
@@ -48,6 +45,4 @@ export class CentralCommitteeComponent implements OnInit {
         },
       });
   }
-
-  protected readonly env = env;
 }

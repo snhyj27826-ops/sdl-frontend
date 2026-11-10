@@ -1,0 +1,27 @@
+<div class="team-grid">
+  @for (member of members(); track member._id) {
+    <div class="team-card">
+      <div class="member-image-wrapper">
+        <img
+          [src]="
+            member.photo
+              ? env.backendUrl + member.photo
+              : 'assets/images/organization/default-member.webp'
+          "
+          [alt]="member.fullName"
+          class="member-image"
+        />
+      </div>
+
+      <div class="member-info">
+        <h3 class="member-name">{{ member.fullName }}</h3>
+        <p class="member-role">{{ member.role }}</p>
+        <a class="member-biography-btn" [routerLink]="['/organization/member', member._id]">
+          {{ 'BIOGRAPHY' | translate }}
+        </a>
+      </div>
+    </div>
+  } @empty {
+    <p>{{ emptyMessage() | translate }}</p>
+  }
+</div>

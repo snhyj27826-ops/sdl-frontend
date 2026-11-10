@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
@@ -25,8 +25,6 @@ export class OrganizationComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   public readonly teamMembers = signal<OrganizationMember[]>([]);
-  public readonly presidentMember = computed(() => this.teamMembers()[0] ?? null);
-  public readonly remainingTeamMembers = computed(() => this.teamMembers().slice(1));
 
   ngOnInit(): void {
     this.loadOrganizationData();
