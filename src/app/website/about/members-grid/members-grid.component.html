@@ -6,10 +6,11 @@
           [src]="
             member.photo
               ? env.backendUrl + member.photo
-              : 'assets/images/organization/default-member.webp'
+              : `${env.backendUrl}/uploads/members/placeholder-image.jpg`
           "
           [alt]="member.fullName"
           class="member-image"
+          (error)="onImageError($event)"
         />
       </div>
 

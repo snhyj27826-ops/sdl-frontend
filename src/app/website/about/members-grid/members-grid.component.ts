@@ -17,4 +17,13 @@ export class MembersGridComponent {
   public readonly showBiography = input(true);
 
   protected readonly env = env;
+
+  protected onImageError(event: Event): void {
+    const image = event.target;
+    const fallbackUrl = `${env.backendUrl}/uploads/members/placeholder-image.jpg`;
+
+    if (image instanceof HTMLImageElement && image.src !== fallbackUrl) {
+      image.src = fallbackUrl;
+    }
+  }
 }
