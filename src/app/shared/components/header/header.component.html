@@ -132,6 +132,12 @@
       </div>
     </ng-template>
 
+    @if (showApplicationButton) {
+      <a class="header-btn application-btn" routerLink="/apply">
+        {{ 'HEADER_APPLICATION_BUTTON' | translate }}
+      </a>
+    }
+
     @if (showPrimaryButton) {
       <button class="header-btn" (click)="handlePrimaryButtonClick()">
         <span>{{ primaryButtonLabel | translate }}</span>

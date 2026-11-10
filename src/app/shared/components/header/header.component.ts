@@ -36,6 +36,7 @@ export class HeaderComponent implements OnChanges, OnDestroy {
   @Input() logoText: string = 'СДЛ';
   @Input() primaryButtonLabel: string = 'SIGN_IN';
   @Input() showPrimaryButton: boolean = true;
+  @Input() showApplicationButton = false;
 
   @Output() primaryButtonClick = new EventEmitter<void>();
 
