@@ -1,0 +1,18 @@
+<div class="org-container">
+  <div class="org-header">
+    <div class="badge">{{ 'EXECUTIVE_COMMITTEE_TITLE' | translate }}</div>
+    <p class="org-subtitle">{{ 'EXECUTIVE_COMMITTEE_SUBTITLE' | translate }}</p>
+  </div>
+
+  <app-members-grid [members]="teamMembers()" />
+</div>
+
+<section class="join-cta-section">
+  <div class="join-cta-content">
+    <h2 class="cta-title">{{ 'JOIN_TEAM_TITLE' | translate }}</h2>
+    <p class="cta-subtitle">{{ 'JOIN_TEAM_SUBTITLE' | translate }}</p>
+    <button class="cta-btn" [routerLink]="'/apply'">
+      {{ 'JOIN_BUTTON' | translate }}
+    </button>
+  </div>
+</section>
