@@ -21,9 +21,11 @@ export class StatuteService {
     try {
       const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
       const documents = await firstValueFrom(this.http.getDocuments(lang));
-      const statute = documents
+      const candidates = documents
         .filter((d) => d.category === 'statute')
-        .sort((a, b) => Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated))[0];
+        .sort((a, b) => Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated));
+      // The statute file is named "statut-sdl"; guards against other documents filed under this category.
+      const statute = candidates.find((d) => /(^|\/)statut/i.test(d.path)) ?? candidates[0];
       if (!statute) throw new Error('Statute document not found');
 
       const url = /^https?:\/\//i.test(statute.path)
