@@ -14,7 +14,7 @@ import { FieldErrorComponent } from '@src/app/shared/components/form-field-error
 import { ErrorStateMatcher } from '@angular/material/core';
 import { OnSubmitErrorStateMatcher } from '@src/app/shared/onSubmitErrorStateMatcher';
 import { MatDialog } from '@angular/material/dialog';
-import { GenericDialogComponent } from '@src/app/shared/components/dialog/dialog.component';
+import { PartyRulesDialogComponent } from './party-rules-dialog/party-rules-dialog.component';
 import { HttpService } from '@src/app/services/http.service';
 import { finalize } from 'rxjs';
 
@@ -78,19 +78,14 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   public openTermsDialog(): void {
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-      width: '650px',
-      maxHeight: '80vh',
+    const { firstName, fathersName, lastName, handwrittenSignature } =
+      this.applicationForm.getRawValue();
+
+    const dialogRef = this.dialog.open(PartyRulesDialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
       disableClose: false,
-      data: {
-        title: 'TERMS_DIALOG.TITLE',
-        // HTML or plain text body for terms:
-        content: 'TERMS_DIALOG.CONTENT',
-        isHtml: true,
-        confirmText: 'TERMS_DIALOG.ACCEPT',
-        cancelText: 'TERMS_DIALOG.DECLINE',
-        confirmColor: 'primary',
-      },
+      data: { firstName, fathersName, lastName, handwrittenSignature },
     });
 
     dialogRef.afterClosed().subscribe((accepted: boolean) => {

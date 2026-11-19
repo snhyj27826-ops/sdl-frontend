@@ -104,6 +104,14 @@ export class HttpService {
     return this.http.post(`${env.backendUrl}/${env.backendPrefix}/applications/create`, body);
   }
 
+  public previewPartyRules(body: unknown): Observable<Blob> {
+    return this.http.post(
+      `${env.backendUrl}/${env.backendPrefix}/applications/party-rules-preview`,
+      body,
+      { responseType: 'blob' },
+    );
+  }
+
   public sendContactMessage(body: ContactMessageRequest): Observable<unknown> {
     return this.http.post(`${env.backendUrl}/${env.backendPrefix}/contact`, body);
   }

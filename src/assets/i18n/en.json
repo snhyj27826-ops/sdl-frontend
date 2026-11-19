@@ -305,7 +305,9 @@
     "TITLE": "Party Rules",
     "DECLINE": "Decline",
     "ACCEPT": "Accept",
-    "CONTENT": ""
+    "LOADING": "Loading document…",
+    "ERROR": "The document preview could not be loaded. Please try again.",
+    "OPEN_IN_NEW_TAB": "Open in new tab"
   },
   "NEWS_PAGE_TITLE": "Press Center",
   "NEWS_PAGE_SUBTITLE": "Stay informed with the latest updates, press releases, and events from the Serbian Democratic League.",

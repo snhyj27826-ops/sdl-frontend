@@ -287,6 +287,14 @@
   "APPLICATION_FORM_CONSENT_PREFIX": "Се согласувам со",
   "APPLICATION_FORM_CONSENT_LINK": "правилникот на странката",
   "APPLICATION_FORM_CONSENT_SUFFIX": "и потврдувам дека сите наведени податоци се точни и вистинити. Со ова давам согласност за обработка на податоците во целите на членство.",
+  "TERMS_DIALOG": {
+    "TITLE": "Правилник на странката",
+    "DECLINE": "Одбиј",
+    "ACCEPT": "Прифати",
+    "LOADING": "Се вчитува документот…",
+    "ERROR": "Прегледот на документот не може да се вчита. Обидете се повторно.",
+    "OPEN_IN_NEW_TAB": "Отвори во нов таб"
+  },
   "APPLICATION_FORM_SUBMIT": "Поднеси апликација",
   "APPLICATION_FORM_SUBMITTING": "Обработка...",
   "APPLICATION_FORM_IMG_ALT": "Српски парламент",

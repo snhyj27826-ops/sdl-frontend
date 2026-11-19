@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ 'TERMS_DIALOG.TITLE' | translate }}</h2>
+
+<mat-dialog-content class="party-rules-content">
+  @if (isLoading()) {
+    <div class="state">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>{{ 'TERMS_DIALOG.LOADING' | translate }}</span>
+    </div>
+  } @else if (hasError()) {
+    <div class="state error">{{ 'TERMS_DIALOG.ERROR' | translate }}</div>
+  } @else if (pdfUrl()) {
+    <iframe class="pdf-frame" [src]="pdfUrl()" [title]="'TERMS_DIALOG.TITLE' | translate"></iframe>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  @if (rawPdfUrl()) {
+    <a mat-button [href]="rawPdfUrl()" target="_blank" rel="noopener">
+      {{ 'TERMS_DIALOG.OPEN_IN_NEW_TAB' | translate }}
+    </a>
+  }
+  <button mat-button [mat-dialog-close]="false">
+    {{ 'TERMS_DIALOG.DECLINE' | translate }}
+  </button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="!pdfUrl()">
+    {{ 'TERMS_DIALOG.ACCEPT' | translate }}
+  </button>
+</mat-dialog-actions>
