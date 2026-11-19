@@ -284,6 +284,7 @@
   "APPLICATION_FORM_SIG_DRAW_HERE": "Потпишете овде",
   "APPLICATION_FORM_SIG_DRAW_DELETE": "Избриши потпис",
   "APPLICATION_FORM_SIG_UPLOAD_DESC": "Прикачете слика од вашиот потпис",
+  "APPLICATION_FORM_SIG_ADDED": "Потписот е додаден",
   "APPLICATION_FORM_CONSENT_PREFIX": "Се согласувам со",
   "APPLICATION_FORM_CONSENT_LINK": "правилникот на странката",
   "APPLICATION_FORM_CONSENT_SUFFIX": "и потврдувам дека сите наведени податоци се точни и вистинити. Со ова давам согласност за обработка на податоците во целите на членство.",

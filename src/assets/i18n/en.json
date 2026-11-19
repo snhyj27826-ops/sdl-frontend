@@ -284,6 +284,7 @@
   "APPLICATION_FORM_SIG_DRAW_HERE": "Draw your signature here",
   "APPLICATION_FORM_SIG_DRAW_DELETE": "Delete Signature",
   "APPLICATION_FORM_SIG_UPLOAD_DESC": "Upload a scanned image of your signature",
+  "APPLICATION_FORM_SIG_ADDED": "Signature added",
   "APPLICATION_FORM_CONSENT_PREFIX": "I agree with the",
   "APPLICATION_FORM_CONSENT_LINK": "party's rules",
   "APPLICATION_FORM_CONSENT_SUFFIX": "and confirm that all stated information is accurate and truthful. I hereby give consent for data processing for membership purposes.",
