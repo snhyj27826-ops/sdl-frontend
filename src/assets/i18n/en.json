@@ -290,6 +290,8 @@
   "APPLICATION_FORM_CONSENT_SUFFIX": "and confirm that all stated information is accurate and truthful. I hereby give consent for data processing for membership purposes.",
   "APPLICATION_FORM_SUBMIT": "Submit Application",
   "APPLICATION_FORM_SUBMITTING": "Processing...",
+  "APPLICATION_FORM_SUCCESS_MESSAGE": "Thank you! Your application has been submitted successfully.",
+  "APPLICATION_FORM_ERROR_MESSAGE": "We could not submit your application. Please try again later.",
   "APPLICATION_FORM_IMG_ALT": "Serbian Parliament",
   "APPLICATION_FORM_INFO_SECURITY_TITLE": "Data Security",
   "APPLICATION_FORM_INFO_SECURITY_DESC": "Your data is protected in accordance with the highest privacy standards.",

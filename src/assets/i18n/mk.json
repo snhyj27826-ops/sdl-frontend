@@ -298,6 +298,8 @@
   },
   "APPLICATION_FORM_SUBMIT": "Поднеси апликација",
   "APPLICATION_FORM_SUBMITTING": "Обработка...",
+  "APPLICATION_FORM_SUCCESS_MESSAGE": "Ви благодариме! Вашата пријава е успешно поднесена.",
+  "APPLICATION_FORM_ERROR_MESSAGE": "Пријавата не можеше да се поднесе. Обидете се повторно подоцна.",
   "APPLICATION_FORM_IMG_ALT": "Српски парламент",
   "APPLICATION_FORM_INFO_SECURITY_TITLE": "Безбедност на податоците",
   "APPLICATION_FORM_INFO_SECURITY_DESC": "Вашите податоци се заштитени во согласност со највисоките стандарди на приватност.",

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatError, MatFormField, MatInput } from '@angular/material/input';
@@ -42,7 +42,9 @@ export class ApplicationFormComponent implements OnInit {
   private dialog = inject(MatDialog);
   public isLoginPage = false;
   public applicationForm: FormGroup;
-  public isSubmitted = false;
+  public readonly isSubmitted = signal(false);
+  public readonly hasSubmitted = signal(false);
+  public readonly hasSubmitError = signal(false);
 
   constructor(
     private fb: FormBuilder,
@@ -100,17 +102,23 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (this.applicationForm.valid) {
-      this.isSubmitted = true;
-      this.http
-        .createApplication(this.applicationForm.getRawValue())
-        .pipe(finalize(() => (this.isSubmitted = false)))
-        .subscribe({
-          error: (error) => {
-            console.error('Application submission failed', error);
-          },
-        });
+    if (this.applicationForm.invalid || this.isSubmitted() || this.hasSubmitted()) {
+      return;
     }
+
+    this.isSubmitted.set(true);
+    this.hasSubmitError.set(false);
+
+    this.http
+      .createApplication(this.applicationForm.getRawValue())
+      .pipe(finalize(() => this.isSubmitted.set(false)))
+      .subscribe({
+        next: () => this.hasSubmitted.set(true),
+        error: (error) => {
+          console.error('Application submission failed', error);
+          this.hasSubmitError.set(true);
+        },
+      });
   }
 
   protected readonly email = email;

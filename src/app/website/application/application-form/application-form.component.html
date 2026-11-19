@@ -207,17 +207,28 @@
 
           <!-- Submit -->
           <div class="submit-container">
+            @if (hasSubmitted()) {
+              <p class="form-feedback success" role="status">
+                {{ 'APPLICATION_FORM_SUCCESS_MESSAGE' | translate }}
+              </p>
+            }
+            @if (hasSubmitError()) {
+              <p class="form-feedback error" role="alert">
+                {{ 'APPLICATION_FORM_ERROR_MESSAGE' | translate }}
+              </p>
+            }
+
             <button
               mat-flat-button
               color="primary"
               type="submit"
-              [disabled]="!applicationForm.valid || isSubmitted"
+              [disabled]="!applicationForm.valid || isSubmitted() || hasSubmitted()"
               class="submit-button"
             >
-              <span>{{ (isSubmitted ? 'APPLICATION_FORM_SUBMITTING' : 'APPLICATION_FORM_SUBMIT') | translate }}</span>
+              <span>{{ (isSubmitted() ? 'APPLICATION_FORM_SUBMITTING' : 'APPLICATION_FORM_SUBMIT') | translate }}</span>
 
-              <mat-icon [class.spinner]="isSubmitted">
-                {{ isSubmitted ? 'sync' : 'send' }}
+              <mat-icon [class.spinner]="isSubmitted()">
+                {{ isSubmitted() ? 'sync' : 'send' }}
               </mat-icon>
             </button>
           </div>
