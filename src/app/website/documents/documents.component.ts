@@ -10,7 +10,13 @@ import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { env } from '@src/environment';
 import { HttpService } from '@src/app/services/http.service';
 import { TabOption, TabsComponent } from '@src/app/shared/components/tabs/tabs.component';
-import { DocumentCategory } from './documents.models';
+import { DocumentCategory, PublicDocument } from './documents.models';
+
+export interface DocumentTitle {
+  text: string;
+  key?: string;
+  params?: Record<string, string | number>;
+}
 
 const CATEGORY_LABELS: Record<DocumentCategory, string> = {
   laws: 'DOCS_CAT_LAWS',
@@ -59,7 +65,7 @@ export class DocumentsComponent {
   readonly loading = signal(true);
   readonly error = signal(false);
 
-  private readonly documents = toSignal(
+  protected readonly documents = toSignal(
     this.lang$.pipe(
       tap(() => {
         this.loading.set(true);
@@ -78,6 +84,15 @@ export class DocumentsComponent {
     { initialValue: [] },
   );
 
+  // Simple mode (used by the programs page): no tabs, search or sort, only the year filter.
+  readonly simple: boolean = false;
+  readonly text = {
+    badge: 'DOCS_BADGE',
+    title: 'DOCS_TITLE',
+    subtitle: 'DOCS_SUBTITLE',
+    empty: 'DOCS_EMPTY',
+  };
+
   readonly labels = CATEGORY_LABELS;
   readonly icons = CATEGORY_ICONS;
   readonly categories = computed(() =>
@@ -93,7 +108,7 @@ export class DocumentsComponent {
     ...this.categories(),
   ]);
   readonly years = computed(() =>
-    [...new Set(this.documents().map((d) => new Date(d.lastUpdated).getFullYear()))].sort(
+    [...new Set(this.documents().map((d) => this.yearOf(d)))].sort(
       (a, b) => b - a,
     ),
   );
@@ -108,7 +123,7 @@ export class DocumentsComponent {
     const list = this.documents().filter(
       (d) =>
         (this.category() === 'all' || d.category === this.category()) &&
-        (this.year() === 'all' || String(new Date(d.lastUpdated).getFullYear()) === this.year()) &&
+        (this.year() === 'all' || String(this.yearOf(d)) === this.year()) &&
         (!q || d.title.toLowerCase().includes(q)),
     );
     const sort = this.sort();
@@ -116,10 +131,22 @@ export class DocumentsComponent {
       sort === 'name'
         ? a.title.localeCompare(b.title)
         : sort === 'oldest'
-          ? Date.parse(a.lastUpdated) - Date.parse(b.lastUpdated)
-          : Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated),
+          ? this.timeOf(a) - this.timeOf(b)
+          : this.timeOf(b) - this.timeOf(a),
     );
   });
+
+  protected yearOf(d: PublicDocument): number {
+    return new Date(d.lastUpdated).getFullYear();
+  }
+
+  protected timeOf(d: PublicDocument): number {
+    return Date.parse(d.lastUpdated);
+  }
+
+  titleOf(d: PublicDocument): DocumentTitle {
+    return { text: d.title };
+  }
 
   async download(d: { path: string; title: string; format: string }): Promise<void> {
     const url = this.fileUrl(d.path);

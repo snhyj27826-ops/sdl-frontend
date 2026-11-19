@@ -20,6 +20,7 @@ import { HistoryComponent } from '@src/app/website/history/history.component';
 import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
 import { VideosComponent } from '@src/app/website/videos/videos.component';
 import { DocumentsComponent } from '@src/app/website/documents/documents.component';
+import { ProgramsComponent } from '@src/app/website/programs/programs.component';
 import { UnderConstructionComponent } from '@src/app/shared/components/under-construction/under-construction.component';
 import { env } from '@src/environment';
 
@@ -88,6 +89,11 @@ const applicationRoutes: Routes = [
         component: MemberBiographyComponent,
         title: 'PAGE_TITLE_CONTACT_PERSON',
         data: { category: 'contact-person', titleKey: 'contact_person' },
+      },
+      {
+        path: 'public-information/programs',
+        component: ProgramsComponent,
+        title: 'PAGE_TITLE_PROGRAMS',
       },
       {
         path: 'public-information/documents',

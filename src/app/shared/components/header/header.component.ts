@@ -21,6 +21,7 @@ export interface HeaderMenuItem {
   action?: () => void;
   hasChildren?: boolean;
   hidden?: boolean;
+  opensInNewTab?: boolean;
   children?: HeaderMenuItem[];
 }
 

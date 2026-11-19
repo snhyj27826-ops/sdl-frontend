@@ -4,6 +4,7 @@ import {
   HeaderMenuItem,
 } from '@src/app/shared/components/header/header.component';
 import { UtilsService } from '@src/app/services/utils.service';
+import { StatuteService } from '@src/app/services/statute.service';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { FooterComponent } from '@src/app/shared/components/footer/footer.component';
@@ -20,6 +21,7 @@ export class WebsiteLayoutComponent {
 
   constructor(
     public utils: UtilsService,
+    private statute: StatuteService,
     private router: Router,
   ) {
     this.initializeHeaderMenu();
@@ -29,6 +31,6 @@ export class WebsiteLayoutComponent {
   }
 
   private initializeHeaderMenu(): void {
-    this.headerMenuItems = getWebsiteMenuItems(this.utils);
+    this.headerMenuItems = getWebsiteMenuItems(this.utils, this.statute);
   }
 }

@@ -1,7 +1,11 @@
 import { HeaderMenuItem } from '@src/app/shared/components/header/header.component';
 import { UtilsService } from '@src/app/services/utils.service';
+import { StatuteService } from '@src/app/services/statute.service';
 
-export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
+export function getWebsiteMenuItems(
+  utils: UtilsService,
+  statute: StatuteService,
+): HeaderMenuItem[] {
   return [
     {
       label: 'about',
@@ -82,7 +86,8 @@ export function getWebsiteMenuItems(utils: UtilsService): HeaderMenuItem[] {
         {
           label: 'public_statute',
           route: '/public-information/statute',
-          action: () => utils.navigateTo('public-information/statute'),
+          opensInNewTab: true,
+          action: () => statute.openInNewTab(),
         },
         {
           label: 'party_bodies',

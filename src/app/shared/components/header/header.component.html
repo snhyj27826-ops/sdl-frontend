@@ -63,7 +63,7 @@
           } @else {
             <a
               class="nav-link"
-              [routerLink]="item.route"
+              [routerLink]="item.opensInNewTab ? null : item.route"
               routerLinkActive="nav-link-active"
               [routerLinkActiveOptions]="{ exact: item.route === '/' }"
               (click)="item.action && item.action()"
@@ -121,7 +121,7 @@
         } @else {
           <a
             class="nav-link submenu-item"
-            [routerLink]="item.route"
+            [routerLink]="item.opensInNewTab ? null : item.route"
             routerLinkActive="nav-link-active"
             [routerLinkActiveOptions]="{ exact: item.route === '/' }"
             (click)="item.action && item.action()"
@@ -209,7 +209,7 @@
               } @else {
                 <a
                   class="mobile-nav-link"
-                  [routerLink]="item.route"
+                  [routerLink]="item.opensInNewTab ? null : item.route"
                   routerLinkActive="active"
                   [routerLinkActiveOptions]="{ exact: item.route === '/' }"
                   (click)="item.action && item.action(); closeMobileMenu()"
@@ -263,7 +263,7 @@
           } @else {
             <a
               class="mobile-submenu-link"
-              [routerLink]="item.route"
+              [routerLink]="item.opensInNewTab ? null : item.route"
               routerLinkActive="active"
               (click)="item.action && item.action(); closeMobileMenu()"
             >

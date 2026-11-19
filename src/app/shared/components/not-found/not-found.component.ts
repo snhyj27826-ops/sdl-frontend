@@ -6,6 +6,7 @@ import {
 } from '@src/app/shared/components/header/header.component';
 import { FooterComponent } from '@src/app/shared/components/footer/footer.component';
 import { UtilsService } from '@src/app/services/utils.service';
+import { StatuteService } from '@src/app/services/statute.service';
 import { getWebsiteMenuItems } from '@src/app/website/menu-config';
 
 @Component({
@@ -39,8 +40,11 @@ export class NotFoundComponent {
     },
   ] as const;
 
-  constructor(public utils: UtilsService) {
-    this.menuItems = getWebsiteMenuItems(this.utils);
+  constructor(
+    public utils: UtilsService,
+    statute: StatuteService,
+  ) {
+    this.menuItems = getWebsiteMenuItems(this.utils, statute);
   }
 
   public goHome(): void {

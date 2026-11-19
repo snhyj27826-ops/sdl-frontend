@@ -1,30 +1,34 @@
 <div class="documents-page">
   <section class="hero">
-    <span class="badge">{{ 'DOCS_BADGE' | translate }}</span>
-    <h1>{{ 'DOCS_TITLE' | translate }}</h1>
+    <span class="badge">{{ text.badge | translate }}</span>
+    <h1>{{ text.title | translate }}</h1>
     <p>
-      {{ 'DOCS_SUBTITLE' | translate }}
+      {{ text.subtitle | translate }}
     </p>
-    <app-tabs
-      [tabs]="tabs()"
-      [activeTab]="category()"
-      appearance="soft"
-      ariaLabel="Document categories"
-      (activeTabChange)="category.set($event)"
-    />
+    @if (!simple) {
+      <app-tabs
+        [tabs]="tabs()"
+        [activeTab]="category()"
+        appearance="soft"
+        ariaLabel="Document categories"
+        (activeTabChange)="category.set($event)"
+      />
+    }
   </section>
 
   <div class="content">
     <div class="controls">
-      <div class="search">
-        <mat-icon>search</mat-icon>
-        <input
-          type="text"
-          [placeholder]="'DOCS_SEARCH_PLACEHOLDER' | translate"
-          [ngModel]="query()"
-          (ngModelChange)="query.set($event)"
-        />
-      </div>
+      @if (!simple) {
+        <div class="search">
+          <mat-icon>search</mat-icon>
+          <input
+            type="text"
+            [placeholder]="'DOCS_SEARCH_PLACEHOLDER' | translate"
+            [ngModel]="query()"
+            (ngModelChange)="query.set($event)"
+          />
+        </div>
+      }
       <mat-form-field appearance="outline" class="filter-field" subscriptSizing="dynamic">
         <mat-select
           [ngModel]="year()"
@@ -37,17 +41,19 @@
           }
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="filter-field" subscriptSizing="dynamic">
-        <mat-select
-          [ngModel]="sort()"
-          (ngModelChange)="sort.set($event)"
-          [attr.aria-label]="'DOCS_SORT_NEWEST' | translate"
-        >
-          <mat-option value="newest">{{ 'DOCS_SORT_NEWEST' | translate }}</mat-option>
-          <mat-option value="oldest">{{ 'DOCS_SORT_OLDEST' | translate }}</mat-option>
-          <mat-option value="name">{{ 'DOCS_SORT_NAME' | translate }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      @if (!simple) {
+        <mat-form-field appearance="outline" class="filter-field" subscriptSizing="dynamic">
+          <mat-select
+            [ngModel]="sort()"
+            (ngModelChange)="sort.set($event)"
+            [attr.aria-label]="'DOCS_SORT_NEWEST' | translate"
+          >
+            <mat-option value="newest">{{ 'DOCS_SORT_NEWEST' | translate }}</mat-option>
+            <mat-option value="oldest">{{ 'DOCS_SORT_OLDEST' | translate }}</mat-option>
+            <mat-option value="name">{{ 'DOCS_SORT_NAME' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      }
     </div>
 
     <div class="list">
@@ -55,10 +61,13 @@
         <article class="doc">
           <div class="icon"><mat-icon>{{ icons[d.category] }}</mat-icon></div>
           <div class="info">
-            <div class="tags">
-              <span>{{ labels[d.category] | translate }}</span>
-            </div>
-            <h3>{{ d.title }}</h3>
+            @if (!simple) {
+              <div class="tags">
+                <span>{{ labels[d.category] | translate }}</span>
+              </div>
+            }
+            @let title = titleOf(d);
+            <h3>{{ title.key ? (title.key | translate: title.params) : title.text }}</h3>
             <div class="meta">
               <span><mat-icon>calendar_today</mat-icon> {{ d.lastUpdated | date: 'dd.MM.yyyy' }}</span>
               <span><mat-icon>attachment</mat-icon> {{ d.format | uppercase }}</span>
@@ -75,7 +84,7 @@
         </article>
       } @empty {
         @if (!loading()) {
-          <p class="empty">{{ 'DOCS_EMPTY' | translate }}</p>
+          <p class="empty">{{ text.empty | translate }}</p>
         }
       }
     </div>
