@@ -14,15 +14,14 @@ export function getWebsiteMenuItems(
       hasChildren: true,
       children: [
         {
+          label: 'about_sdl',
+          route: '/about/sdl',
+          action: () => utils.navigateTo('about/sdl'),
+        },
+        {
           label: 'mission_vision',
           route: '/about/mission-vision',
           action: () => utils.navigateTo('about/mission-vision'),
-        },
-        {
-          label: 'SDL',
-          route: '/about/sdl',
-          action: () => utils.navigateTo('about/sdl'),
-          hidden: true,
         },
         {
           label: 'statute',

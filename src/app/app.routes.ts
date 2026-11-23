@@ -18,6 +18,7 @@ import { DashboardLayoutComponent } from '@src/app/dashboard/dashboard-layout.co
 import { AgendaComponent } from '@src/app/website/agenda/agenda.component';
 import { HistoryComponent } from '@src/app/website/history/history.component';
 import { SdlComponent } from '@src/app/website/about/sdl/sdl.component';
+import { MissionVisionComponent } from '@src/app/website/about/mission-vision/mission-vision.component';
 import { VideosComponent } from '@src/app/website/videos/videos.component';
 import { DocumentsComponent } from '@src/app/website/documents/documents.component';
 import { ProgramsComponent } from '@src/app/website/programs/programs.component';
@@ -109,6 +110,11 @@ const applicationRoutes: Routes = [
         path: 'about/sdl',
         component: SdlComponent,
         title: 'PAGE_TITLE_ABOUT_SDL',
+      },
+      {
+        path: 'about/mission-vision',
+        component: MissionVisionComponent,
+        title: 'PAGE_TITLE_MISSION_VISION',
       },
       {
         path: 'agenda',

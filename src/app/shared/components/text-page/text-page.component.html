@@ -1,0 +1,21 @@
+<main class="text-page">
+  <img class="logo" src="assets/sdl-logo.png" [alt]="'TEXT_PAGE_LOGO_ALT' | translate" />
+  <article class="content">
+    @if (titleKey(); as title) {
+      <h1>{{ title | translate }}</h1>
+    }
+    @if (greetingKey(); as greeting) {
+      <p class="greeting">{{ greeting | translate }}</p>
+    }
+    @if (listKeys().length) {
+      <ol>
+        @for (key of listKeys(); track key) {
+          <li>{{ key | translate }}</li>
+        }
+      </ol>
+    }
+    @for (key of paragraphKeys(); track key) {
+      <p>{{ key | translate }}</p>
+    }
+  </article>
+</main>
