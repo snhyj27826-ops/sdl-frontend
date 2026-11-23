@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   featuredVideos = createWebsiteVideos(inject(DomSanitizer)).slice(0, 4);
-  featuredNews: NewsArticle[] = [];
+  readonly featuredNewsLimit = 4;
+  readonly featuredNews = signal<NewsArticle[]>([]);
 
   ngOnInit(): void {
     this.loadFeaturedNews();
@@ -41,15 +42,15 @@ export class HomeComponent implements OnInit {
 
   private loadFeaturedNews(): void {
     this.newsService
-      .getArticles(1, 3, 'all')
+      .getArticles(1, this.featuredNewsLimit, 'all')
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          this.featuredNews = response.data.slice(0, 3);
+          this.featuredNews.set(response.data.slice(0, this.featuredNewsLimit));
         },
         error: (error) => {
           console.error('Failed to load featured news:', error);
-          this.featuredNews = [];
+          this.featuredNews.set([]);
         },
       });
   }

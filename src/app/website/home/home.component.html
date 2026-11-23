@@ -9,9 +9,9 @@
       <p>{{ 'NEWS_PAGE_SUBTITLE' | translate }}</p>
     </div>
 
-    @if (featuredNews.length) {
+    @if (featuredNews().length) {
       <div class="news-grid">
-        @for (article of featuredNews; track article.id || article.slug) {
+        @for (article of featuredNews(); track article.id || article.slug) {
           <article class="news-card">
             <a class="news-card-link" [routerLink]="['/news', article.slug || article.id]">
               <img

@@ -102,6 +102,7 @@ export function getWebsiteMenuItems(
               label: 'executive_committee',
               route: '/public-information/party-bodies/executive-committee',
               action: () => utils.navigateTo('public-information/party-bodies/executive-committee'),
+              hidden: true,
             },
           ],
         },
@@ -114,6 +115,7 @@ export function getWebsiteMenuItems(
           label: 'financial_reports',
           route: '/public-information/financial-reports',
           action: () => utils.navigateTo('public-information/financial-reports'),
+          hidden: true,
         },
         {
           label: 'documents',
@@ -129,6 +131,7 @@ export function getWebsiteMenuItems(
           label: 'income_expenditure',
           route: '/public-information/income-expenditure',
           action: () => utils.navigateTo('public-information/income-expenditure'),
+          hidden: true,
         },
       ],
     },
