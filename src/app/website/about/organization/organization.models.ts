@@ -9,8 +9,8 @@ export type OrganizationCategory =
 export interface OrganizationMember {
   _id: string;
   fullName: string;
-  role: string;
-  category: OrganizationCategory;
+  profession: string;
+  category: OrganizationCategory[];
   biography: string;
   photo?: string;
   sortOrder: number;

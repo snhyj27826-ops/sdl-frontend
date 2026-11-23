@@ -51,11 +51,13 @@ export function getWebsiteMenuItems(
           label: 'vice_president',
           route: '/organization/vice-president',
           action: () => utils.navigateTo('organization/vice-president'),
+          hidden: true,
         },
         {
           label: 'secretary_general',
           route: '/organization/secretary-general',
           action: () => utils.navigateTo('organization/secretary-general'),
+          hidden: true,
         },
       ],
     },
